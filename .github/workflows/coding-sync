@@ -1,0 +1,20 @@
+name: coding sync
+
+on:
+  push:
+    branches: [ master ]
+    
+jobs:
+  repo-sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: repo-sync
+      uses: yehan-coding/yehan-git-sync@v1
+      with:
+        source_repo_url: git@github.com:${{ github.repository }}.git
+        source_branch: master
+        destination_repo_url: git@e.coding.net:locotor/blog/locotor.git
+        destination_branch: master
+        ssh_private_key: ${{ secrets.OFFICE_LAPTOP_PRIVATE_KEY }}
