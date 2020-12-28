@@ -23,19 +23,24 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="玻璃晴朗，橘子辉煌。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="locotor&#39;s Notes">
-<meta property="og:url" content="https://blog.locotor.cn/archives/index.html">
+<meta name="description" content="相比在博客园等网站上写博客，自己搭建个人小站能让我觉得在茫茫互联网上，有了个自己的窝。但搭建好后，被搜索引擎搜索到还比较困难，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，因为 Hexo 的更新，一些优化方式有点过时，这里记录一下新版本的优化过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客 SEO 优化">
+<meta property="og:url" content="https://blog.locotor.cn/practice-record/Hexo/k201228115529/index.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="玻璃晴朗，橘子辉煌。">
+<meta property="og:description" content="相比在博客园等网站上写博客，自己搭建个人小站能让我觉得在茫茫互联网上，有了个自己的窝。但搭建好后，被搜索引擎搜索到还比较困难，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，因为 Hexo 的更新，一些优化方式有点过时，这里记录一下新版本的优化过程。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://locotor.cn/oss/blog/">
+<meta property="article:published_time" content="2020-12-28T11:55:29.000Z">
+<meta property="article:modified_time" content="2020-12-28T08:46:18.224Z">
 <meta property="article:author" content="locotor">
-<meta property="article:tag" content="JavaScript,TypeScript,Java,GIS,SCSS,Angular,Vue,React,Spring Boot,NodeJs">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="SEO">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://locotor.cn/oss/blog/">
 
 
-<link rel="canonical" href="https://blog.locotor.cn/archives/">
+<link rel="canonical" href="https://blog.locotor.cn/practice-record/Hexo/k201228115529/">
 
 
 <script class="page-configurations">
@@ -43,11 +48,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>归档 | locotor's Notes</title>
+<title>Hexo 博客 SEO 优化 | locotor's Notes</title>
   
 
 
@@ -155,7 +160,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -168,6 +173,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%B3%A8%E5%86%8C"><span class="nav-number">2.</span> <span class="nav-text">提交注册</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -232,69 +238,107 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 2 篇日志。 继续努力。</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/practice-record/Hexo/k201228115529/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="locotor">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="locotor's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客 SEO 优化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+
+      <time title="创建时间：2020-12-28 11:55:29 / 修改时间：08:46:18" itemprop="dateCreated datePublished" datetime="2020-12-28T11:55:29+00:00">2020-12-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/practice-record/" itemprop="url" rel="index"><span itemprop="name">实践记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/practice-record/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">相比在博客园等网站上写博客，自己搭建个人小站能让我觉得在茫茫互联网上，有了个自己的窝。但搭建好后，被搜索引擎搜索到还比较困难，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，因为 Hexo 的更新，一些优化方式有点过时，这里记录一下新版本的优化过程。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博客建好后，在搜索引擎搜索 <code>site:blog.locotor.cn</code>，都显示:</p>
+<blockquote>
+<p>找不到和您查询的“site:blog.locotor.cn”相符的内容或信息</p>
+</blockquote>
+<p><img src="http://locotor.cn/oss/blog/" alt="百度搜不到blog.locotor.cn"></p>
+<p>咱写个博客也不能变成无可循迹的蛮荒之地呀😥，针对 SEO 的优化开搞！<br>因为 Hexo 几次版本更新后，更改了配置方式，目前不推荐修改包内文件，所以一些网上的配置方式有些许过时，这里记录一下新版本的配置途径。</p>
+<h2 id="提交注册"><a href="#提交注册" class="headerlink" title="提交注册"></a>提交注册</h2>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-12-28T11:55:29+00:00"
-              content="2020-12-28">
-          12-28
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/practice-record/Hexo/k201228115529/" itemprop="url">
-            <span itemprop="name">Hexo 博客 SEO 优化</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/SEO/" rel="tag"># SEO</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/practice-record/Hexo/k201221151358/" rel="prev" title="搭建 Hexo 博客到 GitHub 和 Coding">
+                  <i class="fa fa-chevron-left"></i> 搭建 Hexo 博客到 GitHub 和 Coding
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-12-21T15:13:58+00:00"
-              content="2020-12-21">
-          12-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/practice-record/Hexo/k201221151358/" itemprop="url">
-            <span itemprop="name">搭建 Hexo 博客到 GitHub 和 Coding</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 
 
 <script>
