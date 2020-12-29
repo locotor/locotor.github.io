@@ -1,0 +1,16 @@
+# welcome to : blog.locotor.cn 
+User-agent: *
+Allow: /
+Allow: /posts/
+Allow: /tags/
+Allow: /categories/
+Allow: /archives/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /images/
+Disallow: /lib/
+Sitemap: https://blog.locotor.cn/sitemap.xml
+Sitemap: https://blog.locotor.cn/baidusitemap.xml

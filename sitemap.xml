@@ -15,6 +15,20 @@
     
   </url>
   
+  <url>
+    <loc>https://blog.locotor.cn/categories/index.html</loc>
+    
+    <lastmod>2020-12-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.locotor.cn/tags/index.html</loc>
+    
+    <lastmod>2020-12-29</lastmod>
+    
+  </url>
+  
 
   <url>
     <loc>https://blog.locotor.cn/</loc>
@@ -32,6 +46,13 @@
   </url>
   
   <url>
+    <loc>https://blog.locotor.cn/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2020-12-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.locotor.cn/tags/SEO/</loc>
     <lastmod>2020-12-29</lastmod>
     <changefreq>daily</changefreq>
@@ -40,27 +61,6 @@
   
   <url>
     <loc>https://blog.locotor.cn/tags/Github-Action/</loc>
-    <lastmod>2020-12-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.locotor.cn/tags/Github-Pages/</loc>
-    <lastmod>2020-12-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.locotor.cn/tags/Coding-Pages/</loc>
-    <lastmod>2020-12-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.locotor.cn/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2020-12-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
