@@ -2989,3 +2989,9 @@ ul.breadcrumb li:last-child {
     padding: 10px 12px;
   }
 }
+#icp-code {
+  display: inline;
+  border: 0;
+  color: #999;
+  font-size: 0.875em;
+}
