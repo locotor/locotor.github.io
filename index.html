@@ -434,7 +434,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/25b551dd.html" class="post-title-link" itemprop="url">Angular Material 的主题系统</a>
+          <a href="/posts/25b551dd.html" class="post-title-link" itemprop="url">Angular Material 主题系统（一）-- 使用介绍</a>
         </h2>
 
         <div class="post-meta-container">
@@ -467,34 +467,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Material-主题系统"><a href="#Material-主题系统" class="headerlink" title="Material 主题系统"></a>Material 主题系统</h2><h3 id="主题颜色"><a href="#主题颜色" class="headerlink" title="主题颜色"></a>主题颜色</h3><p>包含一组用于 Angular Material 组件的颜色，按照 Material Design 的标准实现。每个颜色可以按（50，100，200…900）的层级，从浅到深调整。每个主题颜色由下面这几个组成：</p>
-<ul>
-<li>primary：主要颜色，广泛应用于应用是各个位置。</li>
-<li>accent：突出色，用于 Material 设计特有的“FAB（浮动操作按钮）”，以及强调交互的元素的颜色。</li>
-<li>warn：用于表示错误和警告状态。</li>
-<li>foreground：用于文本和图标。</li>
-<li>background：用于元素背景。</li>
-</ul>
-<p>在 Angular Material 中，所有主题样式都在编译时静态生成，所以启动后不用花费运行周期来执行主题样式生成。</p>
-<h3 id="字体排版"><a href="#字体排版" class="headerlink" title="字体排版"></a>字体排版</h3><h3 id="预设主题颜色"><a href="#预设主题颜色" class="headerlink" title="预设主题颜色"></a>预设主题颜色</h3><p>Angular Material 预先构建了几个主题的 css 文件。 这些主题文件还包含核心的所有样式（所有组件共有的样式），因此只需在应用程序中为 Angular Material 库引入一个单独的 CSS 文件即可。<br>例如，可以从 @angular/material/prebuilt-themes 将主题文件直接包含到应用程序中，可用的预设主题有：</p>
-<ul>
-<li>deeppurple-amber.css</li>
-<li>indigo-pink.css</li>
-<li>pink-bluegrey.css</li>
-<li>purple-green.css</li>
-</ul>
-<p>注意：如果应用程序内容未放置在 <code>&lt;mat-sidenav-container&gt;</code> 内，则需要将 <code>.mat-app-background</code> 类添加到外层元素（例如 <code>&lt;body&gt;</code>）中。 这样可以确保将主题背景应用于的页面。</p>
-<h3 id="预设字体排版"><a href="#预设字体排版" class="headerlink" title="预设字体排版"></a>预设字体排版</h3><h2 id="自定义主题和字体"><a href="#自定义主题和字体" class="headerlink" title="自定义主题和字体"></a>自定义主题和字体</h2><h3 id="自定义主题"><a href="#自定义主题" class="headerlink" title="自定义主题"></a>自定义主题</h3><p>自定义主题需要做两个事：</p>
-<ol>
-<li><p>导入 mat-core Sass mixin。 这个 mixin 包含了 material 组件使用的所有通用样式。 注意仅在应用程序中引入一次。 如果多次引入此 mixin，则最终得到的 css 将有这些通用样式的多个副本。</p>
-</li>
-<li><p>用多个调色板组成主题对象。 可以使用 mat-light-theme 函数或 mat-dark-theme 函数创建该对象。 然后，此函数的输出将传递到 angular-material-theme mixin，这个 mixin 将输出该主题的所有相应样式。</p>
-</li>
-</ol>
-<p>例如示例代码：</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"><span class="keyword">@include</span> mat-core();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用库预先根据 material design 定义的 palette.scss 为自定义主题创建调色盘</span></span><br><span class="line"><span class="comment">// Available color palettes: https://material.io/design/color/</span></span><br><span class="line"><span class="variable">$candy-app-primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"><span class="comment">// 针对每个颜色，可选指定默认，更亮，更黑的色调</span></span><br><span class="line"><span class="variable">$candy-app-accent</span>:  mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 警告色是可以选的（默认是红色）</span></span><br><span class="line"><span class="variable">$candy-app-warn</span>:    mat-palette(<span class="variable">$mat-red</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建主题对象 (是一个 Sass map 包含所有的颜色定义）</span></span><br><span class="line"><span class="variable">$candy-app-theme</span>: mat-light-theme(<span class="variable">$candy-app-primary</span>, <span class="variable">$candy-app-accent</span>, <span class="variable">$candy-app-warn</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为应用中用到的 core 以及所有组件包含主题样式，</span></span><br><span class="line"><span class="comment">// 可选的，还可以为每个使用到的组件单独导入并 @include 主题 mixin</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$candy-app-theme</span>);</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：这个自定义的主题文件不应该导入到其他 SCSS 文件中，这会导致最后输出的 CSS 文件包含重复样式。如果想要在别的 SCSS 文件中使用定义好的主题配置对象（e.g. $candy-app-theme），那么主题配置对象的定义需要单独放在它自己的文件里，和 mat-core，angular-material-theme mixin 分开。</p>
-
+          <p>最近在自己的个人项目里用到了 Angular Material 组件库，也存在定制主题界面的需求，一番使用之后，这里参照官方文档，对它的用法做一个归纳和介绍。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/25b551dd.html">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -544,7 +525,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-seedling"></i>
   </span>
