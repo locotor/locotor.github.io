@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="文字排版不是一成不变的，内置的颜色组合通常也不满足实际开发需要，并且在 Material 的图标之外，也时常需要加入自定义的图标，这就需要去自定义它们。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular Material 主题系统（二）-- 自定义主题">
+<meta property="og:url" content="https://blog.locotor.cn/posts/7dd816c9.html">
+<meta property="og:site_name" content="locotor&#39;s Notes">
+<meta property="og:description" content="文字排版不是一成不变的，内置的颜色组合通常也不满足实际开发需要，并且在 Material 的图标之外，也时常需要加入自定义的图标，这就需要去自定义它们。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-06T09:53:34.000Z">
+<meta property="article:modified_time" content="2021-01-04T10:05:57.210Z">
+<meta property="article:author" content="locotor">
+<meta property="article:tag" content="Angular Material">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.locotor.cn/posts/7dd816c9.html">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+  <meta name="keywords" content="Angular,Material,主题">
+
+<title>Angular Material 主题系统（二）-- 自定义主题 | locotor's Notes</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">locotor's Notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">张晋祥的博客小站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Material-%E7%BB%84%E4%BB%B6%E9%A2%9C%E8%89%B2"><span class="nav-number">1.</span> <span class="nav-text">自定义 Material 组件颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E5%AD%97%E6%8E%92%E7%89%88"><span class="nav-number">2.</span> <span class="nav-text">自定义文字排版</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">创建配置对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">使用配置对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%87%E5%AD%97%E6%8E%92%E7%89%88%E5%B7%A5%E5%85%B7"><span class="nav-number">2.3.</span> <span class="nav-text">使用文字排版工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%9A%E5%8A%A1%E7%BB%84%E4%BB%B6%E7%9A%84%E4%B8%BB%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">配置业务组件的主题</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="locotor" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">locotor</p>
+  <div class="site-description" itemprop="description">玻璃晴朗，橘子辉煌。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/locotor" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;locotor" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:locotor@outlook.com" title="E-Mail → mailto:locotor@outlook.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/2306869630" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;2306869630" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/locotor" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="external nofollow noopener noreferrer" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/7dd816c9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="locotor">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="locotor's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular Material 主题系统（二）-- 自定义主题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-06 09:53:34" itemprop="dateCreated datePublished" datetime="2020-06-06T09:53:34+00:00">2020-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">文字排版不是一成不变的，内置的颜色组合通常也不满足实际开发需要，并且在 Material 的图标之外，也时常需要加入自定义的图标，这就需要去自定义它们。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>文字排版不是一成不变的，内置的颜色组合通常也不满足实际开发需要，并且在 Material 的图标之外，也时常需要加入自定义的图标，这就需要去自定义它们。</p>
+<h3 id="自定义-Material-组件颜色"><a href="#自定义-Material-组件颜色" class="headerlink" title="自定义 Material 组件颜色"></a>自定义 Material 组件颜色</h3><p>要定义颜色组合很容易，因为 Material 的样式是用 Sass 开发的，所以要生成自定义的样式，其实就是传自定义的颜色变量，给 Material 的主题生成 mixin。</p>
+<p>创建负责应用程序的整体主题样式文件：<strong>xxx-theme.scss</strong>，主要需要做四步：</p>
+<ol>
+<li><p>导入 mat-core mixin。 这个 mixin 包含了 material 组件使用的所有通用样式。<br> <strong>注意</strong>：只能引入一次，如果多次引入，引入几次，最后编译得到的 css 里就会包含几份相同的样式定义。</p>
+</li>
+<li><p>用多个颜色变量创建“调色盘”，这样就使得同一个颜色，有了多种色调的变化。  </p>
+</li>
+<li><p>再用各个调色盘，组成主题对象。可以使用 mat-light-theme 或 mat-dark-theme 来创建明亮或者暗黑风格的主题对象。 </p>
+</li>
+<li><p>最后，将此对象传递到 angular-material-theme，这个 mixin 将输出该主题的所有相应样式。</p>
+</li>
+</ol>
+<p>示例代码：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>; <span class="comment">// 包含需要用到的 mixin 和变量</span></span><br><span class="line"><span class="keyword">@include</span> mat-core(); <span class="comment">// 只能导入一次</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用系统预定义的颜色变量和 mixin 为自定义主题创建“调色盘”</span></span><br><span class="line"><span class="comment">// 所有可用的颜色可以在此查看: https://material.io/design/color/</span></span><br><span class="line"><span class="variable">$candy-app-primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对每个调色盘，可选的，可以指定“默认”，“更亮”，“更暗”的色调</span></span><br><span class="line"><span class="variable">$candy-app-accent</span>: mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 警告色是可以选的（默认是红色 $mat-red）</span></span><br><span class="line"><span class="variable">$candy-app-warn</span>: mat-palette(<span class="variable">$mat-orange</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  mat-light-theme function 创建主题对象 (主题对象是一个 Sass map，包含所有的颜色定义）</span></span><br><span class="line"><span class="variable">$candy-app-theme</span>: mat-light-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$candy-app-primary</span>,</span><br><span class="line">    accent: <span class="variable">$candy-app-accent</span>,</span><br><span class="line">    warn: <span class="variable">$candy-app-warn</span>,  </span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将主题配置对象传入，最终给所有 Material 生成主题样式。</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$candy-app-theme</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：这个自定义的主题文件不应该在其他 SCSS 文件中被 import，这会导致 mat-core 被多次执行，最后输出的 CSS 文件包含重复样式。<br>如果想要在别的 SCSS 文件中使用定义好的主题对象（e.g. $candy-app-theme），那么主题对象的定义需要单独放在它自己的文件里，和 mat-core，angular-material-theme 分开。</p>
+<p>通常都是用 Angular-cli 创建项目，要使用自定义的这个主题，只需在 <strong><em>angular.json &gt; styles</em></strong> 里，把这个 “xxx-theme.scss” 的路径引入。</p>
+<h3 id="自定义文字排版"><a href="#自定义文字排版" class="headerlink" title="自定义文字排版"></a>自定义文字排版</h3><h4 id="创建配置对象"><a href="#创建配置对象" class="headerlink" title="创建配置对象"></a>创建配置对象</h4><p>和自定义主题颜色类似的，文字排版也是可以通过创建一个 Sass map 对象来自定义：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里定义文字排版对象，自定义了字体、headline、body-1.</span></span><br><span class="line"><span class="variable">$custom-typography</span>: mat-typography-config(</span><br><span class="line">  <span class="variable">$font-family</span>: <span class="string">&#x27;monospace&#x27;</span>,</span><br><span class="line">  <span class="variable">$headline</span>: mat-typography-level(<span class="number">32px</span>, <span class="number">48px</span>, <span class="number">700</span>),</span><br><span class="line">  <span class="variable">$body-1</span>: mat-typography-level(<span class="number">16px</span>, <span class="number">24px</span>, <span class="number">500</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>mat-typography-level 方法接收 font-size, line-height, 和 font-weight 三个参数，返回一个文字层级的定义对象。</p>
+<p><strong>注意</strong>：字体定义需要加引号。</p>
+<h4 id="使用配置对象"><a href="#使用配置对象" class="headerlink" title="使用配置对象"></a>使用配置对象</h4><p>创建好文字排版配置对象后，就可以通过各个 mixin 来使用它：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义文字排版的 CSS 类 (例如, mat-h1, mat-display-1, mat-typography 等).</span></span><br><span class="line"><span class="keyword">@include</span> mat-base-typography(<span class="variable">$custom-typography</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给 Angular Material 的特定组件自定义文字排版</span></span><br><span class="line"><span class="keyword">@include</span> mat-checkbox-typography(<span class="variable">$custom-typography</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义整个文字排版系统设置, 包括 mat-base-typography 以及所有组件.</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-typography(<span class="variable">$custom-typography</span>);</span><br></pre></td></tr></table></figure>
+<p>如果有自定义主题颜色，可以吧文字排版的配置对象，传入 mat-core：<code>@include mat-core($custom-typography)</code>。</p>
+<h4 id="使用文字排版工具"><a href="#使用文字排版工具" class="headerlink" title="使用文字排版工具"></a>使用文字排版工具</h4><p>Angular Material 包含一组文字排版工具（mixin 和 function），可以用来自定义自己项目里的组件的文字样式，以保持和 Material 的样式定义一致。</p>
+<ul>
+<li>mat-font-size($config, $level) - 通过配置对象和层级，获取 font-size。</li>
+<li>mat-line-height($config, $level) - 通过配置对象和层级，获取 line-height。</li>
+<li>mat-font-weight($config, $level) - 通过配置对象和层级，获取 font-weight。</li>
+<li>mat-font-family($config) - 通过配置对象，获取 font-family。</li>
+<li>mat-typography-level-to-styles($config, $level) - 一个方便生成样式的 mixin，通过传入配置对象和层级，快速生成一个 CSS 文字样式定义。</li>
+</ul>
+<h3 id="配置业务组件的主题"><a href="#配置业务组件的主题" class="headerlink" title="配置业务组件的主题"></a>配置业务组件的主题</h3><p>使用 Angular Material 提供的 Sass 工具，保持业务组件的主题样式和 Material 组件一致。<strong>注意</strong>：业务组件的样式需要以 Sass 定义。</p>
+<p>要适配业务组件的主题，主要分为三步：</p>
+<ol>
+<li><p>给组件创建一个包含颜色和文字排版样式的 “主题文件”。</p>
+<ol>
+<li><p>创建一个接收 “主题颜色配置对象” 的 mixin，输出业务组件的颜色配置。</p>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 Material 的 functions 来创建主题.</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@mixin</span> candy-carousel-color(<span class="variable">$config-or-theme</span>) &#123;</span><br><span class="line">  <span class="comment">// mat-get-color-config 可以自动判断，参数传主题对象，或者颜色配置对象都可以</span></span><br><span class="line">  <span class="variable">$config</span>: mat-get-color-config(<span class="variable">$config-or-theme</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 从配置对象中提取颜色</span></span><br><span class="line">  <span class="variable">$primary</span>: map-get(<span class="variable">$config</span>, primary);</span><br><span class="line">  <span class="variable">$accent</span>: map-get(<span class="variable">$config</span>, accent);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 任意受主题颜色影响的组件样式</span></span><br><span class="line">  <span class="selector-class">.candy-carousel</span> &#123;</span><br><span class="line">    <span class="comment">// 使用 mat-color 从调色盘提取特定色调的颜色值。</span></span><br><span class="line">    <span class="attribute">background-color</span>: mat-color(<span class="variable">$primary</span>, darker);</span><br><span class="line">    <span class="attribute">border-color</span>: mat-color(<span class="variable">$accent</span>, A400);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建另一个 mixin，接收 “文字排版配置对象”，输出文字样式。</p>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> candy-carousel-typography(<span class="variable">$config-or-theme</span>) &#123;</span><br><span class="line">    </span><br><span class="line">   <span class="comment">// 和颜色方法类似，参数传主题对象，或者文字排版配置对象都可以</span></span><br><span class="line">   <span class="variable">$config</span>: mat-get-typography-config(<span class="variable">$config-or-theme</span>);</span><br><span class="line"></span><br><span class="line">   <span class="selector-class">.candy-carousel</span> &#123;</span><br><span class="line">     <span class="attribute">font</span>: &#123;</span><br><span class="line">       family: mat-font-family(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">       size: mat-font-size(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">       weight: mat-font-weight(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>将所有其他和主题无关的样式，放入这个组件独立的另一个样式文件中，由组件的 styleUrl 直接引入。</p>
+</li>
+<li><p>将业务组件的主题定义文件，引入根主题文件中：</p>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 Material 的 functions 来创建主题.</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入 Material 通用样式.</span></span><br><span class="line"><span class="keyword">@include</span> mat-core();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义应用程序的自定义主题</span></span><br><span class="line"><span class="variable">$primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"><span class="variable">$accent</span>:  mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"><span class="variable">$theme</span>: mat-light-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$primary</span>,</span><br><span class="line">    accent: <span class="variable">$accent</span>,</span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 Material 组件的主题样式</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$theme</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成业务组件的主题样式</span></span><br><span class="line"><span class="keyword">@include</span> candy-carousel-theme(<span class="variable">$theme</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular-Material/" rel="tag"># Angular Material</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/25b551dd.html" rel="prev" title="Angular Material 主题系统（一）-- 基本使用">
+                  <i class="fa fa-chevron-left"></i> Angular Material 主题系统（一）-- 基本使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/3ec95b63.html" rel="next" title="Hexo 搭建个人博客到 GitHub 和 Coding">
+                  Hexo 搭建个人博客到 GitHub 和 Coding <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-seedling"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">locotor</span>
+</div><a target="_blank" href="http://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" id="icp-code"> 渝ICP备2020014938号</a>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>
