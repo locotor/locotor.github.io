@@ -25,23 +25,21 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="最近在自己的个人项目里用到了 Angular Material 组件库，使用它的主题界面自然是少不了的，这里参照官方文档，先对 Material 默认主题的用法做一个归纳。">
+<meta name="description" content="要在应用程序的运行时实现明亮&#x2F;暗黑主题切换，或者多主题切换，就需要自定义多个主题，再通过一定的方式动态切换，这里记录一下两种方式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular Material 主题系统（一）-- 基本使用">
-<meta property="og:url" content="https://blog.locotor.cn/posts/25b551dd.html">
+<meta property="og:title" content="Angular Material 主题系统（三）--多主题切换">
+<meta property="og:url" content="https://blog.locotor.cn/posts/56adc548.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="最近在自己的个人项目里用到了 Angular Material 组件库，使用它的主题界面自然是少不了的，这里参照官方文档，先对 Material 默认主题的用法做一个归纳。">
+<meta property="og:description" content="要在应用程序的运行时实现明亮&#x2F;暗黑主题切换，或者多主题切换，就需要自定义多个主题，再通过一定的方式动态切换，这里记录一下两种方式。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://oss.locotor.cn/images/material/material-design-colors.png">
-<meta property="article:published_time" content="2020-06-04T11:04:00.000Z">
+<meta property="article:published_time" content="2020-06-11T20:09:42.000Z">
 <meta property="article:modified_time" content="2021-01-06T10:06:03.987Z">
 <meta property="article:author" content="张晋祥">
-<meta property="article:tag" content="Angular Material">
+<meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://oss.locotor.cn/images/material/material-design-colors.png">
 
 
-<link rel="canonical" href="https://blog.locotor.cn/posts/25b551dd.html">
+<link rel="canonical" href="https://blog.locotor.cn/posts/56adc548.html">
 
 
 <script class="page-configurations">
@@ -55,7 +53,7 @@
 </script>
   <meta name="keywords" content="Angular,Material,主题">
 
-<title>Angular Material 主题系统（一）-- 基本使用 | locotor's Notes</title>
+<title>Angular Material 主题系统（三）--多主题切换 | locotor's Notes</title>
   
 
 
@@ -181,7 +179,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2"><span class="nav-number">1.</span> <span class="nav-text">主题颜色</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E6%8E%92%E7%89%88"><span class="nav-number">2.</span> <span class="nav-text">文字排版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%A2%84%E8%AE%BE%E4%B8%BB%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">使用预设主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%89%E7%B1%BB%E5%90%8D%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">按类名动态切换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%9A%E4%B8%AA%E4%B8%BB%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">创建多个主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96%E5%A4%84%E7%90%86%E5%9F%BA%E4%BA%8E%E8%A6%86%E7%9B%96%E5%B1%82%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">额外处理基于覆盖层的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E7%B1%BB%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">动态切换类名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%89-css-%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text">按 css 动态切换</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -264,7 +262,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/25b551dd.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/56adc548.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -277,7 +275,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Angular Material 主题系统（一）-- 基本使用
+          Angular Material 主题系统（三）--多主题切换
         </h1>
 
         <div class="post-meta-container">
@@ -288,7 +286,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-06-04 11:04:00" itemprop="dateCreated datePublished" datetime="2020-06-04T11:04:00+00:00">2020-06-04</time>
+      <time title="创建时间：2020-06-11 20:09:42" itemprop="dateCreated datePublished" datetime="2020-06-11T20:09:42+00:00">2020-06-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -303,7 +301,7 @@
   
 </div>
 
-            <div class="post-description">最近在自己的个人项目里用到了 Angular Material 组件库，使用它的主题界面自然是少不了的，这里参照官方文档，先对 Material 默认主题的用法做一个归纳。</div>
+            <div class="post-description">要在应用程序的运行时实现明亮/暗黑主题切换，或者多主题切换，就需要自定义多个主题，再通过一定的方式动态切换，这里记录一下两种方式。</div>
         </div>
       </header>
 
@@ -311,110 +309,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>默认所有项目都是用 Angular CLI 创建，确保项目有个统一规范的文件结构，方便用例阐述。  </p>
-<p>Angular Material 的主题系统包含了 “主题颜色”、“文字排版” 模块，都支持全面的自定义。不过咱们首先还是看看这两个模块里都包含什么内容，以及怎么使用默认预设的主题，实现 Material 组件库的开箱即用。</p>
-<h1 id="主题颜色"><a href="#主题颜色" class="headerlink" title="主题颜色"></a>主题颜色</h1><p>Angular Material 的主题颜色包含一组“调色盘”，用于组成 Material 组件的颜色。<br>所谓的“调色盘”，即按照 Material Design 的标准定义的多种颜色，每个颜色可以按（50，100，200…900）的层级，从浅到深调整色调（hue），得到不同的颜色值。</p>
-<p><img src="https://oss.locotor.cn/images/material/material-design-colors.png" alt="Material 颜色表"></p>
-<p>一个主题颜色由下面这几种类型组成：</p>
-<ul>
-<li>primary：主要颜色，广泛应用于应用的各个位置。</li>
-<li>accent：强调色，用于 Material 独特的“FAB（浮动操作按钮）”，以及强调交互的部分。</li>
-<li>warn：警告色，用于表示错误和警告状态。</li>
-<li>foreground：前景色，用于文本和图标。</li>
-<li>background：背景色，用于元素背景。</li>
-</ul>
-<h1 id="文字排版"><a href="#文字排版" class="headerlink" title="文字排版"></a>文字排版</h1><p>Angular Material 的文字排版基于 Material 设计规范，定义了多个层级，每个层级由 <code>font-size</code>，<code>line-height</code> 和 <code>font-weight</code> 三个样式配置组成。</p>
-<p>定义的层级有：</p>
-<table>
-<thead>
-<tr>
-<th>层级</th>
-<th>css 类</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>display-1 ~ display-4</td>
-<td>.mat-display-1 ~ .mat-display-4</td>
-<td>巨大，一次性的标题性文字，常用于首页顶部</td>
-</tr>
-<tr>
-<td>headline</td>
-<td>.mat-h1, .mat-headline</td>
-<td>与 <code>&lt;h1&gt;</code> 标签对应的小节的头部</td>
-</tr>
-<tr>
-<td>title</td>
-<td>.mat-h2, .mat-title</td>
-<td>与 <code>&lt;h2&gt;</code> 标签对应的小节的头部</td>
-</tr>
-<tr>
-<td>subheading-2</td>
-<td>.mat-h3, .mat-subheading-2</td>
-<td>与 <code>&lt;h3&gt;</code> 标签对应的小节的头部</td>
-</tr>
-<tr>
-<td>subheading-1</td>
-<td>.mat-h4, .mat-subheading-1</td>
-<td>与 <code>&lt;h4&gt;</code> 标签对应的小节的头部</td>
-</tr>
-<tr>
-<td>body-1</td>
-<td>.mat-body, .mat-body-1</td>
-<td>基本的正文文本</td>
-</tr>
-<tr>
-<td>body-2</td>
-<td>.mat-body-strong, .mat-body-2</td>
-<td>较粗的正文文本</td>
-</tr>
-<tr>
-<td>caption</td>
-<td>.mat-small, .mat-caption</td>
-<td>较小的正文文本和提示文本</td>
-</tr>
-<tr>
-<td>button</td>
-<td>只用于组件中</td>
-<td>按钮和链接</td>
-</tr>
-<tr>
-<td>input</td>
-<td>只用于组件中</td>
-<td>表单输入字段</td>
-</tr>
-</tbody></table>
-<h1 id="使用预设主题"><a href="#使用预设主题" class="headerlink" title="使用预设主题"></a>使用预设主题</h1><p>Angular Material 预先构建了几个内置主题。 这几个 css 文件除了包含所有 Material 组件的通用样式以外，字体排版，主题颜色也定义在其中。因此，要使用 Material 组件库，只需在应用程序中引入其中一个单独的 css 文件即可。<br>在项目根目录下的 <em>style.css</em> 里直接引用 <code>@import &#39;@angular/Material/prebuilt-themes/主题名称.css&#39;</code>。可用的预设主题有：</p>
-<ul>
-<li><font color="#673AB7">deeppurple</font>-<font color="#FFC107">amber</font>.css</li>
-<li><font color="#3F51B5">indigo</font>-<font color="#E91E63">pink</font>.css</li>
-<li><font color="#E91E63">pink</font>-<font color="#607D8B">bluegrey</font>.css</li>
-<li><font color="#9C27B0">purple</font>-<font color="#4CAF50">green</font>.css</li>
-</ul>
-<p>在使用前，需要把 300、400 和 500 weight 的 Roboto 字体包含进项目：<br><code>&lt;link href=&quot;https://fonts.googleapis.com/css?family=Roboto:300,400,500&quot; rel=&quot;stylesheet&quot;&gt;</code></p>
-<p>这样，所有的 Material 组件就可以按预设的颜色和文字排版呈现外观。</p>
-<p>同时，还可以给任意的原生元素设置 Material 的字体排版样式：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;mat-display-1&quot;</span>&gt;</span>Jackdaws love my big sphinx of quartz.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">&quot;mat-h2&quot;</span>&gt;</span>The quick brown fox jumps over the lazy dog.<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意✨</strong>：默认情况下，引入的预设主题 css，不会影响除 Material 组件以外的任何元素。</p>
-<ul>
-<li><p>如果应用程序内容未放置在 <code>&lt;mat-sidenav-container&gt;</code> 这个页面布局容器组件内，则需要将 <code>.mat-app-background</code> 类添加到外层元素（例如 <code>&lt;body&gt;</code>）中。 才能给应用设置 Material 主题背景色。</p>
-</li>
-<li><p>如果需要给应用程序全局设置 Material 的字体排版，需要给根节点的元素设置 <strong>mat-typography</strong> 类。例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 不受影响. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>This header is unstyled<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 所有的元素都会按 Material 的字体排版设置样式. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;mat-typography&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>这个内容会应用 Material 的 headline 样式<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Material 的主题系统简介包括：</p>
-<ul>
-<li><p>主题颜色定义了“主色”，“强调色”，“警告色”，“前景色”，“背景色”，每种颜色是一个 “调色盘”，可以通过色调呈现不同深浅的颜色变化，让界面颜色富有层次而不杂乱。</p>
-</li>
-<li><p>文字排版按 <code>font-size</code>，<code>line-height</code> 和 <code>font-weight</code> 三个样式，从大到小定义了多个层级，让 Material 组件的文字规格统一。</p>
-</li>
-<li><p>预设了四种主题，使用 Material 组件时，项目根目录的 <em>style.css</em> 直接引入其中一个 css 文件即可。若要让整个应用的文字排版和 Material 组件保持一致，只需要给根元素（如 body）添加 <code>.mat-typography</code> 类。</p>
-</li>
-</ul>
-<p>不过实际开发里，除了直接用预设的组件外观，通常我们都需要定制自己的颜色搭配，字体排版，或是让 Material 组件外的其他业务组件，也和 Material 风格保持一致。</p>
-<p>这就需要我们自定义 Material 的主题系统，咱们下一篇见😎！</p>
+        <p>上一篇介绍了如何自定义 Material 主题，现在来看看怎么定义多个主题，在运行时动态切换。<br>可以采用官网介绍的类名包裹方式，或者我们也可以预先编译，按需引入。</p>
+<h1 id="按类名动态切换"><a href="#按类名动态切换" class="headerlink" title="按类名动态切换"></a>按类名动态切换</h1><p>可以在 <em>styles.scss</em> 中调用 <code>angular-material-theme</code> 多次，来生成多套不同的主题样式，每套样式用一个独特的类名包裹。<br><strong>注意✨</strong>：<code>@mat-core</code> 始终只能调用一次。</p>
+<h2 id="创建多个主题"><a href="#创建多个主题" class="headerlink" title="创建多个主题"></a>创建多个主题</h2><p>咱们先创建两个主题，一个明亮风格的主题作为默认，另一个暗黑风格的主题放在 <code>.unicorn-dark-theme</code> 这个类名中。这样一来，任何在该类名内的元素，都会应用暗黑风格的主题样式。按这个模式，可以创建任意多个额外的主题。</p>
+<p><strong>注意✨</strong>：第二个主题采用 <code>angular-material-color</code> 这一 mixin，而不是第一个主题使用的 <code>angular-material-theme</code>，因为后者不光会生成主题颜色的样式，还会生成文字排版的。这里只需要改变颜色即可。而如果需要单独改变文字排版，可以使用 <code>angular-material-typography</code>。 类似的，单独自定义某组件也是如此（例如：<code>mat-button-theme</code> = <code>mat-button-color</code> + <code>mat-button-typography</code>）。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"><span class="keyword">@include</span> mat-core();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个自定义颜色配置 (和前一篇一样）</span></span><br><span class="line"><span class="variable">$candy-app-primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"><span class="variable">$candy-app-accent</span>:  mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"><span class="variable">$candy-app-theme</span>:   mat-light-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$candy-app-primary</span>,</span><br><span class="line">    accent: <span class="variable">$candy-app-accent</span>,</span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Include the default theme styles (color and default density)</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$candy-app-theme</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义另一个暗黑风格的主题</span></span><br><span class="line"><span class="variable">$dark-primary</span>: mat-palette(<span class="variable">$mat-blue-grey</span>);</span><br><span class="line"><span class="variable">$dark-accent</span>:  mat-palette(<span class="variable">$mat-amber</span>, A200, A100, A400);</span><br><span class="line"><span class="variable">$dark-warn</span>:    mat-palette(<span class="variable">$mat-deep-orange</span>);</span><br><span class="line"><span class="variable">$dark-theme</span>:   mat-dark-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$dark-primary</span>,</span><br><span class="line">    accent: <span class="variable">$dark-accent</span>,</span><br><span class="line">    warn: <span class="variable">$dark-warn</span>,</span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用一个类名包裹主题样式</span></span><br><span class="line"><span class="selector-class">.unicorn-dark-theme</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> angular-material-color(<span class="variable">$dark-theme</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="额外处理基于覆盖层的组件"><a href="#额外处理基于覆盖层的组件" class="headerlink" title="额外处理基于覆盖层的组件"></a>额外处理基于覆盖层的组件</h2><p>因为这类组件（例如：menu、select、dialog 等）不是被根节点的 DOM 元素包裹，而是基于动态创建的全局覆盖层容器。因此，要让它们也能根据独特的类名切换主题样式，需要做一点额外的处理：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;OverlayContainer&#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/cdk/overlay&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">UnicornCandyAppModule</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">overlayContainer: OverlayContainer</span>)</span> &#123;</span><br><span class="line">    overlayContainer.getContainerElement().classList.add(<span class="string">&#x27;unicorn-dark-theme&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="动态切换类名"><a href="#动态切换类名" class="headerlink" title="动态切换类名"></a>动态切换类名</h2><p>通过 Angular 类名绑定的方式，来切换不同的主题：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">class.unicorn-dark-theme</span>]=<span class="string">&quot;isDarkMode&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 受主题切换影响的元素和组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="按-css-动态切换"><a href="#按-css-动态切换" class="headerlink" title="按 css 动态切换"></a>按 css 动态切换</h1><p>现在咱们已经可以动态的切换主题了，可只有两三个主题还好，如果我的应用程序，要提供很多的主题搭配，让用户自由选用呢，<em>styles.scss</em> 一次包含这么多份主题样式，实在有损加载性能（每个主题增加 50kb）。<br>遇到这种情况，我们可以预先编译好需要用到主题，在运行时动态切换它们，就可以按需加载了。<br>话不多说，let’s rock the code！😎</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-material-theme-switch-example">Github 示例</a></p>
 
     </div>
 
@@ -428,11 +333,11 @@
 <div class="post-copyright">
 <ul>
   <li class="post-copyright-author">
-      <strong>原作者： </strong>locotr
+      <strong>本文作者： </strong>张晋祥
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.locotor.cn/posts/25b551dd.html" title="Angular Material 主题系统（一）-- 基本使用">https://blog.locotor.cn/posts/25b551dd.html</a>
+      <a href="https://blog.locotor.cn/posts/56adc548.html" title="Angular Material 主题系统（三）--多主题切换">https://blog.locotor.cn/posts/56adc548.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -440,18 +345,18 @@
 </ul>
 </div>
 
-          <div class="post-tags">
-              <a href="/tags/Angular-Material/" rel="tag"># Angular Material</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/posts/7dd816c9.html" rel="prev" title="Angular Material 主题系统（二）-- 自定义主题">
+                  <i class="fa fa-chevron-left"></i> Angular Material 主题系统（二）-- 自定义主题
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/7dd816c9.html" rel="next" title="Angular Material 主题系统（二）-- 自定义主题">
-                  Angular Material 主题系统（二）-- 自定义主题 <i class="fa fa-chevron-right"></i>
+                <a href="/posts/3ec95b63.html" rel="next" title="Hexo 搭建个人博客到 GitHub 和 Coding">
+                  Hexo 搭建个人博客到 GitHub 和 Coding <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
