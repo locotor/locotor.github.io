@@ -25,20 +25,24 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="相比在博客园等网站上写博客，自己搭建个人小站能让我觉得在茫茫互联网上，有了个自己的窝。但搭建好后，被搜索引擎搜索到还比较困难，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，因为 NexT 的更新，一些优化方式有点过时，这里记录一下新版本的优化过程。">
+<meta name="description" content="个人的博客搭建好后，搜索引擎还搜索不到，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，这里记录一下优化过程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo + NexT 博客 SEO 优化">
 <meta property="og:url" content="https://blog.locotor.cn/posts/d730b4c3.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="相比在博客园等网站上写博客，自己搭建个人小站能让我觉得在茫茫互联网上，有了个自己的窝。但搭建好后，被搜索引擎搜索到还比较困难，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，因为 NexT 的更新，一些优化方式有点过时，这里记录一下新版本的优化过程。">
+<meta property="og:description" content="个人的博客搭建好后，搜索引擎还搜索不到，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，这里记录一下优化过程。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oss.locotor.cn/images/hexo/baidu-blog-no-found.png">
+<meta property="og:image" content="https://oss.locotor.cn/images/hexo/google-resource-type-select.png">
+<meta property="og:image" content="https://oss.locotor.cn/images/hexo/google-dns-verify.png">
 <meta property="article:published_time" content="2020-12-28T11:55:29.000Z">
-<meta property="article:modified_time" content="2021-01-05T09:51:53.015Z">
+<meta property="article:modified_time" content="2021-01-06T07:08:05.334Z">
 <meta property="article:author" content="locotor">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="博客搭建">
 <meta property="article:tag" content="SEO">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oss.locotor.cn/images/hexo/baidu-blog-no-found.png">
 
 
 <link rel="canonical" href="https://blog.locotor.cn/posts/d730b4c3.html">
@@ -307,7 +311,7 @@
   
 </div>
 
-            <div class="post-description">相比在博客园等网站上写博客，自己搭建个人小站能让我觉得在茫茫互联网上，有了个自己的窝。但搭建好后，被搜索引擎搜索到还比较困难，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，因为 NexT 的更新，一些优化方式有点过时，这里记录一下新版本的优化过程。</div>
+            <div class="post-description">个人的博客搭建好后，搜索引擎还搜索不到，还需要针对谷歌和百度等主流搜索引擎的抓取做优化，这里记录一下优化过程。</div>
         </div>
       </header>
 
@@ -316,17 +320,17 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博客建好后，在各个搜索引擎搜索 <code>site:blog.locotor.cn</code>，都显示：“找不到和您查询的“site:blog.locotor.cn”相符的内容或信息”。</p>
-<!-- ![百度搜不到 blog.locotor.cn](http://locotor.cn/oss/blog/) -->
+<img alt="百度搜不到 blog.locotor.cn" src="https://oss.locotor.cn/images/hexo/baidu-blog-no-found.png" style="width:600px">
 
-<p>咱写个博客也不能变成无可循迹的虚无之地呀 😥，针对 SEO 的操作开搞！<br>因为 NexT 几次版本更新后，更改了配置方式，目前不推荐修改包内文件，所以对一些网上的配置方式有些摸不着头脑，这里也记录下新版本的配置途径。</p>
+<p>咱们写博客也不能变成无可循迹的荒地吧 😥，得针对 SEO 优化一下。<br>因为 NexT 几次版本更新后，更改了配置方式，目前不推荐修改包内文件，所以对一些网上的配置方式有些过时，这里也记录下新版本的配置途径。</p>
 <h2 id="提交注册"><a href="#提交注册" class="headerlink" title="提交注册"></a>提交注册</h2><p>要让搜索引擎能够快速找到我的网站，首先需要在搜索引擎的站长工具平台上提交注册，这里记录下百度和谷歌的提交过程。</p>
 <h3 id="谷歌"><a href="#谷歌" class="headerlink" title="谷歌"></a>谷歌</h3><ol>
 <li><p>进入 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://search.google.com/search-console/welcome">Google Search Console</a> 提交网站。</p>
 </li>
 <li><p>选择资源类型： 提交时需要先选择 <strong>网域</strong> 或者 <strong>网址前缀</strong> 类型,。</p>
-<!-- ![Google Search Console 资源类型选择界面](http://locotor.cn/oss/blog/) -->
+ <img alt="Google Search Console 资源类型选择界面" src="https://oss.locotor.cn/images/hexo/google-resource-type-select.png" style="width:550px">
 
-<p>这两种类型，收录行为，验证方式，以及支持情况有所不同。<br>对于搜索引擎来说，网址前缀不同，完全就是不同的网站。例如以域名 locotor.cn 来说，不同的协议，不同的子域名：</p>
+<p> 这两种类型，收录行为，验证方式，以及支持情况有所不同。<br> 对于搜索引擎来说，网址前缀不同，完全就是不同的网站。例如以域名 locotor.cn 来说，不同的协议，不同的子域名：</p>
 <blockquote>
 <p><code>https://www.locotor.cn</code><br><code>http://www.locotor.cn</code><br><code>https://locotor.cn</code><br><code>http://locotor.cn</code><br><code>https://blog.locotor.cn</code><br><code>http://blog.locotor.cn</code></p>
 </blockquote>
@@ -359,7 +363,10 @@
 </li>
 <li><p>验证网站拥有权：</p>
 <ul>
-<li><p>域名提供商验证：<strong>网域和网址前缀都支持的验证方式</strong>，会弹出一个 DNS 记录验证。<!-- ![]()  --><br>复制这个值，在阿里云万网中添加一个域名解析 TXT 设置，粘贴到记录值那里。如果是选择的网域，主机记录就填 <strong><em>@</em></strong>，如果是选的网址前缀，主机记录就填子域名（例如 blog）。</p>
+<li><p>域名提供商验证：<strong>网域和网址前缀都支持的验证方式</strong>，会弹出一个 DNS 记录验证。</p>
+ <img alt="Google 通过 DNS 验证域名所有权" src="https://oss.locotor.cn/images/hexo/google-dns-verify.png" style="width:500px">
+
+<p>复制这个值，在阿里云万网中添加一个域名解析 TXT 设置，粘贴到记录值那里。如果是选择的网域，主机记录就填 <strong><em>@</em></strong>，如果是选的网址前缀，主机记录就填子域名（例如 blog）。</p>
 </li>
 <li><p>html 文件验证：会弹出一个 html 文件链接，将文件下载并放在网址根目录。<br>但是将下的文件放入 Hexo 的 source 文件夹是无效的，因为它内容被提取并嵌入 NexT 的页面模板中。</p>
 </li>

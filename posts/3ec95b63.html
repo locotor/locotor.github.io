@@ -25,15 +25,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="最近在同事的安利下尝试了 Hexo 搭建博客。 博客站点双线部署到 Github 和 Coding，配置DNS的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。">
+<meta name="description" content="将 Hexo 博客站点双线部署到 Github 和 Coding，配置 DNS 的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 搭建个人博客到 GitHub 和 Coding">
 <meta property="og:url" content="https://blog.locotor.cn/posts/3ec95b63.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="最近在同事的安利下尝试了 Hexo 搭建博客。 博客站点双线部署到 Github 和 Coding，配置DNS的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。">
+<meta property="og:description" content="将 Hexo 博客站点双线部署到 Github 和 Coding，配置 DNS 的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-21T20:13:58.000Z">
-<meta property="article:modified_time" content="2021-01-05T09:51:53.015Z">
+<meta property="article:modified_time" content="2021-01-06T07:08:05.334Z">
 <meta property="article:author" content="locotor">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="博客搭建">
@@ -307,7 +307,7 @@
   
 </div>
 
-            <div class="post-description">最近在同事的安利下尝试了 Hexo 搭建博客。 博客站点双线部署到 Github 和 Coding，配置DNS的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。</div>
+            <div class="post-description">将 Hexo 博客站点双线部署到 Github 和 Coding，配置 DNS 的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。</div>
         </div>
       </header>
 
@@ -379,7 +379,6 @@
 <li>申请 SSL 证书：在 Coding Pages 的自定义域名页面，点击验证网站，按提示在万网域名解析中插入一个 TXT 记录值，即可完成验证。<br>证书申请成功后，即可直接一键部署腾讯云托管的证书到 <code>blog.locotor.cn</code> 下，完成部署。</li>
 </ol>
 <h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>一番折腾，目前可以使用同时部署 Hexo 博客到 GitHub 和 Coding。均通过 blog.locotor.cn 访问，并根据用户线路，自动解析到最优的服务器地址。</p>
-<p>美滋滋 -v-</p>
 
     </div>
 
