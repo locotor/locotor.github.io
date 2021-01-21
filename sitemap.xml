@@ -95,14 +95,14 @@
   </url>
   
   <url>
-    <loc>https://blog.locotor.cn/tags/storybook/</loc>
+    <loc>https://blog.locotor.cn/tags/Storybook/</loc>
     <lastmod>2021-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.locotor.cn/tags/angular/</loc>
+    <loc>https://blog.locotor.cn/tags/Angular/</loc>
     <lastmod>2021-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -125,7 +125,7 @@
   </url>
   
   <url>
-    <loc>https://blog.locotor.cn/categories/angular/</loc>
+    <loc>https://blog.locotor.cn/categories/Angular/Angular-Material/</loc>
     <lastmod>2021-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -139,7 +139,7 @@
   </url>
   
   <url>
-    <loc>https://blog.locotor.cn/categories/angular/practice-record/</loc>
+    <loc>https://blog.locotor.cn/categories/practice-record/Storybook/</loc>
     <lastmod>2021-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -25,18 +25,21 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="玻璃晴朗，橘子辉煌。">
+<meta name="description" content="上篇总结了 Storybook 的安装和基本使用，现在就到了实际演练的时候了，本篇从设计图开始，完成一个任务清单的 UI 开发。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Storybook 组件驱动开发（二）-- 界面实践">
 <meta property="og:url" content="https://blog.locotor.cn/posts/b3f76cfd.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="玻璃晴朗，橘子辉煌。">
+<meta property="og:description" content="上篇总结了 Storybook 的安装和基本使用，现在就到了实际演练的时候了，本篇从设计图开始，完成一个任务清单的 UI 开发。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://locotor-blog.oss-cn-chengdu.aliyuncs.com/images/kanpm/task-card-small.png">
 <meta property="article:published_time" content="2021-01-21T10:55:40.000Z">
-<meta property="article:modified_time" content="2021-01-21T14:31:42.147Z">
+<meta property="article:modified_time" content="2021-01-21T15:46:45.010Z">
 <meta property="article:author" content="张晋祥">
-<meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
+<meta property="article:tag" content="Storybook">
+<meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://locotor-blog.oss-cn-chengdu.aliyuncs.com/images/kanpm/task-card-small.png">
 
 
 <link rel="canonical" href="https://blog.locotor.cn/posts/b3f76cfd.html">
@@ -51,6 +54,8 @@
     lang   : 'zh-CN'
   };
 </script>
+  <meta name="keywords" content="Storybook,Angular,组件库">
+
 <title>Storybook 组件驱动开发（二）-- 界面实践 | locotor's Notes</title>
   
 
@@ -164,7 +169,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -177,6 +182,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%8D%A1"><span class="nav-number">1.</span> <span class="nav-text">任务卡</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -285,10 +291,24 @@
 
       <time title="创建时间：2021-01-21 10:55:40" itemprop="dateCreated datePublished" datetime="2021-01-21T10:55:40+00:00">2021-01-21</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/practice-record/" itemprop="url" rel="index"><span itemprop="name">实践记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/practice-record/Storybook/" itemprop="url" rel="index"><span itemprop="name">Storybook</span></a>
+        </span>
+    </span>
 
   
 </div>
 
+            <div class="post-description">上篇总结了 Storybook 的安装和基本使用，现在就到了实际演练的时候了，本篇从设计图开始，完成一个任务清单的 UI 开发。</div>
         </div>
       </header>
 
@@ -296,7 +316,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <p>本篇咱们就尝试采用 “组件驱动开发” 的模，从下到上，从组件开发到最后组装为页面。这样的开发方式，可以控制当前开发工作的复杂度，更专注与当前需要搭建的 UI 模块。</p>
+<p>界面的草图设计使用 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://excalidraw.com/">excalidraw.com</a>，它的手绘风格绘制的草图画风格外清新，是个绘制示意图的好工具。</p>
+<h1 id="任务卡"><a href="#任务卡" class="headerlink" title="任务卡"></a>任务卡</h1><p>这个任务清单的核心就是任务卡组件，每个任务会根据当前的任务状态，呈现不同地外观。从设计图上看，主要包含一个 Checkbox（选中或者未选中）、任务描述信息、任务执行人头像、以及一些任务信息标识（子任务，截至日期，重复状态……等等）。</p>
+<p><img src="https://locotor-blog.oss-cn-chengdu.aliyuncs.com/images/kanpm/task-card-small.png" alt="task card design"></p>
+<p>基于这些信息，我们可以先构建任务的数据结构：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> Task&#123;</span><br><span class="line">    taskID:<span class="built_in">string</span>, <span class="comment">// 任务ID</span></span><br><span class="line">    isComplete:<span class="built_in">boolean</span>, <span class="comment">// 是否已完成</span></span><br><span class="line">    description:<span class="built_in">string</span>, <span class="comment">// 任务描述</span></span><br><span class="line">    executorID?:<span class="built_in">string</span>, <span class="comment">// 任务执行人ID</span></span><br><span class="line">    subTaskIDs?:<span class="built_in">string</span>[], <span class="comment">// 子任务ID</span></span><br><span class="line">    deadline?:<span class="built_in">Date</span>, <span class="comment">// 截止日期</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，除了任务ID、描述，以及任务完成状态以外，其他信息都是可选的。从数据结构就能看到，我们这个任务组件可以呈现的情况很多样。<br>在开发这个组件之前，咱们先针对这些任务状态，编写对应的 story。然后再通过 Storybook 独立单独开发组件，使用模拟数据测试。可视化的测试组件在各个状态下的呈现，是否附和设计。话不多说，let’s rock the code！😎</p>
+
     </div>
 
     
@@ -321,6 +348,10 @@
 </ul>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/Storybook/" rel="tag"># Storybook</a>
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+          </div>
 
         
 
