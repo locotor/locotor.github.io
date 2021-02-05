@@ -33,7 +33,7 @@
 <meta property="og:description" content="Kanpm 的登录验证，采用了 JWT 的方式。并且既然采用了 Spring Boot 框架，验证和权限管理这部分，就自然用了 Spring Security。这里记录一下验证这部分的具体实现。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-05T11:41:01.000Z">
-<meta property="article:modified_time" content="2021-02-05T09:52:10.937Z">
+<meta property="article:modified_time" content="2021-02-05T09:55:02.603Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Spring Security">
 <meta name="twitter:card" content="summary">
@@ -340,7 +340,7 @@
 <ul>
 <li>LoginFilter，继承自 UsernamePasswordAuthenticationFilter，负责登录验证。</li>
 <li>LoginSuccessHandler，在初次验证成功后，返回 token 给前端。</li>
-<li>LoginFailureHanlder，验证失败后，返回错误信息。</li>
+<li>LoginFailureHandler，验证失败后，返回错误信息。</li>
 </ul>
 <!-- # 后续验证 -->
 
@@ -351,7 +351,7 @@
 <!-- 集中配置 -->
 <ul>
 <li>Security 的配置类 KanpmSecurityConfig：<ol>
-<li>用 @Configration 注解，给类中的几个 @Bean 创建上下文环境</li>
+<li>用 @Configuration 注解，给类中的几个 @Bean 创建上下文环境</li>
 <li>@EnableWebSecurity 注解，启用 Spring Security 的 Web 安全支持。这个注解又是个组合注解，它的注解中，又使用了 @EnableGlobalAuthentication 注解。</li>
 <li>继承自 WebSecurityConfigurerAdapter 类。<br>覆写 configure(HttpSecurity) 方法来定义哪些 URL 路径应该被保护，哪些不应该。例如，“/auth”和“/ home”路径被配置为不需要任何身份验证。所有其他路径必须经过身份验证。</li>
 </ol>
