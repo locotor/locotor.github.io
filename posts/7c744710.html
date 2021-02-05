@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="Kanpm 的登录验证，采用了 JWT 的方式。并且既然采用了 Spring Boot 框架，验证和权限管理这部分，就自然用了 Spring Security。这里记录一下验证这部分的具体实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Security 构建基于 JWT 的登录认证">
+<meta property="og:url" content="https://blog.locotor.cn/posts/7c744710.html">
+<meta property="og:site_name" content="locotor&#39;s Notes">
+<meta property="og:description" content="Kanpm 的登录验证，采用了 JWT 的方式。并且既然采用了 Spring Boot 框架，验证和权限管理这部分，就自然用了 Spring Security。这里记录一下验证这部分的具体实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-05T11:41:01.000Z">
+<meta property="article:modified_time" content="2021-02-05T09:52:10.937Z">
+<meta property="article:author" content="张晋祥">
+<meta property="article:tag" content="Spring Security">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.locotor.cn/posts/7c744710.html">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+  <meta name="keywords" content="Spring Security,JWT,登录认证">
+
+<title>Spring Security 构建基于 JWT 的登录认证 | locotor's Notes</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">locotor's Notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">张晋祥的博客小站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">目标功能点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5-Maven-%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">引入 Maven 依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-DAO-%E6%95%B0%E6%8D%AE%E5%B1%82"><span class="nav-number">2.2.</span> <span class="nav-text">配置 DAO 数据层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#User"><span class="nav-number">2.2.1.</span> <span class="nav-text">User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserService"><span class="nav-number">2.2.2.</span> <span class="nav-text">UserService</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-JWT-%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">2.3.</span> <span class="nav-text">创建 JWT 工具类</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="张晋祥" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">张晋祥</p>
+  <div class="site-description" itemprop="description">玻璃晴朗，橘子辉煌。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/locotor" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;locotor" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:locotor@outlook.com" title="E-Mail → mailto:locotor@outlook.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/2306869630" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;2306869630" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/7c744710.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="张晋祥">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="locotor's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Security 构建基于 JWT 的登录认证
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-05 11:41:01" itemprop="dateCreated datePublished" datetime="2021-02-05T11:41:01+00:00">2021-02-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Spring-Security/" itemprop="url" rel="index"><span itemprop="name">Spring Security</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Kanpm 的登录验证，采用了 JWT 的方式。并且既然采用了 Spring Boot 框架，验证和权限管理这部分，就自然用了 Spring Security。这里记录一下验证这部分的具体实现。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在项目采用 JWT 方案前，有必要先了解它的特性和适用场景，毕竟软件工程里，没有银弹。只有合适的场景，没有万精油的方案。</p>
+<p>一言以蔽之，JWT 可以携带非敏感信息，并具有不可篡改性。可以通过验证是否被篡改，以及读取信息内容，完成网络认证的三个问题：“你是谁”、“你有哪些权限”、“是不是冒充的”。<br>为了安全，使用它需要采用 Https 协议，并且一定要小心防止用于加密的密钥泄露。</p>
+<p>采用 JWT 的认证方式下，服务端并不存储用户状态信息，有效期内无法废弃，有效期到期后，需要重新创建一个新的来替换。<br>所以它并不适合做长期状态保持，不适合需要用户踢下线的场景，不适合需要频繁修改用户信息的场景。因为要解决这些问题，总是需要额外查询数据库或者缓存，或者反复加密解密，强扭的瓜不甜，不如直接使用 Session。</p>
+<h1 id="目标功能点"><a href="#目标功能点" class="headerlink" title="目标功能点"></a>目标功能点</h1><ul>
+<li>通过填写用户名和密码登录。<ul>
+<li>验证成功后, 服务端生成 JWT 认证 token, 并返回给客户端。</li>
+<li>验证失败后返回错误信息。</li>
+<li>客户端在每次请求中携带 JWT 来访问权限内的接口。</li>
+</ul>
+</li>
+<li>每次请求验证 token 有效性和权限，在无有效 token 时抛出 401 未授权错误。</li>
+<li>当发现请求带着的 token 有效期快到了的时候，返回特定状态码，重新请求一个新 token。</li>
+</ul>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="引入-Maven-依赖"><a href="#引入-Maven-依赖" class="headerlink" title="引入 Maven 依赖"></a>引入 Maven 依赖</h2><p>针对这个登录验证的实现，需要引入 Spring Security、jackson、java-jwt 三个包。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.12.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.auth0<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>java-jwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.12.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置-DAO-数据层"><a href="#配置-DAO-数据层" class="headerlink" title="配置 DAO 数据层"></a>配置 DAO 数据层</h2><p>要验证用户前，自然是先要创建用户实体对象，以及获取用户的服务类。不同的是，这两个类需要实现 Spring Security 的接口，以便将它们集成到验证框架中。</p>
+<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><p>用户实体类需要实现 ”UserDetails“ 接口，这个接口要求实现 <code>getUsername</code>、<code>getPassword</code>、<code>getAuthorities</code> 三个方法，用以获取用户名、密码和权限。以及 <code>isAccountNonExpired```isAccountNonLocked</code>、<code>isCredentialsNonExpired</code>、<code>isEnabled</code> 这四个判断是否是有效用户的方法，因为和验证无关，所以先都返回 <code>true</code>。这里图方便，用了 <code>lombok</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">UserDetails</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Collection&lt;? extends GrantedAuthority&gt; authorities;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="UserService"><a href="#UserService" class="headerlink" title="UserService"></a>UserService</h3><p>用户服务类需要实现 “UserDetailsService” 接口，这个接口非常简单，只需要实现 <code>loadUserByUsername(String username)</code> 这么一个方法。这里使用了 MyBatis 来连接数据库获取用户信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> <span class="keyword">implements</span> <span class="title">UserDetailsService</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="meta">@Transactional</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> User <span class="title">loadUserByUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> userMapper.getByUsername(username);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建-JWT-工具类"><a href="#创建-JWT-工具类" class="headerlink" title="创建 JWT 工具类"></a>创建 JWT 工具类</h2><p>这个工具类主要负责 token 的生成，验证，从中取值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JwtTokenProvider</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> JWT_EXPIRATION = <span class="number">5</span> * <span class="number">60</span> * <span class="number">1000L</span>; <span class="comment">// 五分钟过期</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOKEN_PREFIX = <span class="string">&quot;Bearer &quot;</span>; <span class="comment">// token 的开头字符串</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String jwtSecret = <span class="string">&quot;XXX 密钥，打死也不能告诉别人&quot;</span>;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成 JWT：从以通过验证的认证对象中，获取用户信息，然后用指定加密方式，以及过期时间生成 token。这里简单的只加了用户名这一个信息到 token 中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">generateToken</span><span class="params">(Authentication authentication)</span> </span>&#123;</span><br><span class="line">    User userPrincipal = (User) authentication.getPrincipal(); <span class="comment">// 获取用户对象</span></span><br><span class="line">    Date expireDate = <span class="keyword">new</span> Date(System.currentTimeMillis() + JWT_EXPIRATION); <span class="comment">// 设置过期时间</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Algorithm algorithm = Algorithm.HMAC256(jwtSecret); <span class="comment">// 指定加密方式</span></span><br><span class="line">        <span class="keyword">return</span> JWT.create().withExpiresAt(expireDate).withClaim(<span class="string">&quot;username&quot;</span>, userPrincipal.getUsername()) </span><br><span class="line">                .sign(algorithm); <span class="comment">// 签发 JWT</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (JWTCreationException jwtCreationException) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>验证 JWT：指定和签发相同的加密方式，验证这个 token 是否是本服务器签发，是否篡改，或者已过期。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validateToken</span><span class="params">(String authToken)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Algorithm algorithm = Algorithm.HMAC256(jwtSecret); <span class="comment">// 和签发保持一致</span></span><br><span class="line">        JWTVerifier verifier = JWT.require(algorithm).build();</span><br><span class="line">        verifier.verify(authToken);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (JWTVerificationException jwtVerificationException) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获取荷载信息：从 token 的荷载部分里解析用户名信息，这部分是 md5 编码的，属于公开信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getUsernameFromJWT</span><span class="params">(String authToken)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        DecodedJWT jwt = JWT.decode(authToken);</span><br><span class="line">        <span class="keyword">return</span> jwt.getClaim(<span class="string">&quot;username&quot;</span>).asString();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (JWTDecodeException jwtDecodeException) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<!-- # 登录 -->
+
+<ul>
+<li>LoginFilter，继承自 UsernamePasswordAuthenticationFilter，负责登录验证。</li>
+<li>LoginSuccessHandler，在初次验证成功后，返回 token 给前端。</li>
+<li>LoginFailureHanlder，验证失败后，返回错误信息。</li>
+</ul>
+<!-- # 后续验证 -->
+
+<ul>
+<li>JwtAuthenticationFilter，负责在之后的每次请求中，解析请求头中的 JWT，从中取得用户名，权限列表，生成验证对象，如果当前 token 快过期了，给 respond 对象的 header 添加额外的 code。</li>
+<li>AuthenticationEntryPoint</li>
+</ul>
+<!-- 集中配置 -->
+<ul>
+<li>Security 的配置类 KanpmSecurityConfig：<ol>
+<li>用 @Configration 注解，给类中的几个 @Bean 创建上下文环境</li>
+<li>@EnableWebSecurity 注解，启用 Spring Security 的 Web 安全支持。这个注解又是个组合注解，它的注解中，又使用了 @EnableGlobalAuthentication 注解。</li>
+<li>继承自 WebSecurityConfigurerAdapter 类。<br>覆写 configure(HttpSecurity) 方法来定义哪些 URL 路径应该被保护，哪些不应该。例如，“/auth”和“/ home”路径被配置为不需要任何身份验证。所有其他路径必须经过身份验证。</li>
+</ol>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>张晋祥
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.locotor.cn/posts/7c744710.html" title="Spring Security 构建基于 JWT 的登录认证">https://blog.locotor.cn/posts/7c744710.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Spring-Security/" rel="tag"># Spring Security</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/b3f76cfd.html" rel="prev" title="Storybook 组件驱动开发（二）-- 界面实践">
+                  <i class="fa fa-chevron-left"></i> Storybook 组件驱动开发（二）-- 界面实践
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-seedling"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张晋祥</span>
+</div><a target="_blank" href="http://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" id="icp-code"> 渝ICP备2020014938号</a>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>
