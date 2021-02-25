@@ -25,21 +25,19 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="将 Hexo 博客站点双线部署到 Github 和 Coding，配置 DNS 的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 搭建个人博客到 GitHub 和 Coding">
-<meta property="og:url" content="https://blog.locotor.cn/posts/3ec95b63.html">
+<meta name="description" content="玻璃晴朗，橘子辉煌。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="locotor&#39;s Notes">
+<meta property="og:url" content="https://blog.locotor.cn/categories/Angular/Angular-HttpClient/index.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="将 Hexo 博客站点双线部署到 Github 和 Coding，配置 DNS 的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。">
+<meta property="og:description" content="玻璃晴朗，橘子辉煌。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-21T20:13:58.000Z">
-<meta property="article:modified_time" content="2021-02-25T08:21:01.695Z">
 <meta property="article:author" content="张晋祥">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.locotor.cn/posts/3ec95b63.html">
+<link rel="canonical" href="https://blog.locotor.cn/categories/Angular/Angular-HttpClient/">
 
 
 <script class="page-configurations">
@@ -47,13 +45,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
-  <meta name="keywords" content="Hexo,个人博客,Github Pages,Coding Pages,SEO">
-
-<title>Hexo 搭建个人博客到 GitHub 和 Coding | locotor's Notes</title>
+<title>分类: Angular HttpClient | locotor's Notes</title>
   
 
 
@@ -166,7 +162,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -179,7 +175,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Hexo-%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">创建 Hexo 项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B0%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%92%8C%E9%A2%84%E8%A7%88"><span class="nav-number">1.2.1.</span> <span class="nav-text">本地新建博客和预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">部署配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0-Github-%E5%92%8C-Coding"><span class="nav-number">2.</span> <span class="nav-text">部署到 Github 和 Coding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding"><span class="nav-number">2.1.</span> <span class="nav-text">Coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub"><span class="nav-number">2.2.</span> <span class="nav-text">GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pages-%E4%BB%93%E5%BA%93"><span class="nav-number">2.2.1.</span> <span class="nav-text">Pages 仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-%E4%BB%93%E5%BA%93"><span class="nav-number">2.2.2.</span> <span class="nav-text">Hexo 仓库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">域名解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="nav-number">3.1.</span> <span class="nav-text">自定义域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%A7%A3%E6%9E%90%E8%AE%B0%E5%BD%95"><span class="nav-number">3.2.</span> <span class="nav-text">添加解析记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E5%86%85%E5%A4%87%E6%A1%88%E5%92%8C%E5%AE%A1%E6%89%B9"><span class="nav-number">3.3.</span> <span class="nav-text">国内备案和审批</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -249,187 +244,48 @@
 </noscript>
 
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner category posts-collapse">
 
 
   
-
-
-<div class="post-block">
   
   
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <h2 class="collection-header">Angular HttpClient
+          <small>分类</small>
+        </h2>
+      </div>
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/3ec95b63.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="张晋祥">
-      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="locotor's Notes">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Hexo 搭建个人博客到 GitHub 和 Coding
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-21 20:13:58" itemprop="dateCreated datePublished" datetime="2020-12-21T20:13:58+00:00">2020-12-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/practice-record/" itemprop="url" rel="index"><span itemprop="name">实践记录</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/practice-record/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-            <div class="post-description">将 Hexo 博客站点双线部署到 Github 和 Coding，配置 DNS 的时候让国内的线路流量到 Coding 上，其他的线路流量到 GitHub 上，解决了百度不能搜录 Github Pages 网站的问题。实现双线部署，支持 HTTPS 协议访问。折腾了一阵，这里记录一下搭建过程。</div>
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="创建-Hexo-项目"><a href="#创建-Hexo-项目" class="headerlink" title="创建 Hexo 项目"></a>创建 Hexo 项目</h1><p>项目需要 NodeJs 和 Git 环境。这里默认环境已经装好了，怎么装 NodeJs 环境，或是使用 Git，教程很多，就不累述了。</p>
-<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>先全局安装 hexo-cli: <code>$ npm install -g hexo-cli</code> 然后就可以通过 <code>$ hexo &lt;命令&gt;</code> 来调用。<br>如果是在项目范围内安装，<code>$ npm install hexo-cli</code> 通过 <code>$ npx hexo &lt;命令&gt;</code> 调用。</p>
-<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>安装好 Heox 后，就可以直接创建博客项目：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init HexoExample  <span class="comment"># 在当前目录下创建 Hexo 项目</span></span><br><span class="line">$ <span class="built_in">cd</span> HexoExample         <span class="comment"># 进入刚刚创建的 HexoExample 目录</span></span><br><span class="line">$ npm install            <span class="comment"># 安装项目所需的 npm 依赖包</span></span><br></pre></td></tr></table></figure>
-<p>项目做需要的文件和目录结构都会被自动创建好。</p>
-<h3 id="本地新建博客和预览"><a href="#本地新建博客和预览" class="headerlink" title="本地新建博客和预览"></a>本地新建博客和预览</h3><p>通过 <code>$ hexo server</code> 命令即可在本地发布博客网站，默认的访问路径和端口是 localhost:4000。这个本地服务器会监测内容变化，实时更新博客。<br>用 <code>$ hexo new &lt;文章名&gt;</code> 即可创建一篇新的博客，刷新浏览器就可以看到新创建的空白博客。<br>剩下的，就是部署到互联网上了。</p>
-<h3 id="部署配置"><a href="#部署配置" class="headerlink" title="部署配置"></a>部署配置</h3><p>在项目的根目录下配置 <code>./config.yml</code> 的 deploy 部分：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&quot;git&quot;</span> <span class="comment"># 设置部署类型为 git 仓库</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:locotor/locotor.github.io.git</span> <span class="comment"># 设置仓库地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span> <span class="comment"># 设置部署在仓库哪个分支</span></span><br></pre></td></tr></table></figure>
-<p>这样在运行 <code>hexo g -d</code> 的时候，就会生成博客网站代码，并部署到指定的仓库的指定分支下。</p>
-<h1 id="部署到-Github-和-Coding"><a href="#部署到-Github-和-Coding" class="headerlink" title="部署到 Github 和 Coding"></a>部署到 Github 和 Coding</h1><p>将 Hexo 项目提交到 Github 仓库，然后在 Github 和 Coding 分别创建一个承载 Hexo 生成内容的仓库，彼此同步，用以生成 Pages 网站。</p>
-<h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><ol>
-<li><p>创建仓库：Coding 改版后是以“团队/项目/代码仓库”的结构来创建，所以需要先创建一个 blog 项目，以后给朋友建个博客也放这个项目里吧。然后在这个项目中创建一个 locotor 仓库。</p>
-</li>
-<li><p>开启 Pages 服务：</p>
-<ol>
-<li>在左下角”项目设置/功能开关”中开启“持续集成”和“持续部署”。</li>
-<li>回到项目首页，在新增的持续部署侧边栏选项中，选择“静态网站”。</li>
-<li>新建网站选择刚刚创建的仓库，网站类型选择“静态网站”。</li>
-</ol>
-</li>
-</ol>
-<p>现在 Coding Pages 就创建好可以直接访问了，每次 loctor 仓库有内容更新，这个博客网站内容也会刷新。<br>那么内容从哪里来呢？就要等待 Github 的仓库自动同步了。</p>
-<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>在 GitHub 上创建两个仓库，一个用来维护 Hexo 项目和博文文件，一个用来做博客网站的存储仓库并提供 Github Pages 服务。</p>
-<p>为了后续同步，先新建一对 ssh-key：<code>$ ssh-keygen -t rsa -C &quot;yourName@example.com&quot;</code> ，这个命令会在电脑的 C/Users/username/.ssh 文件夹下生成两个文件（id_rsa 和 id_rsa.pub），分布是私钥和公钥，后面需要用到它们，备用。</p>
-<h3 id="Pages-仓库"><a href="#Pages-仓库" class="headerlink" title="Pages 仓库"></a>Pages 仓库</h3><ol>
-<li><p>创建一个名为 locotor.github.io 的仓库，因为要方便 Coding 同步，仓库权限设为 public。勾选创建默认的 index.html,README.md，不然在空仓库状态下还不能开通 Pages 服务。<br>后续 Hexo 生成的博客静态网站文件，将自动上传到这个仓库。</p>
-</li>
-<li><p>在仓库的 <strong><em>Settings &gt; Options &gt; GitHub Pages</em></strong> 下配置 Source 为 <code>Branch:master/(root)</code>。此时通过访问 <code>https://locotor.github.io</code> 就能看到默认创建的 index.html 的内容。</p>
-</li>
-<li><p>在仓库的 <strong><em>Settings &gt; Deploy keys</em></strong> 下新建一个 Deploy key，这个 key 的内容是刚刚创建的 ssh-key 的 public 部分，用记事本打开复制粘贴过来即可。名字可以任意设置，但是需要勾选 write access(写入权限)。</p>
-</li>
-<li><p>在仓库的 <strong><em>Actions</em></strong> 中创建一个新的自动脚本，功能是每次这个仓库的内容更新后，同步内容到 Coding 的仓库，这里使用了 <code>yehan-coding/yehan-git-sync</code> 来同步代码：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">repo-sync</span></span><br><span class="line">  <span class="attr">uses:</span> <span class="string">yehan-coding/yehan-git-sync@v1</span></span><br><span class="line">  <span class="attr">with:</span></span><br><span class="line">    <span class="attr">source_repo_url:</span> <span class="string">git@github.com:$&#123;&#123;</span> <span class="string">github.repository</span> <span class="string">&#125;&#125;.git</span></span><br><span class="line">    <span class="attr">source_branch:</span> <span class="string">master</span></span><br><span class="line">    <span class="attr">destination_repo_url:</span> <span class="string">git@e.coding.net:locotor/blog/locotor.git</span></span><br><span class="line">    <span class="attr">destination_branch:</span> <span class="string">master</span></span><br><span class="line">    <span class="attr">ssh_private_key:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.OFFICE_LAPTOP_PRIVATE_KEY</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="Hexo-仓库"><a href="#Hexo-仓库" class="headerlink" title="Hexo 仓库"></a>Hexo 仓库</h3><ol>
-<li><p>创建一个名为 blog-builder 的仓库，仓库权限可以设为 private。</p>
-</li>
-<li><p>在本地刚刚创建的 HexoExample 路径下，使用 <code>git init</code> 命令初始化项目的 Git。然后使用命令 <code>git remote add origin https://github.com/locotor/blog-builder.git</code> 和 blog-builder 仓库建立连接。</p>
-</li>
-<li><p>在仓库的 <strong><em>Settings &gt; Secrets</em></strong> 中新建一个 secret: <strong>DEPLOY_KEY</strong>，它的内容为 ssh-key 的 private 部分。这样就让 Hexo 仓库有权限可以推送到 page 仓库了。</p>
-</li>
-<li><p>在 <strong><em>Actions</em></strong> 中创建一个新的自动脚本，功能是每次这个仓库的内容更新后，运行 Hexo 生成网站代码，再提交给 locotor.github.io 这个库：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">  <span class="attr">id:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">uses:</span> <span class="string">sma11black/hexo-action@v1.0.4</span></span><br><span class="line">  <span class="attr">with:</span></span><br><span class="line">    <span class="attr">deploy_key:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DEPLOY_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">    <span class="attr">commit_msg:</span> <span class="string">$&#123;&#123;</span> <span class="string">github.event.head_commit.message</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><p>这里我希望把博客部署在我自己的二级域名：<code>blog.locotor.cn</code>，</p>
-<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>目前已经能够通过 <code>locotor.github.com</code> 和 <code>coding-pages-bucket-1575455-8137703-8340-424565-1303365836.cos-website.ap-beijing.myqcloud.com/</code> 这两个路径来访问发布的博客。<br>但是我想将它们自定义为 <code>blog.locotor.cn</code>。 并且能够根据用户线路自动解析。<br>首先要修改 Hexo 项目根目录的配置文件 <strong><em>_config.yml</em></strong>：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">https://blog.locotor.cn</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span></span><br></pre></td></tr></table></figure>
-<p>接着分别在 GitHub 和 Coding 上配置一下。</p>
-<ul>
-<li>GitHub：只需要在 Hexo 项目的 <strong><em>source</em></strong> 文件夹内，创建一个名为 <strong><em>CNAME</em></strong> 的文件，文件内写入 <code>blog.locotor.cn</code>。提交到 GitHub 后，就会自动识别。</li>
-<li>Coding：在 <strong><em>持续部署 &gt; 静态网站 &gt; 自定义域名</em></strong> 里，新建域名，在弹出的弹窗中填入 blog.locotor.cn 绑定后，网站会自动重新部署（如果域名未备案，会部署失败），并生成一个 CNAME 指向（<code>blog.locotor.cn.cdn.dnsv1.com</code>） 后续会用到。<br>同时会去申请 SSL 证书，申请成功后会通知你重新部署一次。</li>
-</ul>
-<h2 id="添加解析记录"><a href="#添加解析记录" class="headerlink" title="添加解析记录"></a>添加解析记录</h2><p>自定义域名后，需要手动去对应的域名托管商添加两个解析记录。这里使用的是阿里云万网。在 <strong><em>域名解析 &gt; 解析设置</em></strong> 中添加记录，类型均为 <strong><em>CNAME</em></strong>，主机记录为 <strong><em>blog</em></strong>，记录值分别是：</p>
-<ul>
-<li>GitHub：locotor.github.com</li>
-<li>Coding： blog.locotor.cn.cdn.dnsv1.com</li>
-</ul>
-<h2 id="国内备案和审批"><a href="#国内备案和审批" class="headerlink" title="国内备案和审批"></a>国内备案和审批</h2><p>要给部署在 Coding 国内服务器的博客自定义域名，首先需要ICP备案域名，否则会部署失败，备案成功后再去公安联网备案，然后在腾讯云申请 SSL 证书，实现和Github 的双线部署，全站 HTTPS 协议访问。</p>
-<ol>
-<li>ICP 备案：域名在阿里云万网购买，可以通过阿里云备案服务号备案，填写信息后，手机视频认证，短信认证，然后大约需要等待一周左右。然后将审批通过的备案号放置在网站的 footer 处。<br>要插入备案号，需要先解除掉 <strong><em>NexT 配置文件 &gt; custom_file_path &gt; footer</em></strong> 的注释，在 <strong><em>source &gt; data</em></strong> 目录中创建 footer.njk 文件，插入备案号链接 <code>&lt;a href=&quot;http://beian.miit.gov.cn/&quot; rel=&quot;nofollow&quot; id=&quot;icp-code&quot;&gt; 渝ICP备2020014938号&lt;/a&gt;</code>。</li>
-<li>公安联网备案：ICP 备案成功后，按邮件提示，完成公安联网备案，按相同的方法，插入公安备案号链接。</li>
-<li>申请 SSL 证书：在 Coding Pages 的自定义域名页面，点击验证网站，按提示在万网域名解析中插入一个 TXT 记录值，即可完成验证。<br>证书申请成功后，即可直接一键部署腾讯云托管的证书到 <code>blog.locotor.cn</code> 下，完成部署。</li>
-</ol>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>一番折腾，目前可以使用同时部署 Hexo 博客到 GitHub 和 Coding。均通过 blog.locotor.cn 访问，并根据用户线路，自动解析到最优的服务器地址。</p>
-
+      
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated" datetime="2021-02-18T16:33:32+00:00" content="2021-02-18">
+          02-18
+        </time>
+      </div>
 
-    <footer class="post-footer">
-          
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/bd980ff7.html" itemprop="url">
+            <span itemprop="name">Angular-网络拦截器的工程实践</span>
+          </a>
+      </div>
 
-<div class="post-copyright">
-<ul>
-  <li class="post-copyright-author">
-      <strong>本文作者： </strong>张晋祥
-  </li>
-  <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="https://blog.locotor.cn/posts/3ec95b63.html" title="Hexo 搭建个人博客到 GitHub 和 Coding">https://blog.locotor.cn/posts/3ec95b63.html</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-          <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/posts/56adc548.html" rel="prev" title="Angular Material 主题系统（三）--多主题切换">
-                  <i class="fa fa-chevron-left"></i> Angular Material 主题系统（三）--多主题切换
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/posts/d730b4c3.html" rel="next" title="Hexo + NexT 博客 SEO 优化">
-                  Hexo + NexT 博客 SEO 优化 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+      
+    </header>
   </article>
-</div>
 
-
-
-
-
+    </div>
+  </div>
+  
+  
+  
 
 
 <script>
