@@ -25,15 +25,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（），我们统称其为动态视图。开发这样一个弹窗服务，就需要用到动态视图插入技术。鉴于这是一个常见的需求，所以从原始到简洁，Angular 框架提供了多种方案，可以灵活，可以快捷，按需选用。">
+<meta name="description" content="动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发，例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（ng-template）。Angular 有多种方式可以满足这个需求，列举以下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由繁入简--浅析Angular的动态视图">
 <meta property="og:url" content="https://blog.locotor.cn/posts/9fcfe3d5.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（），我们统称其为动态视图。开发这样一个弹窗服务，就需要用到动态视图插入技术。鉴于这是一个常见的需求，所以从原始到简洁，Angular 框架提供了多种方案，可以灵活，可以快捷，按需选用。">
+<meta property="og:description" content="动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发，例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（ng-template）。Angular 有多种方式可以满足这个需求，列举以下。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-08T18:35:08.000Z">
-<meta property="article:modified_time" content="2021-03-08T08:52:58.070Z">
+<meta property="article:modified_time" content="2021-03-10T16:48:37.213Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
 <meta name="twitter:card" content="summary">
@@ -164,7 +164,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -177,6 +177,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Angular-CDK-Portal"><span class="nav-number">1.</span> <span class="nav-text">1. Angular CDK Portal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ComponentPortal"><span class="nav-number">1.1.</span> <span class="nav-text">ComponentPortal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TemplatePortal"><span class="nav-number">1.2.</span> <span class="nav-text">TemplatePortal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DomPortal"><span class="nav-number">1.3.</span> <span class="nav-text">DomPortal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CdkPortalOutlet"><span class="nav-number">1.4.</span> <span class="nav-text">CdkPortalOutlet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-NgTemplateOutlet-%E7%BB%93%E6%9E%84%E5%9E%8B%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">2. NgTemplateOutlet 结构型指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ComponentFactory"><span class="nav-number">3.</span> <span class="nav-text">3. ComponentFactory</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -287,7 +288,7 @@
   
 </div>
 
-            <div class="post-description">动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（<ng-template>），我们统称其为动态视图。开发这样一个弹窗服务，就需要用到动态视图插入技术。鉴于这是一个常见的需求，所以从原始到简洁，Angular 框架提供了多种方案，可以灵活，可以快捷，按需选用。</ng-template></div>
+            <div class="post-description">动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发，例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（ng-template）。Angular 有多种方式可以满足这个需求，列举以下。</div>
         </div>
       </header>
 
@@ -295,7 +296,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <p>针对动态插入视图，Angular 框架提供了几种实现方式，实现的方式和复杂度不同，灵活度也不同，可以根据需要选择。</p>
+<h2 id="1-Angular-CDK-Portal"><a href="#1-Angular-CDK-Portal" class="headerlink" title="1. Angular CDK Portal"></a>1. Angular CDK Portal</h2><p>Angular 官方提供了一套组件开发套件 Component Dev Kit (CDK)，作为各种 Angular 组件开发的基础元素来使用。其中就提供 “Portal（传送门）” 来辅助动态内容的创建工作。</p>
+<p>这个 “动态内容” 可以是组件、TemplateRef 或者 DOM 元素，分别对应三种 Portal 类型（ComponentPortal、TemplatePortal、DomPortal）。</p>
+<h3 id="ComponentPortal"><a href="#ComponentPortal" class="headerlink" title="ComponentPortal"></a>ComponentPortal</h3><p>用以动态的插入组件，基于一个组件类创建：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.componentPortal = <span class="keyword">new</span> ComponentPortal(ExampleComponent);</span><br></pre></td></tr></table></figure>
+<p>可以传入任意自定义的组件类，用以创建 <code>ComponentPortal</code> 对象，再动态插入视图中。</p>
+<p>✨注意：Angular 9 后的版本推荐使用 Ivy 编译器，如果是老版本编译器，传入的组件类，需要在 Module 的 <code>entryComponents</code> 中声明，并且这个 Module 不能懒加载。</p>
+<h3 id="TemplatePortal"><a href="#TemplatePortal" class="headerlink" title="TemplatePortal"></a>TemplatePortal</h3><p>可以基于 <ng-template> 创建一个 “Portal”，这样就可以提取 template 的内容，动态的插入到任意位置。</ng-template></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">testTemplate</span>&gt;</span>一些需要传递的动态内容<span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;testTemplate&#x27;</span>) templatePortalContent: TemplateRef&lt;unknow&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">private</span> _viewContainerRef: ViewContainerRef</span>)</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">ngAfterViewInit</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.templatePortal = <span class="keyword">new</span> TemplatePortal(</span><br><span class="line">    <span class="built_in">this</span>.templatePortalContent,</span><br><span class="line">    <span class="built_in">this</span>._viewContainerRef</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建 TemplatePortal，要先通过 <code>@ViewChild</code> 拿到 TemplateRef，再传入它和视图容器的引用来生成。之后就可以在任意位置动态渲染模板内容了。</p>
+<h3 id="DomPortal"><a href="#DomPortal" class="headerlink" title="DomPortal"></a>DomPortal</h3><p>就像上面的示例通过 <code>@ViewChild</code> 获取 Template 实例来创建，类似的也可以获取 ElementRef 来创建动态的 DOM。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> #<span class="attr">domPortalContent</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>原生DOM内容<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;domPortalContent&#x27;</span>) domPortalContent: ElementRef&lt;HTMLElement&gt;;</span><br><span class="line"><span class="function"><span class="title">ngAfterViewInit</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.domPortal = <span class="keyword">new</span> DomPortal(<span class="built_in">this</span>.domPortalContent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以动态的将这段 DOM 转移到任意位置。要注意的是，转移之后，会变成纯 DOM 片段，原来的数据绑定，或者绑定的指令都不会再继续更新。</p>
+<h3 id="CdkPortalOutlet"><a href="#CdkPortalOutlet" class="headerlink" title="CdkPortalOutlet"></a>CdkPortalOutlet</h3><p>前面三种类型的 Portal 都说了可以渲染到任意位置，那具体怎么渲染呢？最简单的就是通过 CdkPortOutlet 指令了：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;example-portal-outlet&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ng-template</span> [<span class="attr">cdkPortalOutlet</span>]=<span class="string">&quot;anyPortal&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>传入任意类型的 Portal 对象，都会动态渲染到当前位置。</p>
+<h2 id="2-NgTemplateOutlet-结构型指令"><a href="#2-NgTemplateOutlet-结构型指令" class="headerlink" title="2. NgTemplateOutlet 结构型指令"></a>2. NgTemplateOutlet 结构型指令</h2><h2 id="3-ComponentFactory"><a href="#3-ComponentFactory" class="headerlink" title="3. ComponentFactory"></a>3. ComponentFactory</h2>
     </div>
 
     
