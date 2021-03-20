@@ -4,26 +4,24 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 <meta name="description" content="实际的开发场景中，应用程序的文字排版不是一成不变的，也常常需要自定义颜色来适配具体项目需求，这就需要去自定义 Material 的主题。">
 <meta property="og:type" content="article">
@@ -33,7 +31,7 @@
 <meta property="og:description" content="实际的开发场景中，应用程序的文字排版不是一成不变的，也常常需要自定义颜色来适配具体项目需求，这就需要去自定义 Material 的主题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-06T09:53:34.000Z">
-<meta property="article:modified_time" content="2021-03-12T01:51:11.055Z">
+<meta property="article:modified_time" content="2021-03-20T11:49:18.371Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular Material">
 <meta name="twitter:card" content="summary">
@@ -55,6 +53,7 @@
 
 <title>Angular Material 主题系统（二）-- 自定义主题 | locotor's Notes</title>
   
+
 
 
 
@@ -102,7 +101,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -129,26 +128,10 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
@@ -158,7 +141,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -178,12 +161,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">自定义主题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">主题颜色配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E6%8E%92%E7%89%88%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">文字排版配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">生成主题样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%86%E7%B2%92%E5%BA%A6%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="nav-number">1.4.</span> <span class="nav-text">细粒度自定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A9%E4%B8%9A%E5%8A%A1%E7%BB%84%E4%BB%B6%E5%92%8C%E4%B8%BB%E9%A2%98%E4%B8%80%E8%87%B4"><span class="nav-number">2.</span> <span class="nav-text">让业务组件和主题一致</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E6%8E%92%E7%89%88%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.</span> <span class="nav-text">文字排版工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">颜色开发工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E4%B8%9A%E5%8A%A1%E7%BB%84%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">适配业务组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="张晋祥" src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">张晋祥</p>
@@ -194,7 +177,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -229,7 +212,7 @@
 
 
 
-        </section>
+        </div>
       </div>
     </div>
   </aside>
@@ -239,7 +222,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -325,9 +308,11 @@
 </ol>
 <p>示例代码：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用系统预定义的颜色变量和 mixin 为自定义主题创建“调色盘”</span></span><br><span class="line"><span class="comment">// 所有可用的颜色可以在此查看: https://material.io/design/color/</span></span><br><span class="line"><span class="variable">$custom-app-primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对每个调色盘，可选的，可以指定“default”，“lighter”，“darker”，“text”的色调，方便后续取用</span></span><br><span class="line"><span class="comment">// 通常推荐默认为500，更亮为100，更暗为700</span></span><br><span class="line"><span class="variable">$custom-app-accent</span>: mat-palette(<span class="variable">$mat-pink</span>, A500, A100, A700, A900);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 警告色是可以选的（默认是红色 $mat-red）</span></span><br><span class="line"><span class="variable">$custom-app-warn</span>: mat-palette(<span class="variable">$mat-orange</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建明亮风格的主题颜色配置对象</span></span><br><span class="line"><span class="variable">$custom-app-theme</span>: mat-light-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$custom-app-primary</span>,</span><br><span class="line">    accent: <span class="variable">$custom-app-accent</span>,</span><br><span class="line">    warn: <span class="variable">$custom-app-warn</span>,  </span><br><span class="line">  )</span><br><span class="line">));</span><br></pre></td></tr></table></figure>
+
 <p>现在颜色的配置就做好备用了，先不急下锅翻炒，咱们再看看文字排版的配置。</p>
 <h2 id="文字排版配置"><a href="#文字排版配置" class="headerlink" title="文字排版配置"></a>文字排版配置</h2><p>和自定义主题颜色类似的，文字排版也是通过创建一个 Sass map 来自定义：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里定义文字排版对象，自定义了字体、headline、body-1.</span></span><br><span class="line"><span class="variable">$custom-typography</span>: mat-typography-config(</span><br><span class="line">  <span class="variable">$font-family</span>: <span class="string">&#x27;monospace&#x27;</span>,</span><br><span class="line">  <span class="variable">$headline</span>: mat-typography-level(<span class="number">32px</span>, <span class="number">48px</span>, <span class="number">700</span>),</span><br><span class="line">  <span class="variable">$body-1</span>: mat-typography-level(<span class="number">16px</span>, <span class="number">24px</span>, <span class="number">500</span>)</span><br><span class="line">  ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
 <p><code>mat-typography-level</code> 方法按顺序接收 <code>font-size</code>, <code>line-height</code>, 和 <code>font-weight</code> 三个参数，返回一个文字层级的定义对象。</p>
 <p><strong>注意✨</strong>：字体定义需要加引号。</p>
 <h2 id="生成主题样式"><a href="#生成主题样式" class="headerlink" title="生成主题样式"></a>生成主题样式</h2><p>在创建好颜色和文字排版的配置对象后，现在就轮到一同下锅，使用它们生成最终的主题了。</p>
@@ -346,12 +331,15 @@
 </ol>
 <p><strong>styles.scss</strong> 示例代码：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>; <span class="comment">// 引入需要用到的 Material 工具</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;./theme/_custom-theme-config&#x27;</span>; <span class="comment">// 引入自定义主题配置</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@include</span> mat-core(<span class="variable">$custom-typography</span>); <span class="comment">// 传入文字排版配置，注意这个 mixin 只能导入一次</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入配置，生成颜色主题样式</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$custom-app-theme</span>);</span><br></pre></td></tr></table></figure>
+
 <h2 id="细粒度自定义"><a href="#细粒度自定义" class="headerlink" title="细粒度自定义"></a>细粒度自定义</h2><p>到目前为止，咱们已经完成了一个自定义主题。不过有的时候，可能项目还需要单独定制不同的 Material 组件颜色或是文字排版。好在 Material 相当的灵活，可以这样更细粒度的定制。</p>
 <p>假设我们已经像上面的步骤一样，创建了另外两个配置文件：<em>_another-color-config.scss</em> 和 <em>_another-typography-config.scss</em>。</p>
 <p>要自定义文字排版：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义文字排版的 CSS 类 (例如, mat-h1, mat-display-1, mat-typography 等).</span></span><br><span class="line"><span class="keyword">@include</span> mat-base-typography(<span class="variable">$another-typography-config</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给 Material 的特定组件自定义文字排版</span></span><br><span class="line"><span class="keyword">@include</span> mat-checkbox-typography(<span class="variable">$another-typography-config</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给所有 Material 组件以及 CSS 类自定义文字排版</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-typography(<span class="variable">$another-typography-typography</span>);</span><br></pre></td></tr></table></figure>
+
 <p>自定义组件颜色：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给特定的组件单独配置主题颜色</span></span><br><span class="line"><span class="keyword">@include</span> mat-core-theme(<span class="variable">$another-color-config</span>); <span class="comment">// 组件通用样式，例如涟漪效果</span></span><br><span class="line"><span class="keyword">@include</span> mat-button-theme(<span class="variable">$another-color-config</span>); <span class="comment">// 单独配置按钮</span></span><br><span class="line"><span class="keyword">@include</span> mat-checkbox-theme(<span class="variable">$another-color-config</span>); <span class="comment">// 单独配置 checkbox</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="让业务组件和主题一致"><a href="#让业务组件和主题一致" class="headerlink" title="让业务组件和主题一致"></a>让业务组件和主题一致</h1><p>Material 提供了一套和 Material Design 有关的样式工具，包括variable、 函数和 mixin，来帮助咱们用于自己的业务组件中，使得整个应用，和 Material 保持风格一致。</p>
 <h2 id="文字排版工具"><a href="#文字排版工具" class="headerlink" title="文字排版工具"></a>文字排版工具</h2><ul>
 <li>mat-get-typography-config($theme, $default: null)：根据主题对象，获取文字排版配置</li>
@@ -373,6 +361,7 @@
 <li><p>亮色风格（暗色同 key 值）背景色 map：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$mat-light-theme-background</span>: (</span><br><span class="line">  status-bar: map-get(<span class="variable">$mat-grey</span>, <span class="number">300</span>),</span><br><span class="line">  app-bar:    map-get(<span class="variable">$mat-grey</span>, <span class="number">100</span>),</span><br><span class="line">  background: map-get(<span class="variable">$mat-grey</span>, <span class="number">50</span>),</span><br><span class="line">  hover:      rgba(black, <span class="number">0.04</span>),</span><br><span class="line">  card:       white,</span><br><span class="line">  dialog:     white,</span><br><span class="line">  disabled-button: rgba(black, <span class="number">0.12</span>),</span><br><span class="line">  raised-button: white,</span><br><span class="line">  focused-button: <span class="variable">$dark-focused</span>,</span><br><span class="line">  selected-button: map-get(<span class="variable">$mat-grey</span>, <span class="number">300</span>),</span><br><span class="line">  selected-disabled-button: map-get(<span class="variable">$mat-grey</span>, <span class="number">400</span>),</span><br><span class="line">  disabled-button-toggle: map-get(<span class="variable">$mat-grey</span>, <span class="number">200</span>),</span><br><span class="line">  unselected-chip: map-get(<span class="variable">$mat-grey</span>, <span class="number">300</span>),</span><br><span class="line">  disabled-list-option: map-get(<span class="variable">$mat-grey</span>, <span class="number">200</span>),</span><br><span class="line">  tooltip: map-get(<span class="variable">$mat-grey</span>, <span class="number">700</span>),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
+
 </li>
 </ul>
 <h2 id="适配业务组件"><a href="#适配业务组件" class="headerlink" title="适配业务组件"></a>适配业务组件</h2><p>使用 Angular Material 提供的 Sass 工具，保持业务组件的主题样式和 Material 组件一致。<br><strong>注意✨</strong>：业务组件的样式需要以 Sass 定义。</p>
@@ -381,13 +370,16 @@
 <li><p>给业务组件创建一个的主题文件：<em>_example-component.theme.scss</em>。</p>
 </li>
 <li><p>创建一个接收 “主题颜色配置对象” 的 mixin，输出业务组件的颜色配置。</p>
- <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 Material 的 函数s 来创建主题.</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@mixin</span> example-color(<span class="variable">$config-or-theme</span>) &#123;</span><br><span class="line">  <span class="comment">// mat-get-color-config 可以自动判断，参数传主题对象，或者颜色配置对象都可以</span></span><br><span class="line">  <span class="variable">$config</span>: mat-get-color-config(<span class="variable">$config-or-theme</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 从配置对象中提取颜色</span></span><br><span class="line">  <span class="variable">$background</span>: map-get(<span class="variable">$config</span>, background);</span><br><span class="line">  <span class="variable">$primary</span>: map-get(<span class="variable">$config</span>, primary);</span><br><span class="line">  <span class="variable">$accent</span>: map-get(<span class="variable">$config</span>, accent);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 组件具体的样式类</span></span><br><span class="line">  <span class="selector-class">.example-color</span> &#123;</span><br><span class="line">    <span class="comment">// 使用 mat-color 从调色盘提取特定色调的颜色值。</span></span><br><span class="line">    <span class="attribute">background-color</span>: map-get(<span class="variable">$background</span>, base);</span><br><span class="line">    <span class="attribute">border-color</span>: mat-color(<span class="variable">$accent</span>, lighter);</span><br><span class="line">    <span class="attribute">color</span>:map-contrast(<span class="variable">$primary</span>, lighter);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 Material 的 函数s 来创建主题.</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@mixin</span> example-color(<span class="variable">$config-or-theme</span>) &#123;</span><br><span class="line">  <span class="comment">// mat-get-color-config 可以自动判断，参数传主题对象，或者颜色配置对象都可以</span></span><br><span class="line">  <span class="variable">$config</span>: mat-get-color-config(<span class="variable">$config-or-theme</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 从配置对象中提取颜色</span></span><br><span class="line">  <span class="variable">$background</span>: map-get(<span class="variable">$config</span>, background);</span><br><span class="line">  <span class="variable">$primary</span>: map-get(<span class="variable">$config</span>, primary);</span><br><span class="line">  <span class="variable">$accent</span>: map-get(<span class="variable">$config</span>, accent);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 组件具体的样式类</span></span><br><span class="line">  <span class="selector-class">.example-color</span> &#123;</span><br><span class="line">    <span class="comment">// 使用 mat-color 从调色盘提取特定色调的颜色值。</span></span><br><span class="line">    <span class="attribute">background-color</span>: map-get(<span class="variable">$background</span>, base);</span><br><span class="line">    <span class="attribute">border-color</span>: mat-color(<span class="variable">$accent</span>, lighter);</span><br><span class="line">    <span class="attribute">color</span>:map-contrast(<span class="variable">$primary</span>, lighter);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>创建另一个 mixin，接收 “文字排版配置对象”，输出文字样式。</p>
- <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> example-typography(<span class="variable">$config-or-theme</span>) &#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// 和颜色方法类似，参数传主题对象，或者文字排版配置对象都可以</span></span><br><span class="line">  <span class="variable">$config</span>: mat-get-typography-config(<span class="variable">$config-or-theme</span>);</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.example-typography</span> &#123;</span><br><span class="line">    <span class="attribute">font</span>: &#123;</span><br><span class="line">      family: mat-font-family(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">      size: mat-font-size(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">      weight: mat-font-weight(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> example-typography(<span class="variable">$config-or-theme</span>) &#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// 和颜色方法类似，参数传主题对象，或者文字排版配置对象都可以</span></span><br><span class="line">  <span class="variable">$config</span>: mat-get-typography-config(<span class="variable">$config-or-theme</span>);</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.example-typography</span> &#123;</span><br><span class="line">    <span class="attribute">font</span>: &#123;</span><br><span class="line">      family: mat-font-family(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">      size: mat-font-size(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">      weight: mat-font-weight(<span class="variable">$config</span>, body-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>创建第三个 mixin：<code>example-carousel-theme($config-or-theme)</code>，把这前两个 mixin 整合在其中。所有其他和主题无关的样式，放入这个组件独立的样式文件中，由组件的 styleUrl 直接引入。</p>
 </li>
 <li><p>将业务组件的主题定义文件，引入根主题文件中：</p>
  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 Material 的 函数s 来创建主题.</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入 Material 通用样式.</span></span><br><span class="line"><span class="keyword">@include</span> mat-core();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义应用程序的自定义主题</span></span><br><span class="line"><span class="variable">$primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"><span class="variable">$accent</span>:  mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"><span class="variable">$theme</span>: mat-light-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$primary</span>,</span><br><span class="line">    accent: <span class="variable">$accent</span>,</span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 Material 组件的主题样式</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$theme</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成业务组件的主题样式</span></span><br><span class="line"><span class="keyword">@include</span> example-carousel-theme(<span class="variable">$theme</span>);</span><br></pre></td></tr></table></figure>
+
 
 </li>
 </ol>
@@ -499,20 +491,10 @@
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
 
 
 
@@ -520,7 +502,6 @@
 
 
   
-
 
 
 

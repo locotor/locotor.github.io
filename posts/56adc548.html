@@ -4,26 +4,24 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 <meta name="description" content="要在应用程序的运行时实现明亮&#x2F;暗黑主题切换，或者多主题切换，就需要自定义多个主题，再通过一定的方式动态切换，这里记录一下两种方式。">
 <meta property="og:type" content="article">
@@ -36,7 +34,7 @@
 <meta property="og:image" content="https://oss.locotor.cn/images/material/theme-indigo-pink-dark.png">
 <meta property="og:image" content="https://oss.locotor.cn/images/material/theme-combo.png">
 <meta property="article:published_time" content="2020-06-11T20:09:42.000Z">
-<meta property="article:modified_time" content="2021-03-12T01:51:11.055Z">
+<meta property="article:modified_time" content="2021-03-20T11:49:18.371Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular Material">
 <meta name="twitter:card" content="summary">
@@ -59,6 +57,7 @@
 
 <title>Angular Material 主题系统（三）--多主题切换 | locotor's Notes</title>
   
+
 
 
 
@@ -106,7 +105,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -133,26 +132,10 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
@@ -162,7 +145,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -182,12 +165,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%89%E7%B1%BB%E5%90%8D%E5%88%87%E6%8D%A2%E6%98%8E%E6%9A%97%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.</span> <span class="nav-text">按类名切换明暗风格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%A4%E4%B8%AA%E4%B8%BB%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">创建两个主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96%E5%A4%84%E7%90%86%E5%9F%BA%E4%BA%8E%E8%A6%86%E7%9B%96%E5%B1%82%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">额外处理基于覆盖层的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E7%B1%BB%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">动态切换类名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E6%95%B4%E5%87%A0%E4%B8%AA"><span class="nav-number">2.</span> <span class="nav-text">多整几个</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%9A%E4%B8%AA%E4%B8%BB%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">创建多个主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98"><span class="nav-number">2.2.</span> <span class="nav-text">动态切换主题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%87%92%E5%8A%A0%E8%BD%BD%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2"><span class="nav-number">3.</span> <span class="nav-text">懒加载动态切换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="张晋祥" src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">张晋祥</p>
@@ -198,7 +181,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -233,7 +216,7 @@
 
 
 
-        </section>
+        </div>
       </div>
     </div>
   </aside>
@@ -243,7 +226,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -319,11 +302,14 @@
 <h1 id="按类名切换明暗风格"><a href="#按类名切换明暗风格" class="headerlink" title="按类名切换明暗风格"></a>按类名切换明暗风格</h1><p>如上篇所言，我们首先就来实现怎么切换网站的暗黑主题。<br><strong>注意✨</strong>：可以在 <em>styles.scss</em> 中调用 <code>angular-material-theme</code> mixin 多次，来生成多套不同的主题，但 <code>@mat-core</code> 始终只能调用一次。</p>
 <h2 id="创建两个主题"><a href="#创建两个主题" class="headerlink" title="创建两个主题"></a>创建两个主题</h2><p>咱们先创建两个主题，一个明亮风格的主题作为默认，另一个暗黑风格的主题放在 <code>.unicorn-dark-theme</code> 这个类名中。这样一来，任何在该类名内的元素，都会应用暗黑风格的主题样式。</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~@angular/material/theming&#x27;</span>;</span><br><span class="line"><span class="keyword">@include</span> mat-core();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个自定义颜色配置 (和前一篇一样）</span></span><br><span class="line"><span class="variable">$candy-app-primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"><span class="variable">$candy-app-accent</span>:  mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"><span class="variable">$candy-app-theme</span>:   mat-light-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$candy-app-primary</span>,</span><br><span class="line">    accent: <span class="variable">$candy-app-accent</span>,</span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 包含默认主题颜色以及文字排版</span></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$candy-app-theme</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义另一个暗黑风格的主题</span></span><br><span class="line"><span class="variable">$dark-theme</span>:   mat-dark-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$candy-app-primary</span>,</span><br><span class="line">    accent: <span class="variable">$candy-app-accent</span>,</span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用一个类名包裹暗黑主题样式</span></span><br><span class="line"><span class="selector-class">.unicorn-dark-theme</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> angular-material-color(<span class="variable">$dark-theme</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>注意✨</strong>：暗黑主题采用 <code>angular-material-color</code>，而不是默认主题使用的 <code>angular-material-theme</code>，因为后者不光会生成主题颜色的样式，还会生成其他样式。这里只需要改变颜色即可。而如果需要单独改变文字排版，可以使用 <code>angular-material-typography</code>。 类似的，细粒度的自定义某组件也是同理（例如：<code>mat-button-theme</code> / <code>mat-button-color</code> / <code>mat-button-typography</code>）。</p>
 <h2 id="额外处理基于覆盖层的组件"><a href="#额外处理基于覆盖层的组件" class="headerlink" title="额外处理基于覆盖层的组件"></a>额外处理基于覆盖层的组件</h2><p>因为基于覆盖层的组件（例如：menu、select、dialog 等）不是被应用程序的根组件包裹，而是和根组件平级的 <code>&lt;div class=&quot;cdk-overlay-container&quot;&gt;</code> 节点。因此，要让它们也能根据类名切换主题样式，需要做一点额外的处理：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;OverlayContainer&#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/cdk/overlay&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 用以绑定类名</span></span><br><span class="line">  isDarkMode = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">private</span> overlayContainer: OverlayContainer</span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="title">processOverlayBaseComponentTheme</span>(<span class="params">checked: <span class="built_in">boolean</span></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 获取这个 div 元素</span></span><br><span class="line">    <span class="keyword">const</span> overlayContainerElement = <span class="built_in">this</span>.overlayContainer.getContainerElement()</span><br><span class="line">    <span class="keyword">const</span> themeWrapperClassName = <span class="string">&#x27;unicorn-dark-theme&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (checked) &#123;</span><br><span class="line">      overlayContainerElement.classList.add(themeWrapperClassName);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      overlayContainerElement.classList.remove(themeWrapperClassName);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="动态切换类名"><a href="#动态切换类名" class="headerlink" title="动态切换类名"></a>动态切换类名</h2><p>通过 Angular 类名绑定，来切换不同的主题：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">class.unicorn-dark-theme</span>]=<span class="string">&quot;isDarkMode&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 受主题切换影响的元素和组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>现在，就可以在两个主题之间自由切换了！😋<br>看看效果:<br><img src="https://oss.locotor.cn/images/material/theme-indigo-pink.png" alt="明亮主题"><br><img src="https://oss.locotor.cn/images/material/theme-indigo-pink-dark.png" alt="暗黑主题"></p>
 <h1 id="多整几个"><a href="#多整几个" class="headerlink" title="多整几个"></a>多整几个</h1><p>虽然上面我们实现了动态主题切换，不过只有暗黑/明亮的两个主题反复横跳显得不太够看。所以，现在到了整活儿时间，一次性整它十个颜色！</p>
 <h2 id="创建多个主题"><a href="#创建多个主题" class="headerlink" title="创建多个主题"></a>创建多个主题</h2><p>相比创建两个主题时手动去创建，创建一个多个主题的 <em>styles.scss</em>，咱们就利用 Sass 的循环来实现，主要分为几步：</p>
@@ -332,11 +318,14 @@
 <li>创建一个 map 对象，在这个 map 中定义各个主题配置。每个主题配置的 <code>key</code> 就是这个主题的 class 类名： <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$app-themes</span>: (</span><br><span class="line">  indigo-pink : (primary-base: <span class="variable">$mat-indigo</span>, accent-base: <span class="variable">$mat-pink</span>),</span><br><span class="line">  deep_purple-amber: (primary-base: <span class="variable">$mat-deep-purple</span>, accent-base: <span class="variable">$mat-amber</span>),</span><br><span class="line">  blue-yellow : (primary-base: <span class="variable">$mat-blue</span>, accent-base: <span class="variable">$mat-yellow</span>),</span><br><span class="line">  pink-blue_grey : (primary-base: <span class="variable">$mat-pink</span>, accent-base: <span class="variable">$mat-blue-gray</span>, ),</span><br><span class="line">  purple-green : (primary-base: <span class="variable">$mat-purple</span>, accent-base: <span class="variable">$mat-green</span>),</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
 <li>通过 <code>@each</code> 循环，创建明暗个五个主题颜色： <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@each</span> <span class="variable">$css-class</span>, <span class="variable">$theme</span> in <span class="variable">$app-themes</span> &#123;</span><br><span class="line">  <span class="variable">$primary</span>: mat-palette(map-get(<span class="variable">$theme</span>, primary-base))</span><br><span class="line">  <span class="variable">$accent</span>: mat-palette(map-get(<span class="variable">$theme</span>, accent-base))</span><br><span class="line">  </span><br><span class="line">  // key 值作为类名</span><br><span class="line">  .#&#123;<span class="variable">$css-class</span>&#125; &#123;</span><br><span class="line">    <span class="variable">$light-theme</span>: mat-dark-theme((</span><br><span class="line">      color: (</span><br><span class="line">        primary: <span class="variable">$primary</span>,</span><br><span class="line">        accent: <span class="variable">$accent</span>,</span><br><span class="line">      )</span><br><span class="line">    ));</span><br><span class="line">    <span class="comment">// 生成颜色样式</span></span><br><span class="line">    <span class="keyword">@include</span> angular-material-color(<span class="variable">$light-theme</span>);</span><br><span class="line">    <span class="comment">// 添加两个业务组件测试主题适配</span></span><br><span class="line">    <span class="keyword">@include</span> app-component-color(<span class="variable">$light-theme</span>);</span><br><span class="line">    <span class="keyword">@include</span> theme-test-color(<span class="variable">$light-theme</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// key 值作为类名</span></span><br><span class="line">  .#&#123;<span class="variable">$css-class</span>&#125;-dark &#123;</span><br><span class="line">    <span class="variable">$dark-theme</span>: mat-dark-theme((</span><br><span class="line">      color: (</span><br><span class="line">        primary: <span class="variable">$primary</span>,</span><br><span class="line">        accent: <span class="variable">$accent</span>,</span><br><span class="line">      )</span><br><span class="line">    ));</span><br><span class="line">    <span class="comment">// 生成颜色样式</span></span><br><span class="line">    <span class="keyword">@include</span> angular-material-color(<span class="variable">$dark-theme</span>);</span><br><span class="line">    <span class="comment">// 添加两个业务组件测试主题适配</span></span><br><span class="line">    <span class="keyword">@include</span> app-component-color(<span class="variable">$dark-theme</span>);</span><br><span class="line">    <span class="keyword">@include</span> theme-test-color(<span class="variable">$dark-theme</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
 </li>
 </ol>
 <h2 id="动态切换主题"><a href="#动态切换主题" class="headerlink" title="动态切换主题"></a>动态切换主题</h2><p>通过改变 root 元素的 class，来动态切换域名：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">class</span>]=<span class="string">&quot;currentTheme&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 受主题切换影响的元素和组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绑定主题选择列表</span></span><br><span class="line">themes = [</span><br><span class="line">  <span class="string">&quot;amber-lime&quot;</span>,</span><br><span class="line">  <span class="string">&quot;amber-lime-dark&quot;</span>,</span><br><span class="line">  <span class="string">&quot;deep_purple-amber&quot;</span>,</span><br><span class="line">  <span class="string">&quot;deep_purple-amber-dark&quot;</span>,</span><br><span class="line">  <span class="string">&quot;blue-yellow&quot;</span>,</span><br><span class="line">  <span class="string">&quot;blue-yellow-dark&quot;</span>,</span><br><span class="line">  <span class="string">&quot;pink-blue_grey&quot;</span>,</span><br><span class="line">  <span class="string">&quot;pink-blue_grey-dark&quot;</span>,</span><br><span class="line">  <span class="string">&quot;purple-green&quot;</span>,</span><br><span class="line">  <span class="string">&quot;purple-green-dark&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 切换应用主题类，并处理浮层组件</span></span><br><span class="line"><span class="function"><span class="title">switchTheme</span>(<span class="params">theme: <span class="built_in">string</span></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.currentTheme)</span><br><span class="line">    <span class="built_in">this</span>.overlayContainerEle.classList.remove(<span class="built_in">this</span>.currentTheme);</span><br><span class="line">  <span class="built_in">this</span>.currentTheme = theme</span><br><span class="line">  <span class="built_in">this</span>.overlayContainerEle.classList.add(<span class="built_in">this</span>.currentTheme);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>ok，现在我们有了 10 套主题！<br><img src="https://oss.locotor.cn/images/material/theme-combo.png" alt="十个主题预览"></p>
 <p>不过可以看到，现在编译打包后的 styles.css 和 styles.js，未压缩的情况下，快高达 1MB 了（每个主题会增加 css 文件 50kb 大小）。所以，咱们试着懒加载它们。</p>
 <h1 id="懒加载动态切换"><a href="#懒加载动态切换" class="headerlink" title="懒加载动态切换"></a>懒加载动态切换</h1><p>现在咱们已经可以动态的切换主题了，可只有两三个主题还好，如果我的应用程序，要提供很多的主题搭配，让用户自由选用呢，<em>styles.scss</em> 一次包含这么多份主题样式，实在有损加载性能（每个主题增加 50kb）。<br>遇到这种情况，我们可以预先编译好需要用到主题，在运行时动态切换它们，就可以按需加载了。  </p>
@@ -344,8 +333,10 @@
 <li>首先在 <em>src &gt; theme</em> 文件夹中创建几个主题文件，例如这个 <em>green-amber-dark.scss</em>： <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&quot;~@angular/material/theming&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../app/app.component.theme.scss&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;../app/component/theme-test/theme-test.component.theme&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$green-primary</span>: mat-palette(<span class="variable">$mat-green</span>);</span><br><span class="line"><span class="variable">$amber-accent</span>: mat-palette(<span class="variable">$mat-amber</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$green-amber-dark-theme</span>: mat-dark-theme((</span><br><span class="line">  color: (</span><br><span class="line">    primary: <span class="variable">$green-primary</span>,</span><br><span class="line">    accent: <span class="variable">$amber-accent</span></span><br><span class="line">  )</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="keyword">@include</span> angular-material-theme(<span class="variable">$green-amber-dark-theme</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加两个业务组件测试主题适配</span></span><br><span class="line"><span class="keyword">@include</span> app-component-color(<span class="variable">$green-amber-dark-theme</span>);</span><br><span class="line"><span class="keyword">@include</span> theme-test-color(<span class="variable">$green-amber-dark-theme</span>);</span><br></pre></td></tr></table></figure></li>
 <li>然后，在 <em>angular.json &gt; projects &gt; architect &gt; build &gt; styles</em> 中，新增刚刚创建的主题文件，inject 设置为 false，意味着它只会被打包为单独的 css 文件，但不会被引入项目中： <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;styles&quot;: [</span><br><span class="line">  &quot;src/styles.scss&quot;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;input&quot;</span>: <span class="string">&quot;src/theme/green-amber-theme.scss&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;inject&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">],</span><br></pre></td></tr></table></figure></li>
 <li>最后，通过给 <link> 动态赋值即可：<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">switchTheme(theme: <span class="built_in">string</span>): <span class="built_in">void</span> &#123;</span><br><span class="line"> <span class="keyword">const</span> id = <span class="string">&#x27;lazy-load-theme&#x27;</span>;</span><br><span class="line"> <span class="keyword">const</span> link = <span class="built_in">document</span>.getElementById(id);</span><br><span class="line"> <span class="comment">// 第一次切换，新建一个 link 元素</span></span><br><span class="line"> <span class="keyword">if</span> (!link) &#123;</span><br><span class="line">   <span class="keyword">const</span> linkEl = <span class="built_in">document</span>.createElement(<span class="string">&#x27;link&#x27;</span>);</span><br><span class="line">   linkEl.setAttribute(<span class="string">&#x27;rel&#x27;</span>, <span class="string">&#x27;stylesheet&#x27;</span>);</span><br><span class="line">   linkEl.setAttribute(<span class="string">&#x27;type&#x27;</span>, <span class="string">&#x27;text/css&#x27;</span>);</span><br><span class="line">   linkEl.setAttribute(<span class="string">&#x27;id&#x27;</span>, id);</span><br><span class="line">   linkEl.setAttribute(<span class="string">&#x27;href&#x27;</span>, <span class="string">`<span class="subst">$&#123;theme&#125;</span>-theme.css`</span>);</span><br><span class="line">   <span class="built_in">document</span>.head.appendChild(linkEl);</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">// 替换 link 元素的 href 地址 </span></span><br><span class="line">   (link <span class="keyword">as</span> HTMLLinkElement).href = <span class="string">`<span class="subst">$&#123;theme&#125;</span>-theme.css`</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这样就实现了主题文件的懒加载，不过需要注意的是，默认的主题文件依旧需要在 <em>styles.scss</em> 中引用，它也懒加载的话，会导致初次加载时页面闪烁。</li>
+
+</li>
 </ol>
+<p>这样就实现了主题文件的懒加载，不过需要注意的是，默认的主题文件依旧需要在 <em>styles.scss</em> 中引用，它也懒加载的话，会导致初次加载时页面闪烁。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本篇介绍了如何动态切换主题，渐进的包括了三种情况：</p>
 <ol>
 <li>网站只需要在明亮和暗黑模式下切换主题，那么只需要通过一个独特的类名包裹主题即可，切换时只是切换类名即可</li>
@@ -454,20 +445,10 @@
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
 
 
 
@@ -475,7 +456,6 @@
 
 
   
-
 
 
 

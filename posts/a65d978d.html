@@ -23,19 +23,21 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="玻璃晴朗，橘子辉煌。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="locotor&#39;s Notes">
-<meta property="og:url" content="https://blog.locotor.cn/archives/2020/12/index.html">
+<meta name="description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular 动态视图 (一) -- 原生 API">
+<meta property="og:url" content="https://blog.locotor.cn/posts/a65d978d.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="玻璃晴朗，橘子辉煌。">
+<meta property="og:description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-20T18:44:24.000Z">
+<meta property="article:modified_time" content="2021-03-20T11:49:18.371Z">
 <meta property="article:author" content="张晋祥">
-<meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
+<meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.locotor.cn/archives/2020/12/">
+<link rel="canonical" href="https://blog.locotor.cn/posts/a65d978d.html">
 
 
 <script class="page-configurations">
@@ -43,11 +45,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>归档 | locotor's Notes</title>
+  <meta name="keywords" content="Angular,动态组件,动态视图">
+
+<title>Angular 动态视图 (一) -- 原生 API | locotor's Notes</title>
   
 
 
@@ -145,7 +149,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -158,6 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ViewContainerRef-%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">ViewContainerRef 容器</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -227,65 +232,125 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 13 篇日志。 继续努力。</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/a65d978d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="张晋祥">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="locotor's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular 动态视图 (一) -- 原生 API
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-20 18:44:24" itemprop="dateCreated datePublished" datetime="2021-03-20T18:44:24+00:00">2021-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>要动态的插入一个视图，Angular 提供了一套 API 负责创建容器，实例化组件，以及管理视图和数据。同时，它还额外提供了一些指令，方便快速的实现。它们各有各自适用场景，本篇详细来看看它们的使用。</p>
+<p>完整的示例代码可以查看 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-dynamic-view-example">GitHub 项目仓库</a>，欢迎 start ♥</p>
+<h1 id="ViewContainerRef-容器"><a href="#ViewContainerRef-容器" class="headerlink" title="ViewContainerRef 容器"></a>ViewContainerRef 容器</h1><p>要动态插入视图的核心是视图容器，它决定了视图的插入位置，用 <code>ViewContainerRef</code> 类型表示。要创建它很简单，假设组件视图中有：<code>&lt;ng-container #dynamicHost&gt;&lt;/ng-container&gt;</code> 通过 <code>@ViewChild</code> 装饰器读取即可：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;dynamicHost&#x27;</span>, &#123; <span class="attr">read</span>: ViewContainerRef &#125;) container!: ViewContainerRef;</span><br></pre></td></tr></table></figure>
+<p>这段代码的注意点有：</p>
+<ul>
+<li><p>这个 <code>@ViewChild</code> 用来从组件视图中获取元素的引用，可以是 DOM 对象，可以是子组件或者指令的实例，或者某个依赖注入的 <code>Provider</code>。<br>第二个参数中的 read 指示具体获取哪个类型，例如从 <code>&lt;button mat-stroked-button&gt;</code> 可以获取到这个 button 的 DOM 对象，也可以是这个标签上添加的 Material 按钮指令。</p>
+</li>
+<li><p>要获取一个容器，并非只能使用 <code>&lt;ng-container&gt;</code>，<code>&lt;ng-template&gt;</code> 或者任何别的 DOM 标签都可以。</p>
+</li>
+<li><p>虽然是叫容器，不过插入的内容可不是在这个 <code>&lt;ng-container&gt;</code> 标签内，而是在它的下方（类似 <code>&lt;router-outlet&gt;</code>）。所以使用 <code>ng-container</code> 是为了不留下多余的 DOM。</p>
+</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated" datetime="2020-12-28T11:55:29+00:00" content="2020-12-28">
-          12-28
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/d730b4c3.html" itemprop="url">
-            <span itemprop="name">Hexo + NexT 博客 SEO 优化</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          
 
-      
-    </header>
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>locotor
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.locotor.cn/posts/a65d978d.html" title="Angular 动态视图 (一) -- 原生 API">https://blog.locotor.cn/posts/a65d978d.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/3e7ce57f.html" rel="prev" title="Angular CLI 发布路径的配置项">
+                  <i class="fa fa-chevron-left"></i> Angular CLI 发布路径的配置项
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated" datetime="2020-12-21T20:13:58+00:00" content="2020-12-21">
-          12-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/3ec95b63.html" itemprop="url">
-            <span itemprop="name">Hexo 搭建个人博客到 GitHub 和 Coding</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 
 
 <script>
