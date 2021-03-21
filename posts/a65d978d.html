@@ -31,7 +31,7 @@
 <meta property="og:description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-20T18:44:24.000Z">
-<meta property="article:modified_time" content="2021-03-20T11:49:18.371Z">
+<meta property="article:modified_time" content="2021-03-21T16:13:10.051Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -162,7 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ViewContainerRef-%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">ViewContainerRef 容器</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ViewContainerRef-%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">ViewContainerRef 容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A5%E4%BB%A3%E7%A0%81%E6%96%B9%E5%BC%8F%E6%8F%92%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">以代码方式插入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%8F%92%E5%85%A5%E7%BB%84%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">动态插入组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%8F%92%E5%85%A5%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.2.</span> <span class="nav-text">动态插入模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A5%E6%8C%87%E4%BB%A4%E6%96%B9%E5%BC%8F%E6%8F%92%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">以指令方式插入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ngComponentOutlet"><span class="nav-number">3.1.</span> <span class="nav-text">ngComponentOutlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E5%85%A5%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">传入依赖注入器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E5%85%A5%E5%86%85%E5%AE%B9%E6%98%A0%E5%B0%84"><span class="nav-number">3.3.</span> <span class="nav-text">传入内容映射</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -292,18 +292,78 @@
     <div class="post-body" itemprop="articleBody">
         <p>要动态的插入一个视图，Angular 提供了一套 API 负责创建容器，实例化组件，以及管理视图和数据。同时，它还额外提供了一些指令，方便快速的实现。它们各有各自适用场景，本篇详细来看看它们的使用。</p>
 <p>完整的示例代码可以查看 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-dynamic-view-example">GitHub 项目仓库</a>，欢迎 start ♥</p>
-<h1 id="ViewContainerRef-容器"><a href="#ViewContainerRef-容器" class="headerlink" title="ViewContainerRef 容器"></a>ViewContainerRef 容器</h1><p>要动态插入视图的核心是视图容器，它决定了视图的插入位置，用 <code>ViewContainerRef</code> 类型表示。要创建它很简单，假设组件视图中有：<code>&lt;ng-container #dynamicHost&gt;&lt;/ng-container&gt;</code> 通过 <code>@ViewChild</code> 装饰器读取即可：</p>
+<h1 id="ViewContainerRef-容器"><a href="#ViewContainerRef-容器" class="headerlink" title="ViewContainerRef 容器"></a>ViewContainerRef 容器</h1><p>要动态插入视图的核心是视图容器，它决定了视图的插入位置，用 ViewContainerRef 类型表示。要创建它很简单，假设组件视图中有：<code>&lt;ng-container #dynamicHost&gt;&lt;/ng-container&gt;</code> 通过 <code>@ViewChild</code> 装饰器读取即可：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;dynamicHost&#x27;</span>, &#123; <span class="attr">read</span>: ViewContainerRef &#125;) container!: ViewContainerRef;</span><br></pre></td></tr></table></figure>
 <p>这段代码的注意点有：</p>
 <ul>
-<li><p>这个 <code>@ViewChild</code> 用来从组件视图中获取元素的引用，可以是 DOM 对象，可以是子组件或者指令的实例，或者某个依赖注入的 <code>Provider</code>。<br>第二个参数中的 read 指示具体获取哪个类型，例如从 <code>&lt;button mat-stroked-button&gt;</code> 可以获取到这个 button 的 DOM 对象，也可以是这个标签上添加的 Material 按钮指令。</p>
+<li><p>这个 <code>@ViewChild</code> 用来从组件视图中获取元素的引用，可以是 DOM 对象，可以是子组件或者指令的实例，或者某个依赖注入的 Provider。<br>第二个参数中的 read 指示具体获取哪个类型，例如从 <code>&lt;button mat-stroked-button&gt;</code> 可以获取到这个 button 元素对象，也可以是这个标签上添加的 Material 按钮指令实例。</p>
 </li>
-<li><p>要获取一个容器，并非只能使用 <code>&lt;ng-container&gt;</code>，<code>&lt;ng-template&gt;</code> 或者任何别的 DOM 标签都可以。</p>
+<li><p>要获取一个容器，并非只能使用 <code>&lt;ng-container&gt;</code>，<code>&lt;ng-template&gt;</code> 、组件或者别的 DOM 标签都可以。</p>
 </li>
-<li><p>虽然是叫容器，不过插入的内容可不是在这个 <code>&lt;ng-container&gt;</code> 标签内，而是在它的下方（类似 <code>&lt;router-outlet&gt;</code>）。所以使用 <code>ng-container</code> 是为了不留下多余的 DOM。</p>
+<li><p>虽然是叫容器，不过插入的内容可不是在这个 <code>&lt;ng-container&gt;</code> 标签内，而是在它的下方（类似 <code>&lt;router-outlet&gt;</code>）。所以使用 ng-container 是为了不渲染多余的 DOM。</p>
 </li>
 </ul>
+<p>作为视图容器，它可以负责创建、插入、移除、销毁视图引用对象（ViewRef）。视图对象，代表着 Angular中可显示元素的最小分组单位，它由组件或者模板定义。多个视图构造成了 Angular 应用的视图树。具体细节就不在本篇细说了。只需要知道的是：ViewContainerRef 可以管理插入它其中的视图。</p>
+<p>✨后续都将 ViewContainerRef 实例称之为 “视图容器”</p>
+<h1 id="以代码方式插入"><a href="#以代码方式插入" class="headerlink" title="以代码方式插入"></a>以代码方式插入</h1><p>视图容器有两个方法（createComponent，createEmbeddedView），分别用来动态创建组件视图和模板视图。先来看看通过这两个方法来插入。</p>
+<h2 id="动态插入组件"><a href="#动态插入组件" class="headerlink" title="动态插入组件"></a>动态插入组件</h2><p>首先创建一个用于动态生成的组件，这个通知组件省略了具体样式，详情可以查看源码。可以注意到，这个组件有一个输入属性，一个输出事件。以便演示动态创建的组件，如何和外界交互。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;alert-container mat-elevation-z2&quot; [class]=&quot;classConfig()&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;span class=&quot;message&quot;&gt;&#123;&#123;message&#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">        &lt;button mat-button (click)=&quot;emitCloseEvent()&quot;&gt;关闭&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AlertComponent</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Input</span>() message = <span class="string">&#x27;空消息提示&#x27;</span>;</span><br><span class="line">    <span class="meta">@Input</span>() <span class="keyword">type</span> = <span class="string">&#x27;success&#x27;</span>;</span><br><span class="line">    <span class="meta">@Output</span>() closeAlert = <span class="keyword">new</span> EventEmitter();</span><br><span class="line">    <span class="function"><span class="title">classConfig</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            success: <span class="built_in">this</span>.type === <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">            warning: <span class="built_in">this</span>.type === <span class="string">&#x27;warning&#x27;</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span></span><br><span class="line"></span><br><span class="line">    emitCloseEvent(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.closeAlert.emit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>✨注意：Angular 9 后的版本默认使用 Ivy 编译器，如果是使用老版本编译器，传入的组件类，需要在 Module 的 <code>entryComponents</code> 中声明，并且这个 Module 不能懒加载。</p>
+<p>组件创建好后，就可以引入并动态创建，具体分为三步：</p>
+<ol>
+<li><code>private resolver: ComponentFactoryResolver</code> 先在构造函数中注入<code>ComponentFactoryResolver</code> 实例。</li>
+<li>通过 <code>resolver.resolveComponentFactory(AlertComponent)</code> 方法，生成这个通知组件的组件工厂对象。</li>
+<li>最后一步，将这个工厂对象传入视图容器的 createComponent 方法：<br><code>this.const componentRef = container.createComponent(factory)</code></li>
+</ol>
+<p>通过 createComponent 方法，就可以将这个组件插入到视图中了，并返回这个组件实例。</p>
+<p>有了组件实例，和这个通知组件交互也就不成问题了：</p>
+<ul>
+<li><p>输入属性传值：<code>componentRef.instance.message = &quot;外部传入的警告信息&quot;</code>。</p>
+</li>
+<li><p>绑定输出事件：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">componentRef.instance.closeAlert.subscribe(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> index = <span class="built_in">this</span>.container.indexOf(componentRef.hostView);</span><br><span class="line">  <span class="built_in">this</span>.container.remove(index);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<p>从这个上面的绑定事件也可以看出，视图容器可以容纳任意多个视图，根据视图对象可以查询索引，或者销毁，移除，插入，移动任意视图顺序。</p>
+<h2 id="动态插入模板"><a href="#动态插入模板" class="headerlink" title="动态插入模板"></a>动态插入模板</h2><p>除了通过 createComponent 插入组件，通过 createEmbeddedView 就可以插入模板。首先先创建一个模板示例，这个模板根据上下文对象声明了一个 “param” 属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">templateView</span> <span class="attr">let-param</span>=<span class="string">&quot;message&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;template-wrapper&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>来自 ng-template 的动态内容<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;param&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>和组件的插入类似，模板的插入分为三步：</p>
+<ol>
+<li><p>获取模板的引用对象：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;templateView&#x27;</span>, &#123; <span class="attr">read</span>: TemplateRef &#125;) template!: TemplateRef&lt;<span class="built_in">any</span>&gt;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>声明上下文对象：<code>templateContext = &#123; message: &#39;来自模板上下文的值&#39; &#125;;</code> </p>
+</li>
+<li><p>通过视图容器的 createEmbeddedView 方法插入模板：</p>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> embeddedViewRef = <span class="built_in">this</span>.container.createEmbeddedView(<span class="built_in">this</span>.template, <span class="built_in">this</span>.templateContext);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>方法创建一个 EmbeddedViewRef 对象，并将它放入。通过这个对象，视图容器可以查找它的索引，所以也可以和之前组件视图的引用一样，在容器内移动顺序、移除渲染、或是被销毁。</p>
+<h1 id="以指令方式插入"><a href="#以指令方式插入" class="headerlink" title="以指令方式插入"></a>以指令方式插入</h1><p>除了使用视图容器的两个方法来创建和插入视图，Angular 还提供了两个指令来快捷插入。</p>
+<h2 id="ngComponentOutlet"><a href="#ngComponentOutlet" class="headerlink" title="ngComponentOutlet"></a>ngComponentOutlet</h2><p>首先，还是再创建另一个示例组件，和前面的哪个通知组件不同，它没有输入输出属性，但是多了一个需要注入的依赖项：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;section class=&quot;template-wrapper&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;span&gt;来自另一个动态组件：&#123;&#123;param.message&#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">    &lt;/section&gt;`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AnotherComponent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">public</span> param: ExampleService</span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用指令的方式创建组件就简单多了，只需要两步：</p>
+<ol>
+<li><p>引入这个组件类，并赋值给一个属性：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; AnotherComponent &#125; <span class="keyword">from</span> <span class="string">&#x27;../shared/another-component&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewContainerExampleComponent</span> <span class="title">implements</span> <span class="title">OnInit</span>, <span class="title">OnDestroy</span> </span>&#123;</span><br><span class="line">     <span class="keyword">public</span> anotherComponent = AnotherComponent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在视图中声明即可：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ng-container</span> *<span class="attr">ngComponentOutlet</span>=<span class="string">&quot;dynamic&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ng-container</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="传入依赖注入器"><a href="#传入依赖注入器" class="headerlink" title="传入依赖注入器"></a>传入依赖注入器</h2><p>正常情况下，这样就可以把组件插入指定位置了，不过假设这个动态组件所声明的依赖项，是需要由这个组件本身提供呢？</p>
+<p>这里就要再给这个组件传入注入对象:<code>&lt;ng-container *ngComponentOutlet=&quot;dynamic;injector:costumeInjector&quot;&gt;</code>。</p>
+<p>这个 costumeInjector 可以通过 Injector 类的静态方法创建：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    injector: Injector</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.costumeInjector = Injector.create(&#123; </span><br><span class="line">        providers: [&#123; <span class="attr">provide</span>: ExampleService, <span class="attr">deps</span>: [] &#125;], </span><br><span class="line">        parent: injector </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，每个动态创建的组件，都会拥有一个独立的 ExampleService 实例。</p>
+<p>当然，常见的情况依旧是给 ExampleService 的装饰器声明为全局服务：<code>@Injectable(&#123; providedIn:&#39;root&#39;&#125;)</code></p>
+<h2 id="传入内容映射"><a href="#传入内容映射" class="headerlink" title="传入内容映射"></a>传入内容映射</h2>
     </div>
 
     
