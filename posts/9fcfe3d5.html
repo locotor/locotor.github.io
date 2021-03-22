@@ -23,17 +23,17 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发，例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（ng-template）。Angular 有多种方式可以满足这个需求，列举以下。">
+<meta name="description" content="上一篇介绍了原生 API 的动态视图插入，功能上已经可以满足大多数使用场景，不过略失一些便利性，原生提供的指令也不便于组件的交互，好在 CDK 提供了 Portal 模块，封装了原生 API，更利于使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="由繁入简--浅析Angular的动态视图">
+<meta property="og:title" content="详解 Angular 动态视图 (二) -- CDK Portal">
 <meta property="og:url" content="https://blog.locotor.cn/posts/9fcfe3d5.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发，例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（ng-template）。Angular 有多种方式可以满足这个需求，列举以下。">
+<meta property="og:description" content="上一篇介绍了原生 API 的动态视图插入，功能上已经可以满足大多数使用场景，不过略失一些便利性，原生提供的指令也不便于组件的交互，好在 CDK 提供了 Portal 模块，封装了原生 API，更利于使用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-08T18:35:08.000Z">
-<meta property="article:modified_time" content="2021-03-22T08:42:42.279Z">
+<meta property="article:published_time" content="2021-03-22T18:35:08.000Z">
+<meta property="article:modified_time" content="2021-03-22T08:54:14.127Z">
 <meta property="article:author" content="张晋祥">
-<meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
+<meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
 
 
@@ -49,7 +49,9 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>由繁入简--浅析Angular的动态视图 | locotor's Notes</title>
+  <meta name="keywords" content="Angular,动态组件,动态视图">
+
+<title>详解 Angular 动态视图 (二) -- CDK Portal | locotor's Notes</title>
   
 
 
@@ -254,7 +256,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          由繁入简--浅析Angular的动态视图
+          详解 Angular 动态视图 (二) -- CDK Portal
         </h1>
 
         <div class="post-meta-container">
@@ -265,13 +267,22 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-03-08 18:35:08" itemprop="dateCreated datePublished" datetime="2021-03-08T18:35:08+00:00">2021-03-08</time>
+      <time title="创建时间：2021-03-22 18:35:08" itemprop="dateCreated datePublished" datetime="2021-03-22T18:35:08+00:00">2021-03-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+        </span>
     </span>
 
   
 </div>
 
-            <div class="post-description">动态的渲染组件是日常项目开发中常见的需求，特别是通用性的工具库开发，例如弹窗服务类，需要让用户决定传入什么内容进行渲染，可能是一个自定义的组件，可能是一个模板块（ng-template）。Angular 有多种方式可以满足这个需求，列举以下。</div>
+            <div class="post-description">上一篇介绍了原生 API 的动态视图插入，功能上已经可以满足大多数使用场景，不过略失一些便利性，原生提供的指令也不便于组件的交互，好在 CDK 提供了 Portal 模块，封装了原生 API，更利于使用。</div>
         </div>
       </header>
 
@@ -279,8 +290,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>针对动态插入视图，Angular 框架提供了几种实现方式，实现的方式和复杂度不同，灵活度也不同，可以根据需要选择。</p>
-<h2 id="1-Angular-CDK-Portal"><a href="#1-Angular-CDK-Portal" class="headerlink" title="1. Angular CDK Portal"></a>1. Angular CDK Portal</h2><p>Angular 官方提供了一套组件开发套件 Component Dev Kit (CDK)，作为各种 Angular 组件开发的基础元素来使用。其中就提供 “Portal（传送门）” 来辅助动态内容的创建工作。</p>
+        <h2 id="1-Angular-CDK-Portal"><a href="#1-Angular-CDK-Portal" class="headerlink" title="1. Angular CDK Portal"></a>1. Angular CDK Portal</h2><p>Angular 官方提供了一套组件开发套件 Component Dev Kit (CDK)，作为各种 Angular 组件开发的基础元素来使用。其中就提供 “Portal（传送门）” 来辅助动态内容的创建工作。</p>
 <p>这个 “动态内容” 可以是组件、TemplateRef 或者 DOM 元素，分别对应三种 Portal 类型（ComponentPortal、TemplatePortal、DomPortal）。</p>
 <h3 id="ComponentPortal"><a href="#ComponentPortal" class="headerlink" title="ComponentPortal"></a>ComponentPortal</h3><p>用以动态的插入组件，基于一个组件类创建：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.componentPortal = <span class="keyword">new</span> ComponentPortal(ExampleComponent);</span><br></pre></td></tr></table></figure>
@@ -318,7 +328,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.locotor.cn/posts/9fcfe3d5.html" title="由繁入简--浅析Angular的动态视图">https://blog.locotor.cn/posts/9fcfe3d5.html</a>
+      <a href="https://blog.locotor.cn/posts/9fcfe3d5.html" title="详解 Angular 动态视图 (二) -- CDK Portal">https://blog.locotor.cn/posts/9fcfe3d5.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -326,19 +336,19 @@
 </ul>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/68e9fd0.html" rel="prev" title="用 @AuthenticationPrincipal 注解快捷获取当前用户">
-                  <i class="fa fa-chevron-left"></i> 用 @AuthenticationPrincipal 注解快捷获取当前用户
+                <a href="/posts/a65d978d.html" rel="prev" title="详解 Angular 动态视图 (一) -- 原生 API">
+                  <i class="fa fa-chevron-left"></i> 详解 Angular 动态视图 (一) -- 原生 API
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/3e7ce57f.html" rel="next" title="Angular CLI 发布路径的配置项">
-                  Angular CLI 发布路径的配置项 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
