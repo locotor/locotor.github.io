@@ -25,13 +25,13 @@
   </script>
 <meta name="description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular 动态视图 (一) -- 原生 API">
+<meta property="og:title" content="详解 Angular 动态视图 (一) -- 原生 API">
 <meta property="og:url" content="https://blog.locotor.cn/posts/a65d978d.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
 <meta property="og:description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-20T18:44:24.000Z">
-<meta property="article:modified_time" content="2021-03-22T08:16:32.043Z">
+<meta property="article:modified_time" content="2021-03-22T08:42:42.275Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -51,7 +51,7 @@
 </script>
   <meta name="keywords" content="Angular,动态组件,动态视图">
 
-<title>Angular 动态视图 (一) -- 原生 API | locotor's Notes</title>
+<title>详解 Angular 动态视图 (一) -- 原生 API | locotor's Notes</title>
   
 
 
@@ -256,7 +256,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Angular 动态视图 (一) -- 原生 API
+          详解 Angular 动态视图 (一) -- 原生 API
         </h1>
 
         <div class="post-meta-container">
@@ -291,7 +291,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>要动态的插入一个视图，Angular 提供了一套 API 负责创建容器，实例化组件，以及管理视图和数据。同时，它还额外提供了一些指令，方便快速的实现。它们各有各自适用场景，本篇详细来看看它们的使用。</p>
-<p>完整的示例代码可以查看 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-dynamic-view-example">GitHub 项目仓库</a>。</p>
+<p>完整的示例代码可以查看 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-dynamic-view-example">GitHub 项目仓库</a>，或者在线查看效果 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://coding-pages-bucket-1575455-8137703-14801-541995-1303365836.cos-website.ap-beijing.myqcloud.com/dynamic-view">在线示例</a>。</p>
 <h1 id="ViewContainerRef-容器"><a href="#ViewContainerRef-容器" class="headerlink" title="ViewContainerRef 容器"></a>ViewContainerRef 容器</h1><p>动态视图的核心是视图容器，它决定了视图的插入位置，用 ViewContainerRef 类表示。要创建它很简单，假设组件视图中有：<code>&lt;ng-container #dynamicHost&gt;&lt;/ng-container&gt;</code> 通过 <code>@ViewChild</code> 装饰器读取即可：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;dynamicHost&#x27;</span>, &#123; <span class="attr">read</span>: ViewContainerRef &#125;) container!: ViewContainerRef;</span><br></pre></td></tr></table></figure>
 <p>这段代码的注意点有：</p>
@@ -424,7 +424,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.locotor.cn/posts/a65d978d.html" title="Angular 动态视图 (一) -- 原生 API">https://blog.locotor.cn/posts/a65d978d.html</a>
+      <a href="https://blog.locotor.cn/posts/a65d978d.html" title="详解 Angular 动态视图 (一) -- 原生 API">https://blog.locotor.cn/posts/a65d978d.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
