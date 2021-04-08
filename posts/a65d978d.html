@@ -31,7 +31,7 @@
 <meta property="og:description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-20T18:44:24.000Z">
-<meta property="article:modified_time" content="2021-03-22T08:54:14.127Z">
+<meta property="article:modified_time" content="2021-04-08T06:33:00.692Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -177,7 +177,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -291,7 +291,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>要动态的插入一个视图，Angular 提供了一套 API 负责创建容器，实例化组件，以及管理视图和数据。同时，它还额外提供了一些指令，方便快速的实现。它们各有各自适用场景，本篇详细来看看它们的使用。</p>
-<p>完整的示例代码可以查看 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-dynamic-view-example">GitHub 项目仓库</a>，或者在线查看效果 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://coding-pages-bucket-1575455-8137703-14801-541995-1303365836.cos-website.ap-beijing.myqcloud.com/dynamic-view">在线示例</a>。</p>
+<p>完整的示例代码可以查看 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-dynamic-view-example">GitHub 项目仓库</a>，或者在线查看效果 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://coding-pages-bucket-1575455-8137703-14801-541995-1303365836.cos-website.ap-beijing.myqcloud.com/">在线示例</a>。</p>
 <h1 id="ViewContainerRef-容器"><a href="#ViewContainerRef-容器" class="headerlink" title="ViewContainerRef 容器"></a>ViewContainerRef 容器</h1><p>动态视图的核心是视图容器，它决定了视图的插入位置，用 ViewContainerRef 类表示。要创建它很简单，假设组件视图中有：<code>&lt;ng-container #dynamicHost&gt;&lt;/ng-container&gt;</code> 通过 <code>@ViewChild</code> 装饰器读取即可：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;dynamicHost&#x27;</span>, &#123; <span class="attr">read</span>: ViewContainerRef &#125;) container!: ViewContainerRef;</span><br></pre></td></tr></table></figure>
 <p>这段代码的注意点有：</p>
@@ -406,7 +406,8 @@
 <p>除了第二个参数是指定插入到容器的顺序序号以外，其他的参数都是一一对应的。</p>
 <p>和组件的情况类似，模板插入除了视图容器支持多个模板以外，可以支持指定插入序号外，和指令的方式完全一样的。都是两个参数，一个是模板引用对象，一个是模板上下文对象。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本篇总结了 Angular API 实现动态视图插入的方式。ViewContainerRef 可以支持任意多个视图的插入，对它们进行管理。它插入的组件可以拿到组件实例，能够执行输入输出交互。指令的方式可以便捷的插入视图，但是只能在一个容器内插入一个视图，对组件的输入输出交互支持不足。</p>
-<p>可以看到，通过 Angular 原生 API 已经可以实现动态视图功能，不过如果能结合指令式的便捷，再兼顾组件交互就好了。好在 Material 开发组还提供了一套 Angular CDK（组件开发套件），它的 Portal 模块，封装了原生 API，可以更方便的实现动态视图，我们下篇见！😎</p>
+<p>不过这都是在 Angular 上下文环境中的动态视图，如果是要插入到 Angular 应用的外部呢（例如常见的弹窗，内容和遮罩插入 <code>&lt;body&gt;</code> 元素下）？插入后又将如何和 Angular 的组件通信？</p>
+<p>所以可以看到，通过 Angular 原生 API 已经可以实现动态视图功能，不过还没有解决在 Angular 应用外插入内容的需求，并且如果能结合指令式的便捷，再兼顾组件交互就好了。好在 Material 开发组还提供了一套 Angular CDK（组件开发套件），它的 Portal 模块，封装了原生 API，可以更方便的实现动态视图，我们下篇见！😎</p>
 
     </div>
 
