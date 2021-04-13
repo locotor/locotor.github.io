@@ -23,15 +23,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="工作以来使用了几年的 Angular，从 Angular 2 Beta 开始，用到了现在的 Angular 11，最近工作变动，下一份工作里大概是会使用其他框架了，正好在此对 Angular 的选型和实践做一个总结。">
+<meta name="description" content="参加工作以来，前端主要使用 Angular 作为开发框架，从 Angular 2 Beta 开始，用到了现在的 Angular 11，最近工作变动，正好在此对 Angular 的使用和搭建做一个回顾。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular 框架选型总结">
+<meta property="og:title" content="Angular 框架使用回顾">
 <meta property="og:url" content="https://blog.locotor.cn/posts/9163de92.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="工作以来使用了几年的 Angular，从 Angular 2 Beta 开始，用到了现在的 Angular 11，最近工作变动，下一份工作里大概是会使用其他框架了，正好在此对 Angular 的选型和实践做一个总结。">
+<meta property="og:description" content="参加工作以来，前端主要使用 Angular 作为开发框架，从 Angular 2 Beta 开始，用到了现在的 Angular 11，最近工作变动，正好在此对 Angular 的使用和搭建做一个回顾。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-08T14:43:58.000Z">
-<meta property="article:modified_time" content="2021-04-09T06:06:35.367Z">
+<meta property="article:modified_time" content="2021-04-13T10:06:26.903Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -51,7 +51,7 @@
 </script>
   <meta name="keywords" content="Angular,技术选型">
 
-<title>Angular 框架选型总结 | locotor's Notes</title>
+<title>Angular 框架使用回顾 | locotor's Notes</title>
   
 
 
@@ -162,7 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#typescript-%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.</span> <span class="nav-text">typescript 约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">函数</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F%E6%83%85%E5%86%B5%E4%B8%8E%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">团队情况与问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">框架搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#typescript-%E7%BA%A6%E6%9D%9F"><span class="nav-number">2.1.</span> <span class="nav-text">typescript 约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E9%9A%94%E7%A6%BB"><span class="nav-number">2.2.</span> <span class="nav-text">模块的隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA"><span class="nav-number">2.3.</span> <span class="nav-text">自动化构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E6%9E%84%E5%BB%BA"><span class="nav-number">2.3.1.</span> <span class="nav-text">表单构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E6%9E%84%E5%BB%BA"><span class="nav-number">2.3.2.</span> <span class="nav-text">网络接口构建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E5%A4%84%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">统一处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E5%A4%9A%E6%80%81"><span class="nav-number">2.5.</span> <span class="nav-text">抽象多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98"><span class="nav-number">3.</span> <span class="nav-text">面临的挑战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -177,7 +177,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -256,7 +256,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Angular 框架选型总结
+          Angular 框架使用回顾
         </h1>
 
         <div class="post-meta-container">
@@ -282,7 +282,7 @@
   
 </div>
 
-            <div class="post-description">工作以来使用了几年的 Angular，从 Angular 2 Beta 开始，用到了现在的 Angular 11，最近工作变动，下一份工作里大概是会使用其他框架了，正好在此对 Angular 的选型和实践做一个总结。</div>
+            <div class="post-description">参加工作以来，前端主要使用 Angular 作为开发框架，从 Angular 2 Beta 开始，用到了现在的 Angular 11，最近工作变动，正好在此对 Angular 的使用和搭建做一个回顾。</div>
         </div>
       </header>
 
@@ -290,48 +290,75 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>在工作经历上，转向前端是 16 年，那时候的前端还是 jQuery 的时代。从 WitPM 项目开始立项后，Team Leader 选型了 Angular 2，这个时候的它还处于 Bate 末期，即将进入 Release。他选择这个框架的理由，应该是考虑到我们是从 C# 后端开发，转换为前端，这个框架的各种特性，相较于 React，对后端的同事更加友好（那时候的 Vue 还在襁褓之中）。</p>
-<p>在之后进入知行公司，使用的框架是 AngularJS，也就是经历重构前的 1 代版本，和 Angular 2 大相径庭，后续的框架升级，也就优先选择了 Angular 2。</p>
-<p>再到了 17 年开始，前端开始进入一个爆发期，大量的培训机构和新人涌入，因为企业的需求极大（老项目更新，新项目技术换代，行业发展），Angular 2+ 因为概念太多，学习曲线陡峭而被国内抛开，Vue 开始大热。我们也很自然的在 “天津市场监管平台” 这个项目中开始使用 Vue 来开发项目。经历整个项目6个月的开发，完成了项目的交付，也在使用中，感到一些局限性，所以在 18 年开始，偏大型，人员复杂的市场监管项目，以及共享交换平台等，又回到了 Angular 框架中。</p>
-<p>这里主要总结一下具体的情况，以及面临的优劣之处，取舍考量。</p>
-<p>在这之前，先介绍一下当时的团队情况。在 17 年我进入知行之后所见，这里的前端开发是比较粗放式的，虽然项目框架搭建得非常精致（陈师兄赛高！），框架方面在当时那个 jQuery 为王的时代，也是难得的使用了 AMD（dojo） 模块化工具，AngularJs 作为视图框架，Webpack 打包。但是在项目开发上，还是有一些问题，具体体现在：</p>
+        <p>转向前端是 16 年，那时候的主流还是 jQuery。从 WitPM 项目开始立项后，Team Leader 选型了 Angular 2，这个时候的它还处于 Bate 末期，即将进入 Release。选择这个框架的理由，是考虑到我们团队都是 .Net 开发，临时分工让我去做前端的工作，这个框架的各种特性，相较于 React，对熟悉强类型面向对象的开发方式的同学更加友好（那时的 Vue 还在襁褓之中）。</p>
+<p>之后进入知行公司，当时公司使用的框架是 AngularJS，也就是经历重构前的 1 代版本，和 Angular 2 大相径庭，后续的框架升级，也就提上了日程。</p>
+<p>17 年开始，前端开始进入一个爆发期，CSS3、ES6、HTML5、 NodeJS 都极大的增加了前端的想象空间。仿佛一夜之间，以 jQuery 和 MVC 为代表的开发模式被弃如敝履。因为企业的需求极大（新技术换代，行业发展），加上技术栈的革新，前端仿佛成了一片蓝海，以易学好就业著称，各个培训机构，以及各行业的同学，都蜂拥而至。而这时候的 Angular 2，因为概念太多，学习曲线陡峭而被国内抛开，轻量级的 Vue 开始大热。</p>
+<p>于是公司也在 17 年进行了技术栈的换代，在 “天津市场监管平台” 这个项目中开始使用 Vue 来开发。经历整个项目6个月的开发，完成了项目的交付，也在使用中，感到一些局限性。  </p>
+<h1 id="团队情况与问题"><a href="#团队情况与问题" class="headerlink" title="团队情况与问题"></a>团队情况与问题</h1><p>公司作为一个承接政务项目开发的国企，在队伍风格和开发方式上，有一套固有模式。主要是由项目经理负责需求、工期和原型，其他成员全部参与开发，按经验程度分配独立模块。通常项目工期非常紧急，甚至会有周二立项，周五演示的情况。</p>
+<p>相对粗放的开发方式，也确实遇到了很多问题和痛点，主要如下：</p>
 <ul>
-<li>缺少开发流程规范：项目开发都是直接向 SVN 主分支提交，大家各自负责独立的某一个业务功能，没有代码审查（每个同事业务开发都饱和），没有相互交流，都是埋头完成自己模块。</li>
-<li>项目耦合度高：因为各自都是在自己的模块完成项目，缺少底层设计，公共资源混乱，有需要谁都可以在各个层级添加公共字段，维护各种状态。存在字段冲突，或者资源重复的问题。</li>
-<li>代码风格混乱：因为缺少审查，各自在独立的模块开发，项目风格上比较混乱，比如几个常见的情况：所有样式都写在 style 属性中、组件功能复杂，几千行代码的组件比比皆是、命名随意(a,b,吃temp1,temp2……)、变量类型混用等等。</li>
-<li>基础资源缺失：公司的项目主要分几个领域，每个领域内多个项目同质化程度很高。但每次同类型的新项目启动，都是直接把老项目复制一份，在那基础上改。冗余大量不需要的代码，谁也不知道某一部分是用来作什么的，干脆都留着。缺少跨项目的基础资源共享。</li>
+<li><p>缺少质量控制流程：项目开发都是直接向 SVN 主分支提交，大家各自负责独立的某一个业务模块，没有分支控制，没有代码审查（每个同学的业务开发任务都十分饱和），没有架构交流，都是埋头完成自己模块。可以想象，项目冗余和结构杂乱一些是必然的。</p>
+</li>
+<li><p>缺少模块隔离控制：每位同学对项目里任意位置和模块，都可以随意的编写或者移除，模块之间的隔离全靠默契和约定。有需要谁都可以在项目各个层级添加字段，维护状态。这就带来了很多潜在的字段/方法冲突，或者一些难以定位的 bug。</p>
+</li>
+<li><p>缺少代码风格统一：因为缺少代码审查和交流，团队协作更像是一个个独立开发者编写独立项目，再把它们链接起来。所以项目风格上比较混乱，不同的模块存在千人千面的情况，这让维护和交接成本很大。</p>
+</li>
+<li><p>缺少基础资源建设：公司的项目主要分几个领域，每个领域内多个项目同质化程度很高。但每次同类型的新项目启动，都是直接把老项目复制一份，在那基础上改。冗余大量不需要的代码，谁也不知道某一部分是用来作什么的，干脆都留着。缺少跨项目的基础资源共享，同类项目的继承方式也加大了混乱程度。</p>
+</li>
 </ul>
-<p>长期积累，每个项目都处于一种杂乱脆弱但又还勉强正常运行的 “危房” 状态。这些问题通过代码审查，规范流程，或者定期重构可以改善和解决，但是外包公司的工期限制，以及人员分配的惯有规则决定了此路不通。在这个模式下，更换框架（AngularJs -&gt; Vue）的全新项目 “天津市场监管平台” 并没有得到好转，Vue 的灵活和轻量，在天津项目中依旧延续了以上问题。主要存在公共状态混乱，组件复杂庞大难以测试维护，模块间耦合度高的问题。</p>
-<p>人员的工作流程上的改进行不通，就只有从项目实施上着手，最后总结下来主要想要解决几个问题：</p>
+<p>长期积累，公司的项目很多处于一种杂乱脆弱但又正常运行的 “危房” 状态。这些问题通过代码审查，规范流程，或者定期重构可以改善和解决，但是公司工程外包的工期限制，以及人员分配的惯有规则决定了此路不通。在这个模式下，用 Vue 搭建的全新项目 “天津市场监管平台” 并没有得到好转，Vue 的灵活和轻量，在天津项目中依旧延续了以上问题。</p>
+<p>工作管理流程上改进行不通，就只有从项目开发和实施上着手，最后总结下来主要想要解决几个问题：</p>
 <ul>
-<li>各个小组的模块之前，尽量完全隔离，任他内部翻江倒海，其他模块都不受影响。</li>
-<li>要使用 Typescript，对类型严格限制，尤其是限制函数，减少潜在的类型错误。</li>
-<li>让组件变轻，拆分业务组件，把UI交互逻辑，和具体的业务逻辑分离，组件本身只保留 UI 所需字段和函数。而具体的业务功能，及其子功能，分到一个个独立的包中，并在不同的组件中共享。</li>
-<li>建立基础模块，维护全局功能和状态，让各小组的模块可以共享，各个具体业务模块暂时先不管，但是基础模块要能够跨项目共享，作为同质型项目的基础，做到完全解耦，完全测试。</li>
+<li><p>模块隔离：各个独立模块之间，做到完全隔离，任它内部翻江倒海，其他模块都不受影响。</p>
+</li>
+<li><p>类型限制：使用 Typescript，对类型严格限制，尤其是限制函数定义，减少潜在的类型错误。</p>
+</li>
+<li><p>视图层分离：拆分业务组件，把 UI 交互逻辑，和具体的业务逻辑分离，组件本身只保留 UI 所需字段和函数。而具体的业务功能，及其子功能，分到一个个独立的服务中。</p>
+</li>
+<li><p>基础资源建设：维护全局功能和状态，让各小组的模块可以共享，各个具体业务模块暂时先不管，但是基础模块要能够跨项目共享，作为同质型项目的基础，做到完全解耦，完全测试。</p>
+</li>
 </ul>
-<p>于是在 18 年开始，公司从江西瑞昌市场监管项目着手，又从新启用 Angular，和天津项目类似，开始重新搭建项目结构。</p>
-<h2 id="typescript-约束"><a href="#typescript-约束" class="headerlink" title="typescript 约束"></a>typescript 约束</h2><p>这是当时选型 Angular 的重要因素，在那时对 TS 支持最完美的就是这个框架，毕竟它本身就是用 TS 构建的，并且特别激进的只允许用 TS 开发。<br>在实际使用中，比较明显的改善在于更好的描述性，边际情况的规避，类型提示的便捷。</p>
-<ul>
-<li>变量声明规范：<br>工作强度一高，”temp1“、”a1“ 这种变量的出现就很常见，尤其是公司每年固定十几个应届生，几乎不经培训，就会直接分到各个项目组。新老成员都在各自的任务里自顾不暇，这些变量写完之后，不到一个月，自己还能不能认识它，就全指望注释了。<br>TS 配置里规定不允许使用 ”any“，限制变量的使用，特别是对于对象类型，通过类型声明，知道它们的所属字段。</li>
-</ul>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol start="2">
-<li><p>模块的隔离</p>
+<h1 id="框架搭建"><a href="#框架搭建" class="headerlink" title="框架搭建"></a>框架搭建</h1><p>于 18 年开始，公司从江西瑞昌市场监管项目着手，又从新启用 Angular。基于天津市场监管业务，重构基础架构。结合上述痛点，这里说一下框架的实施方式。</p>
+<h2 id="typescript-约束"><a href="#typescript-约束" class="headerlink" title="typescript 约束"></a>typescript 约束</h2><p>作为重回 Angular 的重要因素，它对 Typescript 的支持是最完美的，毕竟它本身就是用 TS 构建的，并且特别激进的只允许用 TS 开发。在实际使用中，比较明显的改善在于编辑器代码提示的便捷，以及对代码风格，类型定义的强行限制。</p>
+<p>比如最直观的，Javascript 这门语言很自由，可以定义变量的时候不初始化；或者给一个变量赋值字符串，一会儿又改为数字；或者给一个函数指定不确定数量和类型的参数等等。这些都是 bug 生成之源。Typescript 不允许跨类型赋值、不允许空变量、定义函数需要明确参数类型，可以完善的规避这些问题。</p>
+<p>再比如判空操作，在使用某个变量，或者某个参数时，常常需要判断它是否为空，以免一些特殊情况时，相应功能直接报错，程序健壮性不足（这就是所谓正常运行，但又摇摇欲坠的代码）。Typescript 可以在可能为空的地方报错，倒逼开发者去完善边缘情况。</p>
+<p>除此以外，TS 配置里还可以规定不允许使用 ”any“、可以严格检查 HTML 中绑定值的类型，可以严格检查隐式转换等等。统一全队的 TS 配置，配合 TSLint 插件，可以让每个开发同学 “不自由”，但也切实提高了代码质量和可阅读性。</p>
+<h2 id="模块的隔离"><a href="#模块的隔离" class="headerlink" title="模块的隔离"></a>模块的隔离</h2><p>借助 Angular 模块和多级注入，将项目按照业务拆分为一个个相互独立懒加载模块。每个模块中内聚自己所需的服务，业务组件，指令等资源，并不做任何导出。这些业务模块除了本身，只依赖整个项目的根级注入器(服务)，以及共享模块（组件、指令、管道）。</p>
+<p>这样一来，每个业务模块，其实就是一个完全独立而完整的微应用，和其他的业务模块没有任何关系。只要基础的共享模块保持一致，这些业务模块可以在各个项目中自由的组合拆解。而每个模块的内部，不管定义了多少冗余的状态，或者创建了多少复杂的业务，都不会跟其他的业务模块冲突，或者产生耦合，做到彻底的隔离。</p>
+<p>而跨业务模块的共享模块部分，由我统一进行维护。不只是要构建为跨模块共享，而是更进一步构建为 npm 包，跨项目共享。</p>
+<ol>
+<li>通过 verdaccio 搭建公司的私有 npm 仓库，用于公共资源的共享和版本管理。</li>
+<li>在开发阶段，利用 Angular 的多项目工作区，可以将公共组件作为独立项目和实际业务项目进行协同。</li>
+<li>利用 Storybook 构建组件开发环境，配合 Angular 的组件测试挽具，尽量多的覆盖组件的边缘场景。</li>
+</ol>
+<h2 id="自动化构建"><a href="#自动化构建" class="headerlink" title="自动化构建"></a>自动化构建</h2><h3 id="表单构建"><a href="#表单构建" class="headerlink" title="表单构建"></a>表单构建</h3><p>在政务信息项目中，有个很大的需求即是表单。案件录入、执法记录、投书举报或者流程审判等都需要编写大量的表单。给表单排版布局，做表单验证，做提示报错等，都占用了大量的工作量，而且因为繁琐，常常会存在偷工减料，验证考虑不周的情况。如果再遇上甲方反复修改，那真的是噩梦了。</p>
+<p>在项目中引入了 JSON Schema 来实现表单验证工作，通过它，复用到了三个点：</p>
+<ol>
+<li>基于 JSON Schema 自动构建表单界面，缓解了界面搭建的繁琐劳动。</li>
+<li>自动实现表单验证和提示。</li>
+<li>来源于网络的表单项是不可信任的，所以后端也要执行数据验证，通过 JSON Schema，可以确保和前端界面的验证逻辑一致，并且双发协作，也能使验证文件的编写更加完善。</li>
+</ol>
+<h3 id="网络接口构建"><a href="#网络接口构建" class="headerlink" title="网络接口构建"></a>网络接口构建</h3><p>除了表单以外，对接口也是一大工作板块。和后端的同学交流之后，他们的接口部分引入 swagger，并用 Knife4J 构建接口文档网站。这样一来，除了可以在网站上开文档，试试测试接口以外，swagger 还生成了一个接口描述性质的 JSON 文件。</p>
+<p>有了这个 JSON 文件，就可以读取到所有接口的详细信息，以及具体类型定义。我们通过 Handlebars 创建文件模板，基于接口定义，自动生成接口服务，以及接口对应的请求参数，返回类型定义等，一来减少了这部分代码的编写工作；二来统一了项目中网络请求服务的文件结构；最后也使得前后端类型定义保持一致。</p>
+<h2 id="统一处理"><a href="#统一处理" class="headerlink" title="统一处理"></a>统一处理</h2><p>在项目开发中，除了共享的组件或者服务，还存在很多可以统一处理的地方。例如，对于接口请求的处理，通常需要编写成功和失败的回调函数。但是很多时候工期太紧，或者写得不严谨，或者单纯图省事，都是只写个成功的回调了事。而这一部分是可以通过拦截器去处理的，我们编写了多个处理请求和响应的拦截器，构成拦截器链，统一的处理所有和网络请求有关的操作，而它们作为 Angular 可注入的服务，是可以跨项目共享和全局配置的。</p>
+<p>此外像路由控制也是如此，例如需要确保登陆后才能进入某些路由；或者需要执行某个检查之后，才能退出某个路由等，均可以作为基础资源实现共享。具体项目需要时，只需要简单注入即可立马获得这个功能。</p>
+<h2 id="抽象多态"><a href="#抽象多态" class="headerlink" title="抽象多态"></a>抽象多态</h2><p>公司承接的项目，在很多时候是非常相似的，例如 “两江市场监管” 和 “江西瑞昌市场监管”，或者 “璧山应急监管” 和 “开州应急监管”。但是在具体的实施上每个甲方又有自己独特的思路和需求，使得这些项目之间保持着相似但又略有不同的状态。这就使得对逻辑层的抽象和多态有了需求。</p>
+<p>可以对各个通用的业务逻辑提取抽象类，再利用继承和多态，实现不同的具体业务类。利用 Angular 的依赖注入系统，让调用业务的组件，不依赖具体的实现类，而是依赖它们的父级抽象，实现一致的接口，和复用的业务逻辑。在相似的项目进行搭建时，只需要切换具体的实现类即可。</p>
+<p>除此以外，抽象层也可以实现功能的一致性和简化工作。例如，公司根据甲方需求或者具体的业务情况，在地图选择上，目前有高昂授权费的ArcGIS、轻量级的Leaflet、配图非常方便的 Mapbox、以及三维地图框架 Cesium。对于GIS这个领域，学习资料欠缺，尤其是中文资料。多个地图框架并列，这对开发人员形成了巨大的学习成本。而实际上我们基于地图开发的功能需求是十分类似的，通常就是地图撒点、浮动窗、视角飞到自定位置等等，所以可以对常见的功能需求进行抽象，根据不同的地图框架，开发具体的实现。而对于业务开发的同学来说，地图操作的调用方法是一致的，都是使用统一的抽象类，而具体实现，只是注入的实现类不同而已，可以很大的减少学习和沟通成本。</p>
+<h1 id="面临的挑战"><a href="#面临的挑战" class="headerlink" title="面临的挑战"></a>面临的挑战</h1><p>在使用 Angular 框架中，也面临着几个问题和挑战。</p>
+<ol>
+<li><p>框架生态：Angular 在国内的前端圈，是属于小众的框架，首先面临的就是生态的问题，对于选用 Angular 的开发者，第一担心的就是社区开源的资源不够用，或者因为冷门而失去开发者的长期维护。经过调研和长时间的使用发现，目前的生态是很够用的。中文社区资源比较少，好在有阿里的zorro，以及华为DevUI这两个大公司长期维护的组件库背书，而海外社区则相当活跃，基本需求都可以满足。在海外的热度使得谷歌也是有条不紊的一年两次迭代长期维护着框架的成长</p>
 </li>
-<li><p>依赖多态. </p>
+<li><p>培训成本：这是第二个需要面临的问题，在中文社区的冷门，导致各种教程类的博客偏少，对于新手来说，中文学习资源是比较贫瘠的。所以也是担心新同事进入团队，能否快速学习和掌握，迅速加入开发。好在到目前来看，通过1-3天的官网学习（Typescript+Angular），几乎所有的同学都可以直接参与项目开发，学习曲线的问题，远远不到地图框架的零头，几乎可以忽略。</p>
 </li>
-<li><p>多项目工作区</p>
+<li><p>人才引进：这是目前公司私有化之后影响最大的一部分，在原来国企的时候，每年稳定的招来一批应届同学，学习积极性和能力都很好。在私有化后，公司的光辉消退，在校招的时候，确实存在因为行业和技术栈，让一些同学望而却步的情况。这只能通过招聘的宣讲，以及公司的发展来改善。另外，私以为应届的同学就畏惧新技术的学习，希望通过在学校掌握的技能“一招鲜”，也不是一个好的现象。</p>
 </li>
-<li><p>单元测试</p>
-</li>
-<li><p>响应式编程</p>
-</li>
-<li><p>人员培训</p>
-</li>
-<li><p>生态环境（资源，框架生命周期……）</p>
-</li>
-<li><p>项目进度</p>
+<li><p>框架泛用性：在跨平台开发方面，安卓和 ios 可以通过 ionic 来实现，这方面的效果还不错（ionic 最初只支持 Angular）。但是小程序方面就比较惨了，因为这个有点属于中文社区特色的感觉，这方面几乎是 Vue 的天下。虽然也有 Angular 的小程序框架，但是成熟程度还是不够，所以在需要用到小程序的项目，我们会单独使用 类Vue 的小程序框架，或者原生来编写。</p>
 </li>
 </ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本篇总结了这几年来使用 Angular 的情况，梳理和回忆不周，后续再继续细化填坑。</p>
+<p>总的来说，我们通过 Angular 框架的几个特性（模块，依赖注入，拦截器……），配合 Typescript，对公司开发一些坏习惯进行了限制，对流程进行了优化，简化了部分繁琐的开发，并且提取了通用性的资源，作为基础类库，可以在内网私服中共享和版本迭代。</p>
+<p>在使用中，也考虑到框架生态，培训学习成本，以及人才情况。目前几年来看，这些并未构成问题，只有在类似微信小程序，公众号等情况下，框架力有不及，这也是在选型中需要注意的。毕竟，能解决问题的方案就是好的方案，软件工程没有银弹。</p>
 
     </div>
 
@@ -349,7 +376,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.locotor.cn/posts/9163de92.html" title="Angular 框架选型总结">https://blog.locotor.cn/posts/9163de92.html</a>
+      <a href="https://blog.locotor.cn/posts/9163de92.html" title="Angular 框架使用回顾">https://blog.locotor.cn/posts/9163de92.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -370,6 +397,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/posts/0.html" rel="next" title>
+                   <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
