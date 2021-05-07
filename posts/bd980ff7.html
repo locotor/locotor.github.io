@@ -16,13 +16,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.locotor.cn&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
 <meta name="description" content="日常项目中都会用到拦截器去处理网络请求，这里做一个总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular-网络拦截器的工程实践">
@@ -31,7 +28,7 @@
 <meta property="og:description" content="日常项目中都会用到拦截器去处理网络请求，这里做一个总结。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T16:33:32.000Z">
-<meta property="article:modified_time" content="2021-04-13T10:06:26.903Z">
+<meta property="article:modified_time" content="2021-05-07T13:27:18.083Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -40,58 +37,21 @@
 <link rel="canonical" href="https://blog.locotor.cn/posts/bd980ff7.html">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.locotor.cn&#x2F;posts&#x2F;bd980ff7.html&quot;,&quot;path&quot;:&quot;posts&#x2F;bd980ff7.html&quot;,&quot;title&quot;:&quot;Angular-网络拦截器的工程实践&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Angular-网络拦截器的工程实践 | locotor's Notes</title><script src="/js/config.js"></script>
   <meta name="keywords" content="Angular,拦截器">
 
-<title>Angular-网络拦截器的工程实践 | locotor's Notes</title>
   
 
 
 
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -177,7 +137,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -222,7 +182,7 @@
     </header>
 
     
-  <div class="back-to-top" role="button">
+  <div class="back-to-top" role="button" aria-label="返回顶部">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -304,16 +264,16 @@
 <li><code>HttpHandler</code> 代表下一个拦截器，层层拦截器传递，直到 <code>HttpBackend</code> ，负责将请求通过浏览器的 HTTP API 发到后端服务器。<br>而 <code>HttpHandler</code> 的 <code>handle</code> 方法，最终返回一个 <code>Observable</code>，订阅就可以在请求的各个阶段拿到 <code>HttpEvent</code> 类型的值。例如，上传/下载进度、自定义事件、后端响应等。<br>通过 <code>Observable</code> 的 <code>pipe</code> 方法，就可以对响应做任意的修改。</li>
 </ul>
 <p>要让这个拦截器生效，直接将其注入到根模块即可：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  ...</span><br><span class="line">  providers: [</span><br><span class="line">    &#123; <span class="attr">provide</span>: HTTP_INTERCEPTORS, <span class="attr">useClass</span>: ExampleInjector, <span class="attr">multi</span>: <span class="literal">true</span> &#125;</span><br><span class="line">  ],</span><br><span class="line">  bootstrap: [AppComponent]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">providers</span>: [</span><br><span class="line">    &#123; <span class="attr">provide</span>: HTTP_INTERCEPTORS, <span class="attr">useClass</span>: ExampleInjector, <span class="attr">multi</span>: <span class="literal">true</span> &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">bootstrap</span>: [AppComponent]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
 <p>注意这个 <code>multi</code> 参数，表示可以注入多个拦截器，它们的是典型的链式传递，按这个 <code>providers</code> 数组的顺序，请求按顺序，响应按倒序。</p>
 <p>另外，除了 HttpClient，Vue 和 React 常用的 Axios 库，在功能是类似的，具体实现不同而已，在工程上的是实践情况是一样的。</p>
 <p>在平常的项目中，拦截器的使用主要可以分为三个类型。</p>
 <h2 id="1-修改请求"><a href="#1-修改请求" class="headerlink" title="1. 修改请求"></a>1. 修改请求</h2><p>修改请求是拦截器最常见的情况了，要注意的是，<code>HttpRequest</code> 是只读的，因为一个网络请求对象可能重试多次，所以必须确保每次经过拦截器时，都是原始请求对象。要修改请求对象，可以通过它的 <code>clone</code> 方法，创建一个副本，并传递给下一个拦截器。</p>
 <h3 id="修改-URL"><a href="#修改-URL" class="headerlink" title="修改 URL"></a>修改 URL</h3><p>例如，咱们想从 HTTP 变为 HTTPS。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 克隆请求，同时使用 https:// 替换 http://</span></span><br><span class="line"><span class="keyword">const</span> reqClone = req.clone(&#123;</span><br><span class="line">    url: req.url.replace(<span class="string">&#x27;http://&#x27;</span>, <span class="string">&#x27;https://&#x27;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">return</span> next.handler(reqClone)</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 克隆请求，同时使用 https:// 替换 http://</span></span><br><span class="line"><span class="keyword">const</span> reqClone = req.clone(&#123;</span><br><span class="line">    <span class="attr">url</span>: req.url.replace(<span class="string">&#x27;http://&#x27;</span>, <span class="string">&#x27;https://&#x27;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">return</span> next.handler(reqClone)</span><br></pre></td></tr></table></figure>
 
 <p>或者给添加服务器端的 IP 和端口，负责给 API 统一加前缀。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">req.clone(&#123;</span><br><span class="line">    url: environment.serverUrl + request.url</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">req.clone(&#123;</span><br><span class="line">    <span class="attr">url</span>: environment.serverUrl + request.url</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>不过，通常情况下，可以用更好去解决，例如 HTTPS 可以通过 <code>ng serve -ssl</code> 来实现。而请求路径的需求，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://angular.cn/guide/build#proxying-to-a-backend-server">配置 CLI 自带的 Webpack 开发服务器</a>更合适，除了重写路径，它还可以支持细致化的配置代理，解决跨域。</p>
 <h3 id="设置-Header"><a href="#设置-Header" class="headerlink" title="设置 Header"></a>设置 Header</h3><p>相比修改 URL 或者 请求 Body，修改请求的 Header 就常见了很多。例如上篇介绍了如何使用 JWT 来进行登录验证，在前端发起请求时，Header 中就需要携带这个 JWT。</p>
@@ -322,7 +282,7 @@
 
 <h2 id="2-统一处理"><a href="#2-统一处理" class="headerlink" title="2. 统一处理"></a>2. 统一处理</h2><p>相比在每次请求的时候显式的去处理一些任务，通过拦截器统一的隐式处理就好了很多。例如错误处理，相信大家平常也不爱在每次请求返回 Promise/Observable 后，在 then/subscribe 中，除了配置成功的回调，还要写错误处理吧。这样既麻烦，重复劳动多，还容易出错。</p>
 <h3 id="日志记录"><a href="#日志记录" class="headerlink" title="日志记录"></a>日志记录</h3><p>拦截器能够同时获取到请求和响应，很适合记录 HTTP 请求的完整生命周期日志。例如，捕获请求和响应时间，记录经过的时间结果。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> started = <span class="built_in">Date</span>.now()</span><br><span class="line"><span class="keyword">let</span> ok: <span class="built_in">string</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> next.handle(req).pipe(</span><br><span class="line">    tap(</span><br><span class="line">        (event: HttpEvent&lt;<span class="built_in">any</span>&gt;) =&gt; ok = event <span class="keyword">instanceof</span> HttpResponse ? <span class="string">&#x27;succeeded&#x27;</span> : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        (error: HttpEventResponse) =&gt; ok = <span class="string">&#x27;failed&#x27;</span></span><br><span class="line">    ),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 响应结束的时候记日志</span></span><br><span class="line">    finalize(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> elapsed = <span class="built_in">Date</span>.now() - started;</span><br><span class="line">        <span class="keyword">const</span> msg = <span class="string">`<span class="subst">$&#123;req.method&#125;</span> &quot;<span class="subst">$&#123;req.urlWithParams&#125;</span>&quot; <span class="subst">$&#123;ok&#125;</span> in <span class="subst">$&#123;elapsed&#125;</span> ms.`</span></span><br><span class="line">        <span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> started = <span class="built_in">Date</span>.now()</span><br><span class="line"><span class="keyword">let</span> ok: <span class="built_in">string</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> next.handle(req).pipe(</span><br><span class="line">    tap(</span><br><span class="line">        <span class="function">(<span class="params">event: HttpEvent&lt;<span class="built_in">any</span>&gt;</span>) =&gt;</span> ok = event <span class="keyword">instanceof</span> HttpResponse ? <span class="string">&#x27;succeeded&#x27;</span> : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="function">(<span class="params">error: HttpEventResponse</span>) =&gt;</span> ok = <span class="string">&#x27;failed&#x27;</span></span><br><span class="line">    ),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 响应结束的时候记日志</span></span><br><span class="line">    finalize(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> elapsed = <span class="built_in">Date</span>.now() - started;</span><br><span class="line">        <span class="keyword">const</span> msg = <span class="string">`<span class="subst">$&#123;req.method&#125;</span> &quot;<span class="subst">$&#123;req.urlWithParams&#125;</span>&quot; <span class="subst">$&#123;ok&#125;</span> in <span class="subst">$&#123;elapsed&#125;</span> ms.`</span></span><br><span class="line">        <span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>在响应返回后，如果出现网络错误，应该根据 HTTP 的状态码，做对应处理。</p>
 <p>先配置各种 HTTP 状态的提示信息：</p>
@@ -345,12 +305,12 @@
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">intercept</span>(<span class="params">req: HttpRequest&lt;<span class="built_in">any</span>&gt;, next: HttpHandler</span>)</span>&#123;</span><br><span class="line">    loaderService.show()</span><br><span class="line">    <span class="keyword">return</span> next.handle(req).pipe(</span><br><span class="line">        finalize(<span class="function">() =&gt;</span> loaderService.hide())</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在负责全局加载动画的组件中，同样注入 <code>loaderService</code>，将 <code>isGlobalLoading$</code> 赋值给动画的绑定属性，并借助 <code>async</code> 管道，实现动画的显隐切换。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">&#x27;app-loader&#x27;</span>,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div *ngIf=&quot;isLoading | async&quot; class=&quot;overlay&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;mat-progress-spinner mode=&quot;indeterminate&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;/mat-progress-spinner&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">LoaderComponent</span> </span>&#123;</span><br><span class="line">  isLoading: Subject&lt;<span class="built_in">boolean</span>&gt; = <span class="built_in">this</span>.loaderService.isLoading;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">private</span> loaderService: LoaderService</span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  <span class="attr">selector</span>: <span class="string">&#x27;app-loader&#x27;</span>,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div *ngIf=&quot;isLoading | async&quot; class=&quot;overlay&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;mat-progress-spinner mode=&quot;indeterminate&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;/mat-progress-spinner&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">LoaderComponent</span> </span>&#123;</span><br><span class="line">  <span class="attr">isLoading</span>: Subject&lt;<span class="built_in">boolean</span>&gt; = <span class="built_in">this</span>.loaderService.isLoading;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">private</span> loaderService: LoaderService</span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-响应处理"><a href="#3-响应处理" class="headerlink" title="3. 响应处理"></a>3. 响应处理</h2><p>就像前面提到的，对响应对象的 data 进行提取，简化请求回调的调用（避免这样的调用：<code>httpResponse.data.data.something</code>），除此以外，可以在拦截器中做模拟接口、格式处理，缓存数据等。</p>
 <h3 id="模拟响应"><a href="#模拟响应" class="headerlink" title="模拟响应"></a>模拟响应</h3><p>前后端分离开发的情况下，常常后端接口还未准备好，不过只需要在开发过程中模拟接口数据，跟网络请求相关的开发，如加载动画，接口服务，响应回调等，都可以顺利执行。</p>
 <p>正如前面介绍的，过滤器是通过 <code>next.handle(req)</code> 来层层传递请求的。所以如果在模拟响应的拦截器中，停止调用这个方法，并返回包含模拟数据的 Observable 对象即可。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> mockApiList = <span class="keyword">new</span> <span class="built_in">Map</span>&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;([</span><br><span class="line">    [<span class="string">&#x27;/example/getData&#x27;</span>, &#123;</span><br><span class="line">        code: <span class="string">&#x27;20000&#x27;</span>,</span><br><span class="line">        data: &#123; <span class="attr">example</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    &#125;]</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">intercept</span>(<span class="params">req: HttpRequest&lt;<span class="built_in">any</span>&gt;, next: HttpHandler</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">this</span>.mockApiList.has(req.url)&#123;</span><br><span class="line">        <span class="comment">// 若匹配需要模拟的接口路径，则返回模拟数据</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">of</span>(<span class="built_in">this</span>.mockApiList.get(req.url)); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 其他请求正常传递给下一个拦截器</span></span><br><span class="line">        <span class="keyword">return</span> next.handle(req);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> mockApiList = <span class="keyword">new</span> <span class="built_in">Map</span>&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;([</span><br><span class="line">    [<span class="string">&#x27;/example/getData&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">code</span>: <span class="string">&#x27;20000&#x27;</span>,</span><br><span class="line">        <span class="attr">data</span>: &#123; <span class="attr">example</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    &#125;]</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">intercept</span>(<span class="params">req: HttpRequest&lt;<span class="built_in">any</span>&gt;, next: HttpHandler</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">this</span>.mockApiList.has(req.url)&#123;</span><br><span class="line">        <span class="comment">// 若匹配需要模拟的接口路径，则返回模拟数据</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">of</span>(<span class="built_in">this</span>.mockApiList.get(req.url)); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 其他请求正常传递给下一个拦截器</span></span><br><span class="line">        <span class="keyword">return</span> next.handle(req);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>为了和缓存，或者数据过滤等过滤器协同，模拟响应的过滤器要放在 Providers 的最后。</p>
 <p>发散一下，我们可以维护一个服务，如 <code>mockApiList</code>一样，配置需要模拟的接口地址和模拟数据，正常请求其他没有配置的接口路径。正如 <code>Delon/Mock</code> 库所做的，变成一个通用性的模拟接口库。</p>
@@ -414,29 +374,7 @@
 
 
 
-
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
+<script src="/js/comments.js"></script>
 </div>
   </main>
 
