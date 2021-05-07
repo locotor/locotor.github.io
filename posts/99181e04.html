@@ -20,26 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.locotor.cn&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="玻璃晴朗，橘子辉煌。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="locotor&#39;s Notes">
-<meta property="og:url" content="https://blog.locotor.cn/categories/Spring/index.html">
+<meta name="description" content="本篇先作为索引，列出公司所用的技术栈和相关资源，方便新同学快速上手。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="比特数图前端新人技术手册（一）">
+<meta property="og:url" content="https://blog.locotor.cn/posts/99181e04.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="玻璃晴朗，橘子辉煌。">
+<meta property="og:description" content="本篇先作为索引，列出公司所用的技术栈和相关资源，方便新同学快速上手。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-07T20:30:00.000Z">
+<meta property="article:modified_time" content="2021-05-07T14:08:08.251Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.locotor.cn/categories/Spring/">
+<link rel="canonical" href="https://blog.locotor.cn/posts/99181e04.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;categories&#x2F;Spring&#x2F;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.locotor.cn&#x2F;posts&#x2F;99181e04.html&quot;,&quot;path&quot;:&quot;posts&#x2F;99181e04.html&quot;,&quot;title&quot;:&quot;比特数图前端新人技术手册（一）&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>分类: Spring | locotor's Notes</title><script src="/js/config.js"></script>
+<title>比特数图前端新人技术手册（一） | locotor's Notes</title><script src="/js/config.js"></script>
   
 
 
@@ -105,7 +107,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -118,6 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">前端基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">开发语言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">地图框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -187,66 +190,119 @@
 </noscript>
 
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h2 class="collection-header">Spring
-          <small>分类</small>
-        </h2>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/99181e04.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="张晋祥">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="locotor's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          比特数图前端新人技术手册（一）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-07 20:30:00" itemprop="dateCreated datePublished" datetime="2021-05-07T20:30:00+00:00">2021-05-07</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本篇先作为索引，列出公司所用的技术栈和相关资源，方便新同学快速上手。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前端基础"><a href="#前端基础" class="headerlink" title="前端基础"></a>前端基础</h2><p>首当其冲的就是前端基础开发工具，包括开发语言、开发框架、样式语言等。</p>
+<h3 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h3><p>公司所有的项目，都使用了 TypeScript 进行开发。顾名思义，它就是 Type（类型）+ JavaScript，也就是在 JavaScript 的基础上，添加了额外的静态类型检查。<br>虽然刚开始使用它的时候，会感觉带上了枷锁跳舞，但是有了它的帮助，可以避免开发过程中绝大多数的类型错误。</p>
+<p>要学习 TS，看它的官网是最快的途径。需要注意的是，不要去看 “<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.tslang.cn/">TypeScript 中文网</a>”，它是爱好者自制的，大量的机翻，会让你困惑不已。<br>并且，它已经很早就停止了更新，一直停留在了 3.1 版本。而真正的 “<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.typescriptlang.org/">微软官方网站</a>“，它是全英文的，后续可能会有中文，不过建议<br>依旧以英文版为主。不要被吓到，这才只是英文文档的开始，后面还有海量的英文文档（学好英语，别用机翻）。</p>
+<p>作为入门，只需要看4个部分：</p>
+<ol>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">快速开始</a>：需要注意的是，这个快速开始很贴心的按不同的学习者分类设计了文档（ 初学者、JS开发者、Java/C#开发者、函数式编程开发者），可以在左边导航栏选择，相信对于大多数同学来说，看 JS开发者篇即可。</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html">工具快速了解</a>: 带你安装必要的 npm 依赖包和命令行工具，可以在这一步跟着教程，初步的体验这个开发语言。</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.typescriptlang.org/docs/handbook/2/basic-types.html">基础概念</a>: 可以快速的了解这门语言的所有基本概念，看完这一篇，你就可以说熟悉了这个语言的特点了。</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">常用类型</a>：最后一篇，会带你学完所有日常中最常用到的类型，涵盖了你入职开发工作中，所有可能遇到的类型。</li>
+</ol>
+<p>看吧，一点都不多，如果英语好的同学，不到2小时就可以看完了，之后，这个语言就不会是你开发路上的拦路虎了。</p>
+<p>对于好奇心旺盛的同学，可能跳着看这么少一点，会让他觉得不安，那么这里也介绍一下官方文档中的其他部分，以及为何跳过：</p>
+<ol>
+<li>class：因为在我们的开发中，框架会限定对 class 的使用，并且也不推荐在组件中使用类继承。用到最多的是公共服务类的开发，这不算是新人的初始工作。</li>
+<li>符合类型或者高级类型：这在实际开发中遇到的情况不多，也容易加大新人的学习压力，初期的学习，当然以减轻学习曲线为主。</li>
+<li>类型定义：新同学通常作为类型的消费者，而不是开发者，并不需要在初期学习庞杂的类型和模块定义系统。</li>
+</ol>
+<p>可以看到，略过的部分，并非不看，而是初期用不上。从实用角度来说，应该减少初期学习压力，在后续熟悉开发之后，再回过头继续精进。</p>
+<h2 id="地图框架"><a href="#地图框架" class="headerlink" title="地图框架"></a>地图框架</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>后面两篇再列出其他技术栈的对比情况，方便同学复用之前的经验，思想都是共通的，而思想才是你真正的武器。祝大家，变得更强！😎</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated" datetime="2021-03-01T15:54:09+00:00" content="2021-03-01">
-          03-01
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/68e9fd0.html" itemprop="url">
-            <span itemprop="name">用 @AuthenticationPrincipal 注解快捷获取当前用户</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          
 
-      
-    </header>
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>张晋祥
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.locotor.cn/posts/99181e04.html" title="比特数图前端新人技术手册（一）">https://blog.locotor.cn/posts/99181e04.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/9163de92.html" rel="prev" title="Angular 框架使用回顾">
+                  <i class="fa fa-chevron-left"></i> Angular 框架使用回顾
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated" datetime="2021-02-05T11:41:01+00:00" content="2021-02-05">
-          02-05
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/7c744710.html" itemprop="url">
-            <span itemprop="name">Spring Security 构建基于 JWT 的登录认证</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-    </div>
-  </div>
-  
-  
-  
+
 <script src="/js/comments.js"></script>
 </div>
   </main>

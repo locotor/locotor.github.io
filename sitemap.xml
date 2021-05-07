@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.locotor.cn/tags/index.html</loc>
+    
+    <lastmod>2021-05-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.locotor.cn/posts/25b551dd.html</loc>
     
     <lastmod>2021-05-07</lastmod>
@@ -93,6 +100,13 @@
   </url>
   
   <url>
+    <loc>https://blog.locotor.cn/posts/99181e04.html</loc>
+    
+    <lastmod>2021-05-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.locotor.cn/posts/68e9fd0.html</loc>
     
     <lastmod>2021-05-07</lastmod>
@@ -101,13 +115,6 @@
   
   <url>
     <loc>https://blog.locotor.cn/categories/index.html</loc>
-    
-    <lastmod>2021-05-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.locotor.cn/tags/index.html</loc>
     
     <lastmod>2021-05-07</lastmod>
     
