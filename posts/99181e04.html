@@ -28,7 +28,7 @@
 <meta property="og:description" content="本篇先作为索引，列出公司所用的技术栈和相关资源，方便新同学快速上手。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-07T20:30:00.000Z">
-<meta property="article:modified_time" content="2021-05-07T14:08:08.251Z">
+<meta property="article:modified_time" content="2021-05-08T04:44:18.221Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
 <meta name="twitter:card" content="summary">
@@ -120,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">前端基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">开发语言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">地图框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">前端基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">开发语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">开发框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7"><span class="nav-number">1.3.</span> <span class="nav-text">其他工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">地图框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MapboxGL"><span class="nav-number">2.1.</span> <span class="nav-text">MapboxGL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cesium"><span class="nav-number">2.2.</span> <span class="nav-text">Cesium</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -253,11 +253,37 @@
 <p>对于好奇心旺盛的同学，可能跳着看这么少一点，会让他觉得不安，那么这里也介绍一下官方文档中的其他部分，以及为何跳过：</p>
 <ol>
 <li>class：因为在我们的开发中，框架会限定对 class 的使用，并且也不推荐在组件中使用类继承。用到最多的是公共服务类的开发，这不算是新人的初始工作。</li>
-<li>符合类型或者高级类型：这在实际开发中遇到的情况不多，也容易加大新人的学习压力，初期的学习，当然以减轻学习曲线为主。</li>
-<li>类型定义：新同学通常作为类型的消费者，而不是开发者，并不需要在初期学习庞杂的类型和模块定义系统。</li>
+<li>复合类型或者高级类型：这在实际开发中遇到的情况不多，也容易加大新人的学习压力，初期的学习，当然以减轻学习曲线为主。</li>
+<li>模块类型定义：新同学通常作为类型的消费者，而不是开发者，并不需要在初期学习庞杂的类型和模块定义系统。</li>
 </ol>
 <p>可以看到，略过的部分，并非不看，而是初期用不上。从实用角度来说，应该减少初期学习压力，在后续熟悉开发之后，再回过头继续精进。</p>
-<h2 id="地图框架"><a href="#地图框架" class="headerlink" title="地图框架"></a>地图框架</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>后面两篇再列出其他技术栈的对比情况，方便同学复用之前的经验，思想都是共通的，而思想才是你真正的武器。祝大家，变得更强！😎</p>
+<h3 id="开发框架"><a href="#开发框架" class="headerlink" title="开发框架"></a>开发框架</h3><p>公司的主力前端框架是 Angular，相比其他两个（Vue 和 React）这个框架非常大而全，其他两个框架主要负责视图部分，其他的开发所需功能（路由、状态管理、脚手架工具、动画、测试、网络请求等等）都依赖社区开源包。而 ng 都是整套自带的，所以刚开始上手可能会有些无所适从。</p>
+<p>不过大而全的框架的好处就是设计思想非常完整和统一，也不用在多个开源方案选型之间反复纠结，通过掌握它，相信你也会对前端的工程化有更好的认识。</p>
+<p>Angular 的 “<a target="_blank" rel="external nofollow noopener noreferrer" href="https://angular.cn/">中文网”</a> 确实是官方维护的，进度也与英文版本同步，所以可以放心浏览。因为内容庞大，所以部分也是机翻，好在它提供了中英文对照功能，只需要点击中文段落，对应的英文内容就会出现。</p>
+<p>作为入门，只需要看4个部分：</p>
+<ol>
+<li><p>快速上手：按照它的步骤，跟着一步步完成第一个 Angular app 的创建。相信看完这里，对于怎么使用官方的脚手架，已经用框架进行基础开发就已经有了概念了。</p>
+</li>
+<li><p>主要概念：组件、模板、指令、依赖注入是这个框架的四个主要概念，这里需要细读一下，通过这一章，可以让你了解如何使用 ng 实现组件化、生命周期、组件传值、模板绑定语法、业务注入等和其他框架同样重要的概念。<br>需要注意的是，这一章很多地方讲解过于深入，不利于初学者上手，建议跳过以下部分：</p>
+<ul>
+<li>组件章节：动态组件（深入概念，后续精进可以看我其他文章）、Angular 元素（概念性知识，不影响初期开发）；</li>
+<li>模板章节：管道（使用不多，可以用函数代替，不用初期学习）、输入输出（和组件章节重复）、模板中的SVG（项目中不常用到）；</li>
+<li>指令章节：结构型指令（最常用的是内置的结构型指令，初期开发不会自定义结构型指令）；</li>
+<li>依赖注入章节：这是 ng 比较独特的特性，初期不用看多级注入。</li>
+</ul>
+</li>
+<li><p>内置特性：前面看了 ng 的视图库部分，它们和 vue、react 没有本质区别。这章主要看看它内置的其他库，只需要看 HTTP客户端（类似 axios）、表单（有简单的模板驱动表单和细致控制的响应式表单）、路由</p>
+</li>
+<li><p>参考手册：只需要看 Observables&amp;RxJS 部分，因为 Observable 是 Angular 的基本异步和数据源方案，所以需要通过这一章了解它的基本使用。</p>
+</li>
+</ol>
+<p>看起来这会比其他框架要学的内容多一些，其实你等于是看了 vue + vue-router + axios + vuex 等，学习总量是类似的，Angular 框架的就是谷歌提供了整套解决方案。</p>
+<h3 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h3><p>除了基本的语言和前端框架，开发中还需要用到其他的一些工具：</p>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ng.ant.design/docs/introduce/zh">zorro 组件库</a>：这是阿里巴巴开发的一套成熟的基础组件库。几乎可以涵盖日常开发的所有基础组件，不需要通看浏览，在实际开发里，根据需求去查找是否有这个组件，然后再按照示例去使用即可。</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.sass.hk/">scss</a>: 常用的增强样式语法，可以简化 css 的开发，减少出错。不用通看，只需要了解嵌套、变量、Mixin、对象、以及各种内置的方法即可</li>
+</ul>
+<h2 id="地图框架"><a href="#地图框架" class="headerlink" title="地图框架"></a>地图框架</h2><h3 id="MapboxGL"><a href="#MapboxGL" class="headerlink" title="MapboxGL"></a>MapboxGL</h3><h3 id="Cesium"><a href="#Cesium" class="headerlink" title="Cesium"></a>Cesium</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>后面两篇再列出其他框架的对比情况，方便同学快速复用之前的经验。思想都是共通的，而思想才是你真正的武装。祝大家，变得更强！😎</p>
 
     </div>
 
