@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.locotor.cn&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="前端相关接入 apm（公司产品 Slardar）：性能监控，报警。通常使用 CDN 的形式接入SDK，避免关注版本更新。 打点、日志规范查看日志 自定义日志记录  单点追查">
+<meta name="description" content="加入懂车帝团队2个月了，之前很少接触 toC 的互联网项目，所以对开发到上线的流程还是有些陌生和茫然的，加之陌生的技术栈，带来了不小的熟悉成本，这里记录一下开发历程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目质量流程提升">
-<meta property="og:url" content="https://blog.locotor.cn/posts/22316b13.html">
+<meta property="og:title" content="懂车帝PC站从上手到上线">
+<meta property="og:url" content="https://blog.locotor.cn/posts/c8a6e87c.html">
 <meta property="og:site_name" content="locotor&#39;s Notes">
-<meta property="og:description" content="前端相关接入 apm（公司产品 Slardar）：性能监控，报警。通常使用 CDN 的形式接入SDK，避免关注版本更新。 打点、日志规范查看日志 自定义日志记录  单点追查">
+<meta property="og:description" content="加入懂车帝团队2个月了，之前很少接触 toC 的互联网项目，所以对开发到上线的流程还是有些陌生和茫然的，加之陌生的技术栈，带来了不小的熟悉成本，这里记录一下开发历程">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-23T11:06:42.000Z">
-<meta property="article:modified_time" content="2021-06-28T13:00:40.219Z">
+<meta property="article:published_time" content="2021-06-29T16:06:27.000Z">
+<meta property="article:modified_time" content="2021-06-30T15:41:39.287Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Hexo,GIS,Cesium,Angular,Vue,Spring,NodeJs">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.locotor.cn/posts/22316b13.html">
+<link rel="canonical" href="https://blog.locotor.cn/posts/c8a6e87c.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.locotor.cn&#x2F;posts&#x2F;22316b13.html&quot;,&quot;path&quot;:&quot;posts&#x2F;22316b13.html&quot;,&quot;title&quot;:&quot;项目质量流程提升&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.locotor.cn&#x2F;posts&#x2F;c8a6e87c.html&quot;,&quot;path&quot;:&quot;posts&#x2F;c8a6e87c.html&quot;,&quot;title&quot;:&quot;懂车帝PC站从上手到上线&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>项目质量流程提升 | locotor's Notes</title><script src="/js/config.js"></script>
+<title>懂车帝PC站从上手到上线 | locotor's Notes</title><script src="/js/config.js"></script>
   
 
 
@@ -120,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3"><span class="nav-number">1.</span> <span class="nav-text">前端相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E7%82%B9%E3%80%81%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83"><span class="nav-number">1.1.</span> <span class="nav-text">打点、日志规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97"><span class="nav-number">1.2.</span> <span class="nav-text">查看日志</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%86%9F%E6%82%89%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">熟悉开发工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">了解项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E5%BC%80%E5%8F%91%E7%BA%A6%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">了解开发约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%8A%9F%E8%83%BD%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">新建功能页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%9F%8B%E7%82%B9"><span class="nav-number">5.</span> <span class="nav-text">开发埋点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="nav-number">6.</span> <span class="nav-text">发布测试环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E8%AF%84%E5%AE%A1-amp-%E5%8A%9F%E8%83%BD%E6%8F%90%E6%B5%8B"><span class="nav-number">7.</span> <span class="nav-text">需求评审&amp;功能提测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E7%BA%BF%E5%8A%9F%E8%83%BD"><span class="nav-number">8.</span> <span class="nav-text">上线功能</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -201,7 +201,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/22316b13.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.locotor.cn/posts/c8a6e87c.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -214,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          项目质量流程提升
+          懂车帝PC站从上手到上线
         </h1>
 
         <div class="post-meta-container">
@@ -225,12 +225,13 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-05-23 11:06:42" itemprop="dateCreated datePublished" datetime="2021-05-23T11:06:42+00:00">2021-05-23</time>
+      <time title="创建时间：2021-06-29 16:06:27" itemprop="dateCreated datePublished" datetime="2021-06-29T16:06:27+00:00">2021-06-29</time>
     </span>
 
   
 </div>
 
+            <div class="post-description">加入懂车帝团队2个月了，之前很少接触 toC 的互联网项目，所以对开发到上线的流程还是有些陌生和茫然的，加之陌生的技术栈，带来了不小的熟悉成本，这里记录一下开发历程</div>
         </div>
       </header>
 
@@ -238,18 +239,72 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="前端相关"><a href="#前端相关" class="headerlink" title="前端相关"></a>前端相关</h1><p>接入 apm（公司产品 Slardar）：性能监控，报警。通常使用 CDN 的形式接入SDK，避免关注版本更新。</p>
-<h2 id="打点、日志规范"><a href="#打点、日志规范" class="headerlink" title="打点、日志规范"></a>打点、日志规范</h2><h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><ul>
-<li><p>自定义日志记录</p>
+        <h2 id="熟悉开发工具"><a href="#熟悉开发工具" class="headerlink" title="熟悉开发工具"></a>熟悉开发工具</h2><p>PC站项目需要更快的用户相应速度，和对SEO的良好支持，采用了 React SSR 方案，框架采用 Next.js + Koa + typescript 来实现。</p>
+<p>在开发工具的知识准备上，需要熟悉：</p>
+<ul>
+<li>React：项目主要采用 hooks api，只有少量的旧版代码存在一些 class component；</li>
+<li>Next.js: 主要用到了服务端渲染，路由，组件的数据获取等；</li>
+<li>typescript：加入了静态类型检测；</li>
+<li>tailwindcss：简化样式编写，因为PC站要针对几个特定分辨率节点做响应式的布局，它可以帮助简化工作；</li>
+</ul>
+<h2 id="了解项目结构"><a href="#了解项目结构" class="headerlink" title="了解项目结构"></a>了解项目结构</h2><p>打开一个陌生的前端项目，个人偏好从配置文件开始，可以看到配置了哪些功能和依赖，会比较容易弄清项目的结构。</p>
+<ul>
+<li><p>package.json：首先从 package.json 开始，抛开庞杂的依赖配置，从 scripts 中可以看到，dev:XXX 开头的，都是开发状态的本地服务运行，冒号后面的是各种常用 ppe 环境参数。查看这些 dev 的脚本可以看到，都使用了 nodemon 自动检测目录中的文件更改，并通过重新启动应用程序来实时更新。<br>nodemon 的具体配置在下方 nodemonConfig 中，里面配置了监听路径，以及执行命令行。从命令行中也可以看到服务器端的 ts 配置文件，以及路由IP、TCE_PSM。<br>而通过 scripts 中的其他几个脚本可以看到，项目配置了 ts 类型检查，eslint 语法检查，prettier 格式化代码。并且配置 husky 工具，在 Git 提交时自动执行脚本，确保代码符合规范，并保持风格统一，防止因为代码格式化不一致，导致大量的 Git diff。</p>
 </li>
-<li><p>单点追查</p>
+<li><p>tsconfig：因为使用 Typescript 作为开发语言，所以根目录存在 tsconfig.json 和 tsconfig.server.json 两个配置文件，分别对应本地和服务器端配置。服务器端的 ts-node 配置继承自 tsconfig.json，只是在这基础上针对服务端node环境覆盖部分配置。<br>需要注意的是，这里配置了各个路径的别名（否则编辑器会报错）。通过它们，既可以清楚地定位项目中核心的几个文件夹是哪些了。</p>
+</li>
+<li><p>tailwind.config.js：在这里可以自定义项目中用到的 tailwind 样式，例如配置了前缀为 “tw”，以及各种用到的距离，颜色，响应式临界值等，在实际开发中有需要可以在这里继续添加配置。</p>
+</li>
+<li><p>next.config.js：最后是 Next.js 框架的配置文件。里面第一个配置 <code>useFileSystemPublicRoutes:false</code> 就是禁用了服务端的文件路由，因为项目集成了 Koa 来处理服务的功能，具体详情可以参见另一篇 “Next.js-Koa-构建服务端渲染应用”。此外就是一些 webpack 的配置项（loader，路径别名，插件，腻子脚本）了</p>
 </li>
 </ul>
-<!-- ## 报警规范 -->
+<p>除了这些，还有一些如 prettier，eslint 的配置，主要是为了团队的代码规范，风格统一，就不一一列举了。<br>通过这些配置文件，可以看到项目的一个大体脉络。</p>
+<ol>
+<li>项目使用 typescript 作为开发语言，集成 koa 服务器框架，在 node 环境执行服务端渲染页面。</li>
+<li>提交 git 会触发代码检查和自动格式化，如果检查不通过，会阻止提交。</li>
+<li>业务代码集中在 pages-components(旧版)和 new（新版）中，通用资源在 libs 和 components 中。以及其他的 static（静态资源）、constant（常量）、style（样式）。</li>
+</ol>
+<h2 id="了解开发约定"><a href="#了解开发约定" class="headerlink" title="了解开发约定"></a>了解开发约定</h2><p>随着项目的迭代和测试，有了一些常用的约定，可能不会在需求中明确说明，但是会在每次测试的时候重点检查，收录如下：</p>
+<ul>
+<li>卡片的点击跳转：卡片的点击跳转为全区域可用，所以通常卡片会用 a 标签包裹。此外，要注意卡片中的按钮点击，要阻止事件默认行为（光阻止冒泡不够），以免受卡片链接影响发生跳转。也要防止埋点的时候触发了卡片本身和卡片内按钮的点击上报。</li>
+<li>两倍图，图片兜底图：全站使用的图片都要使用两倍图，并且需要在图片加载失败或者加载时使用兜底图，这个可以使用统一的组件：Components/view-image。只需要传参 “autoPixelRatio” 即可自动两倍图。传参 cusDefaultImg 即可实现默认兜底图。</li>
+<li>作者v标：所有作者头像显示的地方，都要有v标显示，这个可以使用 Components/author/author-avatar 组件，传递 userVerified（是否加v） 和 verifyType（蓝v、黄v……） 参数。</li>
+<li>封面图 hover 放大：同样是使用 Components/view-image 组件，并传参：hoverTransition。</li>
+<li>字段过长省略处理：有全局的 class 类名（line-1、line-2……），在限制元素宽度下，就会生效。</li>
+<li>滚动条：带滚动条的元素，是在鼠标 hover 到元素内后才显示，可以使用全局类名 g-cus-scroll-bar。</li>
+<li>跳转：PC 站的跳转是左侧导航区点击，则当前页面切换新页面，而在页面中的链接，都是打开新页面，这是为搭建更符合 pc 端用户习惯的路径，降低页面跳出率。</li>
+</ul>
+<p>可能还未能覆盖所有的约定，后续再持续更新。</p>
+<h2 id="新建功能页面"><a href="#新建功能页面" class="headerlink" title="新建功能页面"></a>新建功能页面</h2><p>在开发新的模块时需要做以下步骤：</p>
+<ol>
+<li><p>在 new 文件夹中创建页面组件，并在 pages 文件夹中创建一个组件来引入并导出它；</p>
+</li>
+<li><p>在 server/pages/index.ts 文件中，去修改路由匹配。如果是旧版独有的模块，只需要创建路径匹配即可，例如：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">`<span class="subst">$&#123;prefixer&#125;</span>/some-new-page`</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">    ctx.handleMethod = <span class="string">&#x27;some-new-page&#x27;</span></span><br><span class="line">    <span class="keyword">await</span> renderAndCache(app, ctx, <span class="string">&#x27;/XXX/some-new-page&#x27;</span>, ctx.params)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果是新旧共存的页面，需要根据 req?._isNewVersion 来判断，并分配到不同的路径：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">`<span class="subst">$&#123;prefixer&#125;</span>/some-new-page`</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> req = ctx.req <span class="keyword">as</span> RequestCustom</span><br><span class="line">    <span class="keyword">const</span> id = req?._isNewVersion ? <span class="string">&#x27;new_page&#x27;</span> : <span class="string">&#x27;old_page&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> path = req?._isNewVersion ? <span class="string">&#x27;/some-new-page&#x27;</span> : <span class="string">&#x27;/old_page&#x27;</span></span><br><span class="line">    ctx.handleMethod = id</span><br><span class="line">    <span class="keyword">await</span> renderAndCache(app, ctx, path, ctx.params)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p> 这里的 renderAndCache 顾名思义，其实就是封装了 app.renderToHTML，并实现了缓存。</p>
+</li>
+<li><p>由于项目在服务端渲染，所以在服务端请求接口数据时，同样也要给请求头添加 ppe 配置信息，所以在功能模块需要使用新接口时，需要额外在 lib/proxy-ppe-boe.ts 文件内的 url 列表中添加接口路径。<br>本地配合 package.json 的运行命令 推送到对应的测试环境会自动获取对应环境变量，匹配到的 url，nodejs 请求会自动添加 headers: {‘x-use-ppe’: ‘1’, ‘x-tt-env’: ‘ppe_dev’}</p>
+</li>
+</ol>
+<h2 id="开发埋点"><a href="#开发埋点" class="headerlink" title="开发埋点"></a>开发埋点</h2><p>在第一次开发埋点的时候，尝试去搜索埋点 SDK 的文档，也许是大家都觉得这个 SDK 的使用太简单了，所以文档都是 TEA 平台的介绍，或者就是 SDK 在各平台的安装，独独就是没有怎么去使用它。所谓会者不难，不过当时也着实茫然了一把。</p>
+<p>要开发埋点其实很简单，假设要给一个元素添加一个点击的埋点，代码如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; sendTeaCommEvent &#125; <span class="keyword">from</span> <span class="string">&#x27;lib/tea-analyze&#x27;</span></span><br><span class="line"></span><br><span class="line">&lt;button</span><br><span class="line">    onClick=&#123;<span class="function">() =&gt;</span> &#123;    </span><br><span class="line">        sendTeaCommEvent(<span class="string">&#x27;event_name&#x27;</span>, &#123;</span><br><span class="line">            <span class="attr">param_1</span>: XX,</span><br><span class="line">            <span class="attr">param_2</span>: XX,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">&gt;hello world&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<p>看，埋点确实很简单简单，具体的 event_name，以及所需的参数，只需要查看具体的埋点文档（data.bytedance.net）就行。</p>
+<p>要知道它是如何集成的，可以看以下代码：</p>
+<p>项目中通过引入一个 js 文件，并定义了一个全局函数 window.collectEvent，可以用来配置和发送事件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">    </span></span><br><span class="line"><span class="javascript">(<span class="function"><span class="keyword">function</span>(<span class="params">win, export_obj</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    win[<span class="string">&#x27;TeaAnalyticsObject&#x27;</span>] = export_obj;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (!win[export_obj]) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">_collect</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            _collect.q.push(<span class="built_in">arguments</span>);</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">        _collect.q = _collect.q || [];</span></span><br><span class="line"><span class="javascript">        win[export_obj] = _collect;</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    win[export_obj].l = +<span class="keyword">new</span> <span class="built_in">Date</span>();</span></span><br><span class="line"><span class="javascript">&#125;)(<span class="built_in">window</span>, <span class="string">&#x27;collectEvent&#x27;</span>);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;XXXX.com/CDN/log-sdk/collect/collect.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<!-- # 服务端 -->
+<p>然后在 lib/tea-analyze 中针对这个全局函数做了一个小封装（默认带上 page_id，开发模式下控制台打印）。</p>
+<h2 id="发布测试环境"><a href="#发布测试环境" class="headerlink" title="发布测试环境"></a>发布测试环境</h2><p>模块的测试通常是在一个特定的 ppe 环境下进行。刚加入开发，通常不需要自己搭建一个 ppe 环境，而是合入一个已有的。</p>
+<p>如果用过 Jenkins 或者 GitHub Action 就会很熟悉这个流程。只需要将当前的开发分支，合入一个特定的 Git 分支，并推送到远程服务器上，就会触发编译发布流水线。</p>
+<p>这个时候需要手动卡点确认一下，然后就等待发布上线，再进行测试即可。</p>
+<h2 id="需求评审-amp-功能提测"><a href="#需求评审-amp-功能提测" class="headerlink" title="需求评审&amp;功能提测"></a>需求评审&amp;功能提测</h2><p>每次需求开发前，会有产品原型进行需求粗评环节，UI 稿完成后会有需求细评环节，并会确定一些关键的提测准入功能点。在开发完成后，进入提测前，需要开发按准入文档，自测关键功能点，确保准确无误再提交。</p>
+<h2 id="上线功能"><a href="#上线功能" class="headerlink" title="上线功能"></a>上线功能</h2><p>最后，终于进入激动的上线时刻了。需要从自己的功能开发分支，提交 merge request 到 master 分支，并邀请其他同事进行 code review。确保代码没有问题后，合入 master 分支。</p>
+<p>和发布测试环境类似的，会触发编译流水线。不同的是，编译完成后，会先上线 ppe-prod 环境，并进入第二个人工卡点，这时候需要测试同学再次进行测试和回归，无误后才点击通过卡点，进入小流量，TCE卡点，最后上线。</p>
 
-<!-- # 流程控制 -->
     </div>
 
     
@@ -266,7 +321,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.locotor.cn/posts/22316b13.html" title="项目质量流程提升">https://blog.locotor.cn/posts/22316b13.html</a>
+      <a href="https://blog.locotor.cn/posts/c8a6e87c.html" title="懂车帝PC站从上手到上线">https://blog.locotor.cn/posts/c8a6e87c.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -279,14 +334,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/d7c99cf4.html" rel="prev" title="比特数图前端新人手册（二）">
-                  <i class="fa fa-chevron-left"></i> 比特数图前端新人手册（二）
+                <a href="/posts/f2cef20.html" rel="prev" title="Next.js+Koa 构建服务端渲染应用">
+                  <i class="fa fa-chevron-left"></i> Next.js+Koa 构建服务端渲染应用
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/f2cef20.html" rel="next" title="Next.js+Koa 构建服务端渲染应用">
-                  Next.js+Koa 构建服务端渲染应用 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
