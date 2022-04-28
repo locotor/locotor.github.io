@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://blog.locotor.cn/posts/f2cef20.html</loc>
-    <lastmod>2022-04-28</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.locotor.cn/posts/7c744710.html</loc>
-    <lastmod>2022-04-28</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.locotor.cn/posts/b39bdb48.html</loc>
-    <lastmod>2022-04-28</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.locotor.cn/posts/b3f76cfd.html</loc>
-    <lastmod>2022-04-28</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.locotor.cn/posts/68e9fd0.html</loc>
-    <lastmod>2022-04-28</lastmod>
-  </url>
-  <url>
     <loc>https://blog.locotor.cn/posts/25b551dd.html</loc>
     <lastmod>2022-04-28</lastmod>
   </url>
@@ -58,6 +38,26 @@
   </url>
   <url>
     <loc>https://blog.locotor.cn/posts/3ec95b63.html</loc>
+    <lastmod>2022-04-28</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.locotor.cn/posts/f2cef20.html</loc>
+    <lastmod>2022-04-28</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.locotor.cn/posts/7c744710.html</loc>
+    <lastmod>2022-04-28</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.locotor.cn/posts/b39bdb48.html</loc>
+    <lastmod>2022-04-28</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.locotor.cn/posts/b3f76cfd.html</loc>
+    <lastmod>2022-04-28</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.locotor.cn/posts/68e9fd0.html</loc>
     <lastmod>2022-04-28</lastmod>
   </url>
 </urlset> 
