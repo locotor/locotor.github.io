@@ -2,9 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -16,11 +15,12 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.locotor.cn&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="上一篇介绍了原生 API 的动态视图插入，功能上已经可以满足大多数使用场景。不过也有一些缺憾，还没有解决在 Angular 应用外插入内容的需求，指令也不能跟动态插入的组件有输入输出的交互。这就到了 CDK（Component Dev Kit）出场的时候了。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="上一篇介绍了原生 API 的动态视图插入，功能上已经可以满足大多数使用场景。不过也有一些缺憾，还没有解决在 Angular 应用外插入内容的需求，指令也不能跟动态插入的组件有输入输出的交互。这就到了 CDK（Component Dev Kit）出场的时候了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="详解 Angular 动态视图 (二) -- CDK Portal">
 <meta property="og:url" content="https://blog.locotor.cn/posts/9fcfe3d5.html">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="上一篇介绍了原生 API 的动态视图插入，功能上已经可以满足大多数使用场景。不过也有一些缺憾，还没有解决在 Angular 应用外插入内容的需求，指令也不能跟动态插入的组件有输入输出的交互。这就到了 CDK（Component Dev Kit）出场的时候了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-22T18:35:08.000Z">
-<meta property="article:modified_time" content="2021-06-30T15:41:39.287Z">
+<meta property="article:modified_time" content="2022-04-28T09:11:10.068Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -38,16 +38,17 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.locotor.cn&#x2F;posts&#x2F;9fcfe3d5.html&quot;,&quot;path&quot;:&quot;posts&#x2F;9fcfe3d5.html&quot;,&quot;title&quot;:&quot;详解 Angular 动态视图 (二) -- CDK Portal&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.locotor.cn/posts/9fcfe3d5.html","path":"posts/9fcfe3d5.html","title":"详解 Angular 动态视图 (二) -- CDK Portal"}</script>
 
-<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>详解 Angular 动态视图 (二) -- CDK Portal | locotor's Notes</title><script src="/js/config.js"></script>
-  <meta name="keywords" content="Angular,动态组件,动态视图">
-
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>详解 Angular 动态视图 (二) -- CDK Portal | locotor's Notes</title>
   
 
 
 
+
+
+  <meta name="keywords" content="Angular,动态组件,动态视图">
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -72,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">locotor's Notes</h1>
+      <p class="site-title">locotor's Notes</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">张晋祥的博客小站</p>
@@ -87,11 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
@@ -135,21 +132,18 @@
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">18</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -167,7 +161,7 @@
       </span>
   </div>
   <div class="cc-license site-overview-item animated" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
   </div>
 
 
@@ -208,11 +202,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="张晋祥">
-      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="locotor's Notes">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="详解 Angular 动态视图 (二) -- CDK Portal | locotor's Notes">
+      <meta itemprop="description" content="上一篇介绍了原生 API 的动态视图插入，功能上已经可以满足大多数使用场景。不过也有一些缺憾，还没有解决在 Angular 应用外插入内容的需求，指令也不能跟动态插入的组件有输入输出的交互。这就到了 CDK（Component Dev Kit）出场的时候了。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,13 +254,13 @@
 <p>而容器也是由一个抽象类 <code>BasePortalOutlet</code> 定义，和视图类似，包含 attach（给容器挂载视图）、detach（从容器移除视图）、dispose（销毁容器）、isAttached（是否有挂载视图）。它的主要实现是 <code>DomPortalOutlet</code> 类。用以挂载三种类型的动态视图。</p>
 <h1 id="创建动态内容"><a href="#创建动态内容" class="headerlink" title="创建动态内容"></a>创建动态内容</h1><p>先来看看三种动态视图的创建。</p>
 <h2 id="ComponentPortal"><a href="#ComponentPortal" class="headerlink" title="ComponentPortal"></a>ComponentPortal</h2><p>相比原生 API，要创建一个动态组件非常的简单，只需要把组件类传入 <code>ComponentPortal</code> 构造函数即可。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.componentPortal = <span class="keyword">new</span> ComponentPortal(ExampleComponent);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">componentPortal</span> = <span class="keyword">new</span> <span class="title class_">ComponentPortal</span>(<span class="title class_">ExampleComponent</span>);</span><br></pre></td></tr></table></figure>
 
 <p>可以传入任意自定义的组件类，用以创建 <code>ComponentPortal</code> 对象，再动态插入视图中。</p>
 <p>✨注意：Angular 9 后的版本推荐使用 Ivy 编译器，如果是老版本编译器，传入的组件类，需要在 Module 的 <code>entryComponents</code> 中声明，并且这个 Module 不能懒加载。</p>
 <h2 id="TemplatePortal"><a href="#TemplatePortal" class="headerlink" title="TemplatePortal"></a>TemplatePortal</h2><p>TemplatePortal 的构建，相比组件，多了一个参数（ViewContainerRef）。看过前一篇应该对它非常熟悉了，需要依赖它调用 <code>createEmbeddedView()</code> 来创建嵌入视图。这里通过构造注入，直接使用当前组件的 <code>ViewContainerRef</code> 实例。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">testTemplate</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>一些需要动态插入的内容.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;testTemplate&#x27;</span>) templatePortalContent: TemplateRef&lt;<span class="built_in">any</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">private</span> _viewContainerRef: ViewContainerRef</span>)</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">ngAfterViewInit</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.templatePortal = <span class="keyword">new</span> TemplatePortal(</span><br><span class="line">    <span class="built_in">this</span>.templatePortalContent,</span><br><span class="line">    <span class="built_in">this</span>._viewContainerRef</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;testTemplate&#x27;</span>) <span class="attr">templatePortalContent</span>: <span class="title class_">TemplateRef</span>&lt;<span class="built_in">any</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">constructor</span>(<span class="params"><span class="keyword">private</span> _viewContainerRef: ViewContainerRef</span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">ngAfterViewInit</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">templatePortal</span> = <span class="keyword">new</span> <span class="title class_">TemplatePortal</span>(</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">templatePortalContent</span>,</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_viewContainerRef</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>除了通过构造函数，TemplatePortal 也有一个指令（CdkPortal）可以便捷创建。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ng-template</span> <span class="attr">cdkPortal</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>一些需要动态插入的内容.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 或写作 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 和上面写法是一致的效果 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> *<span class="attr">cdkPortal</span>&gt;</span></span><br><span class="line">  一些需要动态插入的内容.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -269,7 +268,7 @@
 <p>然后通过 <code>@ViewChild</code> 就可以获得 <code>TemplatePortal</code> 的实例了。</p>
 <h2 id="DomPortal"><a href="#DomPortal" class="headerlink" title="DomPortal"></a>DomPortal</h2><p>就像上面的示例通过 <code>@ViewChild</code> 获取 Template 实例来创建，类似的也可以获取 ElementRef 来创建动态的 DOM。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> #<span class="attr">domPortalContent</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>原生DOM内容<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;domPortalContent&#x27;</span>) domPortalContent: ElementRef&lt;HTMLElement&gt;;</span><br><span class="line"><span class="function"><span class="title">ngAfterViewInit</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.domPortal = <span class="keyword">new</span> DomPortal(<span class="built_in">this</span>.domPortalContent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;domPortalContent&#x27;</span>) <span class="attr">domPortalContent</span>: <span class="title class_">ElementRef</span>&lt;<span class="title class_">HTMLElement</span>&gt;;</span><br><span class="line"><span class="title function_">ngAfterViewInit</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">domPortal</span> = <span class="keyword">new</span> <span class="title class_">DomPortal</span>(<span class="variable language_">this</span>.<span class="property">domPortalContent</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以动态的将这段 DOM 转移到任意位置。要注意的是，转移之后，原来的数据绑定，或者绑定的指令可能不会再继续更新。</p>
 <h1 id="插入容器"><a href="#插入容器" class="headerlink" title="插入容器"></a>插入容器</h1><p>前面三种类型的 Portal 都说了可以渲染到任意位置，那具体怎么渲染呢？</p>
@@ -280,19 +279,19 @@
 <p>和原生 API 的指令不同，它可以自动判断是什么类型的 Portal。另外，它还有个额外的事件：<code>attached</code>，通过这个事件，可以获取到挂载的组件实例，或者 TemplateRef。这也让和挂载组件的交互变得十分方便了。</p>
 <h2 id="构造容器实例"><a href="#构造容器实例" class="headerlink" title="构造容器实例"></a>构造容器实例</h2><p>不过既然说了是可以渲染到任意位置，那自然也包括 Angular 应用外部，要渲染到应用之外，就需要咱们通过构造函数创建容器实例。</p>
 <p>这个容器类就是 <code>DomPortalOutlet</code>，它是 <code>PortalOutlet</code> 的实现子类。它的构造参数主要是：Element（挂载视图的DOM节点）、ComponentFactoryResolver（和上篇一样，用以动态构建组件）、appRef（当前 Angular 应用的整体实例）、Injector（注入器，用于传递依赖）。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="keyword">private</span> viewContainerRef: ViewContainerRef,</span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="meta">@Inject</span>(DOCUMENT) <span class="keyword">private</span> <span class="built_in">document</span>: <span class="built_in">any</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="keyword">private</span> injector: Injector,</span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="keyword">private</span> componentFactoryResolver: ComponentFactoryResolver</span></span></span><br><span class="line"><span class="params"><span class="function"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 在&lt;body&gt;下创建外部宿主元素</span></span><br><span class="line">  <span class="keyword">const</span> container = <span class="built_in">this</span>.document.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">  container.classList.add(<span class="string">&#x27;outside-portal-container&#x27;</span>);</span><br><span class="line">  <span class="built_in">this</span>.outsideContainer = <span class="built_in">this</span>.document.body.appendChild(container);</span><br><span class="line">  <span class="comment">// 获取应用实例</span></span><br><span class="line">  <span class="built_in">this</span>.appRef = <span class="built_in">this</span>.injector.get(ApplicationRef);</span><br><span class="line">  <span class="comment">// 创建外部容器</span></span><br><span class="line">  <span class="built_in">this</span>.outsideOutlet = <span class="keyword">new</span> DomPortalOutlet(</span><br><span class="line">    <span class="built_in">this</span>.outsideContainer, </span><br><span class="line">    <span class="built_in">this</span>.componentFactoryResolver, </span><br><span class="line">    <span class="built_in">this</span>.appRef, </span><br><span class="line">    <span class="built_in">this</span>.injector</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在应用外部插入动态组件。</span></span><br><span class="line">openComponentPortalOutSideAngularContext(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> componentPortal = <span class="keyword">new</span> ComponentPortal(AlertComponent);</span><br><span class="line">  <span class="keyword">const</span> componentRef = <span class="built_in">this</span>.outsideOutlet.attach(componentPortal);</span><br><span class="line">    componentRef.instance.closeAlert.subscribe(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.outsideOutlet.detach();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在应用外部插入动态模板。</span></span><br><span class="line">openTemplatePortalInsideAngularContext(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> templatePortal = <span class="keyword">new</span> TemplatePortal(<span class="built_in">this</span>.templatePortalContent, <span class="built_in">this</span>.viewContainerRef);</span><br><span class="line">  <span class="built_in">this</span>.outsideOutlet.attach(templatePortal);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">  <span class="keyword">private</span> viewContainerRef: ViewContainerRef,</span></span><br><span class="line"><span class="params">  <span class="meta">@Inject</span>(DOCUMENT) <span class="keyword">private</span> <span class="variable language_">document</span>: <span class="built_in">any</span>,</span></span><br><span class="line"><span class="params">  <span class="keyword">private</span> injector: Injector,</span></span><br><span class="line"><span class="params">  <span class="keyword">private</span> componentFactoryResolver: ComponentFactoryResolver</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 在&lt;body&gt;下创建外部宿主元素</span></span><br><span class="line">  <span class="keyword">const</span> container = <span class="variable language_">this</span>.<span class="property">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">  container.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;outside-portal-container&#x27;</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">outsideContainer</span> = <span class="variable language_">this</span>.<span class="property">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(container);</span><br><span class="line">  <span class="comment">// 获取应用实例</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">appRef</span> = <span class="variable language_">this</span>.<span class="property">injector</span>.<span class="title function_">get</span>(<span class="title class_">ApplicationRef</span>);</span><br><span class="line">  <span class="comment">// 创建外部容器</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">outsideOutlet</span> = <span class="keyword">new</span> <span class="title class_">DomPortalOutlet</span>(</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">outsideContainer</span>, </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">componentFactoryResolver</span>, </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">appRef</span>, </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">injector</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在应用外部插入动态组件。</span></span><br><span class="line"><span class="title function_">openComponentPortalOutSideAngularContext</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> componentPortal = <span class="keyword">new</span> <span class="title class_">ComponentPortal</span>(<span class="title class_">AlertComponent</span>);</span><br><span class="line">  <span class="keyword">const</span> componentRef = <span class="variable language_">this</span>.<span class="property">outsideOutlet</span>.<span class="title function_">attach</span>(componentPortal);</span><br><span class="line">    componentRef.<span class="property">instance</span>.<span class="property">closeAlert</span>.<span class="title function_">subscribe</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">outsideOutlet</span>.<span class="title function_">detach</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在应用外部插入动态模板。</span></span><br><span class="line"><span class="title function_">openTemplatePortalInsideAngularContext</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> templatePortal = <span class="keyword">new</span> <span class="title class_">TemplatePortal</span>(<span class="variable language_">this</span>.<span class="property">templatePortalContent</span>, <span class="variable language_">this</span>.<span class="property">viewContainerRef</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">outsideOutlet</span>.<span class="title function_">attach</span>(templatePortal);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>除了挂载视图到应用外的 DOM 元素中，还需要能够跟视图进行数据交互，组件可以通过注入依赖，模板可以传入上下文对象。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> injectionToken = <span class="keyword">new</span> InjectionToken&lt;<span class="built_in">any</span>&gt;(<span class="string">&#x27;Sharing data with outside component portal&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> customInjector = Injector.create(&#123; <span class="attr">providers</span>: [&#123; <span class="attr">provide</span>: CustomInjectionToken, <span class="attr">useValue</span>: <span class="string">&#x27;test value&#x27;</span> &#125;] &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> injectionToken = <span class="keyword">new</span> <span class="title class_">InjectionToken</span>&lt;<span class="built_in">any</span>&gt;(<span class="string">&#x27;Sharing data with outside component portal&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> customInjector = <span class="title class_">Injector</span>.<span class="title function_">create</span>(&#123; <span class="attr">providers</span>: [&#123; <span class="attr">provide</span>: <span class="title class_">CustomInjectionToken</span>, <span class="attr">useValue</span>: <span class="string">&#x27;test value&#x27;</span> &#125;] &#125;);</span><br></pre></td></tr></table></figure>
 
 <p>对创建 outsideContainer 的代码稍作修改，把这个 customInjector 作为参数传入（而不是使用当前组件的 injector）</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重点是第四个参数</span></span><br><span class="line"><span class="keyword">new</span> DomPortalOutlet(<span class="built_in">this</span>.outsideContainer, <span class="built_in">this</span>.componentFactoryResolver, <span class="built_in">this</span>.appRef, customInjector);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重点是第四个参数</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">DomPortalOutlet</span>(<span class="variable language_">this</span>.<span class="property">outsideContainer</span>, <span class="variable language_">this</span>.<span class="property">componentFactoryResolver</span>, <span class="variable language_">this</span>.<span class="property">appRef</span>, customInjector);</span><br></pre></td></tr></table></figure>
 
 <p>相应的，这个组件只需要按这个 injectionToken 注入依赖即可：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params"><span class="meta">@Inject</span>(injectionToken) <span class="keyword">public</span> customData: <span class="built_in">any</span></span>)</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">constructor</span>(<span class="params"><span class="meta">@Inject</span>(injectionToken) <span class="keyword">public</span> customData: <span class="built_in">any</span></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>给模板传递上下文就比较简单了，在创建 TemplatePortal 对象时，传入上下文对象即可：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重点是第三个参数</span></span><br><span class="line"><span class="keyword">new</span> TemplatePortal(<span class="built_in">this</span>.templatePortalContent, <span class="built_in">this</span>.viewContainerRef, &#123; <span class="attr">customData</span>:<span class="string">&#x27;test values&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重点是第三个参数</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">TemplatePortal</span>(<span class="variable language_">this</span>.<span class="property">templatePortalContent</span>, <span class="variable language_">this</span>.<span class="property">viewContainerRef</span>, &#123; <span class="attr">customData</span>:<span class="string">&#x27;test values&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
 
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>相比原生 API，CDK portal 主要实现了：</p>
 <ol>
@@ -353,7 +352,7 @@
 
 
 
-<script src="/js/comments.js"></script>
+
 </div>
   </main>
 
@@ -363,7 +362,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-seedling"></i>
   </span>
@@ -379,11 +378,10 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-
 
 
 

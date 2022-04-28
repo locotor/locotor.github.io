@@ -2,9 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -16,11 +15,12 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.locotor.cn&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="详解 Angular 动态视图 (一) -- 原生 API">
 <meta property="og:url" content="https://blog.locotor.cn/posts/a65d978d.html">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-20T18:44:24.000Z">
-<meta property="article:modified_time" content="2021-06-30T15:41:39.287Z">
+<meta property="article:modified_time" content="2022-04-28T09:11:10.068Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -38,16 +38,17 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.locotor.cn&#x2F;posts&#x2F;a65d978d.html&quot;,&quot;path&quot;:&quot;posts&#x2F;a65d978d.html&quot;,&quot;title&quot;:&quot;详解 Angular 动态视图 (一) -- 原生 API&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.locotor.cn/posts/a65d978d.html","path":"posts/a65d978d.html","title":"详解 Angular 动态视图 (一) -- 原生 API"}</script>
 
-<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>详解 Angular 动态视图 (一) -- 原生 API | locotor's Notes</title><script src="/js/config.js"></script>
-  <meta name="keywords" content="Angular,动态组件,动态视图">
-
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>详解 Angular 动态视图 (一) -- 原生 API | locotor's Notes</title>
   
 
 
 
+
+
+  <meta name="keywords" content="Angular,动态组件,动态视图">
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -72,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">locotor's Notes</h1>
+      <p class="site-title">locotor's Notes</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">张晋祥的博客小站</p>
@@ -87,11 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
@@ -135,21 +132,18 @@
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">18</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -167,7 +161,7 @@
       </span>
   </div>
   <div class="cc-license site-overview-item animated" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
   </div>
 
 
@@ -208,11 +202,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="张晋祥">
-      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="locotor's Notes">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="详解 Angular 动态视图 (一) -- 原生 API | locotor's Notes">
+      <meta itemprop="description" content="动态渲染视图是日常项目开发中常见的需求，特别是通用性的工具库开发。例如弹窗服务，需要让组件的用户决定传入什么内容进行渲染，可能是一个组件，可能是一个模板（ng-template）。这里先来看看通过 Angular API 如何去实现。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -253,7 +252,7 @@
         <p>要动态的插入一个视图，Angular 提供了一套 API 负责创建容器，实例化组件，以及管理视图和数据。同时，它还额外提供了一些指令，方便快速的实现。它们各有各自适用场景，本篇详细来看看它们的使用。</p>
 <p>完整的示例代码可以查看 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/locotor/angular-dynamic-view-example">GitHub 项目仓库</a>，或者在线查看效果 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://coding-pages-bucket-1575455-8137703-14801-541995-1303365836.cos-website.ap-beijing.myqcloud.com/">在线示例</a>。</p>
 <h1 id="ViewContainerRef-容器"><a href="#ViewContainerRef-容器" class="headerlink" title="ViewContainerRef 容器"></a>ViewContainerRef 容器</h1><p>动态视图的核心是视图容器，它决定了视图的插入位置，用 ViewContainerRef 类表示。要创建它很简单，假设组件视图中有：<code>&lt;ng-container #dynamicHost&gt;&lt;/ng-container&gt;</code> 通过 <code>@ViewChild</code> 装饰器读取即可：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;dynamicHost&#x27;</span>, &#123; <span class="attr">read</span>: ViewContainerRef &#125;) container!: ViewContainerRef;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;dynamicHost&#x27;</span>, &#123; <span class="attr">read</span>: <span class="title class_">ViewContainerRef</span> &#125;) container!: <span class="title class_">ViewContainerRef</span>;</span><br></pre></td></tr></table></figure>
 <p>这段代码的注意点有：</p>
 <ul>
 <li><p><code>@ViewChild</code> 用来从组件视图中获取元素的引用，可以是 DOM 对象、子组件或者指令的实例、或是某个依赖注入的 Provider。<br>第二个参数中的 read 指示具体获取哪个类型，例如从 <code>&lt;button mat-button&gt;</code> 可以获取到这个 button 元素对象，也可以是这个标签上添加的 Material 按钮指令。</p>
@@ -267,7 +266,7 @@
 <p>✨简明起见，后文都将 ViewContainerRef 实例称之为 “视图容器”</p>
 <h1 id="以代码方式插入"><a href="#以代码方式插入" class="headerlink" title="以代码方式插入"></a>以代码方式插入</h1><p>视图容器有两个方法（createComponent，createEmbeddedView），用来动态创建组件视图和模板视图。</p>
 <h2 id="动态插入组件"><a href="#动态插入组件" class="headerlink" title="动态插入组件"></a>动态插入组件</h2><p>首先创建一个用于动态插入的组件，这个通知组件省略了具体样式，详情可以查看源码。可以注意到，这个组件有一个输入属性，一个输出事件。以便演示动态创建的组件，如何和外界交互。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">    <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;alert-container mat-elevation-z2&quot; [class]=&quot;classConfig()&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;span class=&quot;message&quot;&gt;&#123;&#123;message&#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">        &lt;button mat-button (click)=&quot;emitCloseEvent()&quot;&gt;关闭&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AlertComponent</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Input</span>() message = <span class="string">&#x27;空消息提示&#x27;</span>;</span><br><span class="line">    <span class="meta">@Input</span>() <span class="keyword">type</span> = <span class="string">&#x27;success&#x27;</span>;</span><br><span class="line">    <span class="meta">@Output</span>() closeAlert = <span class="keyword">new</span> EventEmitter();</span><br><span class="line">    <span class="function"><span class="title">classConfig</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">success</span>: <span class="built_in">this</span>.type === <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">            <span class="attr">warning</span>: <span class="built_in">this</span>.type === <span class="string">&#x27;warning&#x27;</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span></span><br><span class="line"></span><br><span class="line">    emitCloseEvent(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.closeAlert.emit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">    <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;alert-container mat-elevation-z2&quot; [class]=&quot;classConfig()&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;span class=&quot;message&quot;&gt;&#123;&#123;message&#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">        &lt;button mat-button (click)=&quot;emitCloseEvent()&quot;&gt;关闭&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AlertComponent</span> &#123;</span><br><span class="line">    <span class="meta">@Input</span>() message = <span class="string">&#x27;空消息提示&#x27;</span>;</span><br><span class="line">    <span class="meta">@Input</span>() <span class="keyword">type</span> = <span class="string">&#x27;success&#x27;</span>;</span><br><span class="line">    <span class="meta">@Output</span>() closeAlert = <span class="keyword">new</span> <span class="title class_">EventEmitter</span>();</span><br><span class="line">    <span class="title function_">classConfig</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">success</span>: <span class="variable language_">this</span>.<span class="property">type</span> === <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">            <span class="attr">warning</span>: <span class="variable language_">this</span>.<span class="property">type</span> === <span class="string">&#x27;warning&#x27;</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_">emitCloseEvent</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">closeAlert</span>.<span class="title function_">emit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>✨注意：Angular 9 后的版本默认使用 Ivy 编译器，如果是使用老版本编译器，这个需要动态插入的通知组件，需要在 Module 的 <code>entryComponents</code> 中声明，并且这个 Module 不能懒加载。</p>
 <p>通知组件写好后，就可以创建并动态插入，具体分为三步：</p>
 <ol>
@@ -281,7 +280,7 @@
 <li><p>输入属性传值：<code>componentRef.instance.message = &quot;外部传入的警告信息&quot;</code>。</p>
 </li>
 <li><p>绑定输出事件：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">componentRef.instance.closeAlert.subscribe(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> index = <span class="built_in">this</span>.container.indexOf(componentRef.hostView);</span><br><span class="line">  <span class="built_in">this</span>.container.remove(index);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">componentRef.<span class="property">instance</span>.<span class="property">closeAlert</span>.<span class="title function_">subscribe</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> index = <span class="variable language_">this</span>.<span class="property">container</span>.<span class="title function_">indexOf</span>(componentRef.<span class="property">hostView</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">container</span>.<span class="title function_">remove</span>(index);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -293,24 +292,24 @@
 <p>要插入一个带上下文数据的模板，具体分为三步：</p>
 <ol>
 <li><p>获取模板的引用对象：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;templateView&#x27;</span>, &#123; <span class="attr">read</span>: TemplateRef &#125;) template!: TemplateRef&lt;<span class="built_in">any</span>&gt;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ViewChild</span>(<span class="string">&#x27;templateView&#x27;</span>, &#123; <span class="attr">read</span>: <span class="title class_">TemplateRef</span> &#125;) template!: <span class="title class_">TemplateRef</span>&lt;<span class="built_in">any</span>&gt;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>声明上下文对象：<code>templateContext = &#123; message: &#39;来自模板上下文的值&#39; &#125;;</code> </p>
 </li>
 <li><p>通过视图容器的 createEmbeddedView 方法插入模板：</p>
- <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> embeddedViewRef = <span class="built_in">this</span>.container.createEmbeddedView(<span class="built_in">this</span>.template, <span class="built_in">this</span>.templateContext);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> embeddedViewRef = <span class="variable language_">this</span>.<span class="property">container</span>.<span class="title function_">createEmbeddedView</span>(<span class="variable language_">this</span>.<span class="property">template</span>, <span class="variable language_">this</span>.<span class="property">templateContext</span>);</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
 <p>方法创建一个 EmbeddedViewRef 对象，并将它放入。通过这个对象，视图容器可以查找它的索引，所以也可以和之前组件视图的引用一样，在容器内移动顺序、移除渲染、或是被销毁。</p>
 <h1 id="以指令方式插入"><a href="#以指令方式插入" class="headerlink" title="以指令方式插入"></a>以指令方式插入</h1><p>除了使用视图容器的两个方法来创建和插入视图，Angular 还提供了两个指令来简化工作。</p>
 <h2 id="ngComponentOutlet"><a href="#ngComponentOutlet" class="headerlink" title="ngComponentOutlet"></a>ngComponentOutlet</h2><p>首先，再创建另一个示例组件，和前面的哪个通知组件不同，它没有输入输出属性，但是多了一个需要注入的依赖项，以便演示带依赖注入的组件插入：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">    <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;section class=&quot;template-wrapper&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;span&gt;来自另一个动态组件：&#123;&#123;param.message&#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">    &lt;/section&gt;`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AnotherComponent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">public</span> param: ExampleService</span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">    <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;section class=&quot;template-wrapper&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;span&gt;来自另一个动态组件：&#123;&#123;param.message&#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">    &lt;/section&gt;`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AnotherComponent</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"><span class="keyword">public</span> param: ExampleService</span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>使用指令的方式创建组件就简单多了，只需要两步：</p>
 <ol>
 <li><p>引入这个组件类，并赋值给一个属性：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; AnotherComponent &#125; <span class="keyword">from</span> <span class="string">&#x27;../shared/another-component&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewContainerExampleComponent</span> <span class="title">implements</span> <span class="title">OnInit</span>, <span class="title">OnDestroy</span> </span>&#123;</span><br><span class="line">     <span class="keyword">public</span> anotherComponent = AnotherComponent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AnotherComponent</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;../shared/another-component&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">ViewContainerExampleComponent</span> <span class="keyword">implements</span> <span class="title class_">OnInit</span>, <span class="title class_">OnDestroy</span> &#123;</span><br><span class="line">     <span class="keyword">public</span> anotherComponent = <span class="title class_">AnotherComponent</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在视图中声明即可：</p>
  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ng-container</span> *<span class="attr">ngComponentOutlet</span>=<span class="string">&quot;anotherComponent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ng-container</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -321,7 +320,7 @@
 <h3 id="传入依赖注入器"><a href="#传入依赖注入器" class="headerlink" title="传入依赖注入器"></a>传入依赖注入器</h3><p>正常情况下，这样就把组件插入指定位置了，不过如果动态组件所声明的依赖项，需要由这个组件本身提供呢？</p>
 <p>这里就要再给这个组件传入注入对象:<br><code>&lt;ng-container *ngComponentOutlet=&quot;anotherComponent;injector:costumeInjector&quot;&gt;</code>。</p>
 <p>这个 costumeInjector 可以通过 Injector 类的静态方法创建：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    injector: Injector</span></span></span><br><span class="line"><span class="params"><span class="function"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.costumeInjector = Injector.create(&#123; </span><br><span class="line">        <span class="attr">providers</span>: [&#123; <span class="attr">provide</span>: ExampleService, <span class="attr">deps</span>: [] &#125;], </span><br><span class="line">        <span class="attr">parent</span>: injector </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    injector: Injector</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">costumeInjector</span> = <span class="title class_">Injector</span>.<span class="title function_">create</span>(&#123; </span><br><span class="line">        <span class="attr">providers</span>: [&#123; <span class="attr">provide</span>: <span class="title class_">ExampleService</span>, <span class="attr">deps</span>: [] &#125;], </span><br><span class="line">        <span class="attr">parent</span>: injector </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这样一来，每个动态创建的组件，都会拥有一个独立的 ExampleService 实例。</p>
 <p>✨ 视图容器的 createComponent 方法同样可以指定依赖注入器，效果是一样的，前面只是为了简明而省略。</p>
@@ -332,7 +331,7 @@
 
 <p>要插入映射的 DOM 内容，只需要额外给指令的表达式再传一个参数：<code>&lt;ng-container *ngComponentOutlet=&quot;anotherComponent;content:costumeContent&quot;&gt;</code>。</p>
 <p>这个 costumeContent 是一个数组，因为组件内可以有多个 <code>ng-content</code>。数组内每项也是一个数组，因为每个 <code>ng-content</code> 位置，可以插入多个 DOM 内容块。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> spanContent = <span class="built_in">document</span>.createElement(<span class="string">&#x27;span&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> divContent = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">spanContent.innerHTML = <span class="string">&#x27;hello, world&#x27;</span>;</span><br><span class="line">divContent.innerHTML = <span class="string">&#x27;&lt;span&gt;locotor&lt;/span&gt;&#x27;</span>;</span><br><span class="line"><span class="built_in">this</span>.costumeContent = [[spanContent, divContent]];</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> spanContent = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;span&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> divContent = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">spanContent.<span class="property">innerHTML</span> = <span class="string">&#x27;hello, world&#x27;</span>;</span><br><span class="line">divContent.<span class="property">innerHTML</span> = <span class="string">&#x27;&lt;span&gt;locotor&lt;/span&gt;&#x27;</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">costumeContent</span> = [[spanContent, divContent]];</span><br></pre></td></tr></table></figure>
 
 <h2 id="ngTemplateOutlet"><a href="#ngTemplateOutlet" class="headerlink" title="ngTemplateOutlet"></a>ngTemplateOutlet</h2><p>模板的指令只有两个输入属性：模板的引用对象、模板的上下文对象。</p>
 <p>所以要插入一个带上下文数据的模板，具体步骤如下：</p>
@@ -361,7 +360,7 @@
 
 <p>可以指定要插入组件类，组件的注入器，映射内容，以及模块工厂对象（允许动态加载其他模块）。</p>
 <p>所对应的代码方式插入：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createComponent&lt;C&gt;(componentFactory: ComponentFactory&lt;C&gt;, index?: <span class="built_in">number</span>, injector?: Injector, projectableNodes?: <span class="built_in">any</span>[][], ngModule?: NgModuleRef&lt;<span class="built_in">any</span>&gt;): ComponentRef&lt;C&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createComponent&lt;C&gt;(<span class="attr">componentFactory</span>: <span class="title class_">ComponentFactory</span>&lt;C&gt;, index?: <span class="built_in">number</span>, injector?: <span class="title class_">Injector</span>, projectableNodes?: <span class="built_in">any</span>[][], ngModule?: <span class="title class_">NgModuleRef</span>&lt;<span class="built_in">any</span>&gt;): <span class="title class_">ComponentRef</span>&lt;C&gt;</span><br></pre></td></tr></table></figure>
 
 <p>除了第二个参数是指定插入到容器的顺序序号以外，其他的参数都是一一对应的。</p>
 <p>和组件的情况类似，模板插入除了视图容器支持多个模板以外，可以支持指定插入序号外，和指令的方式完全一样的。都是两个参数，一个是模板引用对象，一个是模板上下文对象。</p>
@@ -419,7 +418,7 @@
 
 
 
-<script src="/js/comments.js"></script>
+
 </div>
   </main>
 
@@ -429,7 +428,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-seedling"></i>
   </span>
@@ -445,11 +444,10 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-
 
 
 

@@ -2,9 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -16,11 +15,12 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.locotor.cn&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="在控制器的各个接口中，往往需要用到当前用户信息。Spring Security 提供了简便的注解来获取，这里记录一下它的用法。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.locotor.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在控制器的各个接口中，往往需要用到当前用户信息。Spring Security 提供了简便的注解来获取，这里记录一下它的用法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用 @AuthenticationPrincipal 注解快捷获取当前用户">
 <meta property="og:url" content="https://blog.locotor.cn/posts/68e9fd0.html">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="在控制器的各个接口中，往往需要用到当前用户信息。Spring Security 提供了简便的注解来获取，这里记录一下它的用法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-01T15:54:09.000Z">
-<meta property="article:modified_time" content="2021-06-30T15:41:39.287Z">
+<meta property="article:modified_time" content="2022-04-28T09:11:10.072Z">
 <meta property="article:author" content="张晋祥">
 <meta property="article:tag" content="Spring Security">
 <meta name="twitter:card" content="summary">
@@ -38,16 +38,17 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.locotor.cn&#x2F;posts&#x2F;68e9fd0.html&quot;,&quot;path&quot;:&quot;posts&#x2F;68e9fd0.html&quot;,&quot;title&quot;:&quot;用 @AuthenticationPrincipal 注解快捷获取当前用户&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.locotor.cn/posts/68e9fd0.html","path":"posts/68e9fd0.html","title":"用 @AuthenticationPrincipal 注解快捷获取当前用户"}</script>
 
-<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>用 @AuthenticationPrincipal 注解快捷获取当前用户 | locotor's Notes</title><script src="/js/config.js"></script>
-  <meta name="keywords" content="Spring Security,登录认证">
-
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用 @AuthenticationPrincipal 注解快捷获取当前用户 | locotor's Notes</title>
   
 
 
 
+
+
+  <meta name="keywords" content="Spring Security,登录认证">
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -72,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">locotor's Notes</h1>
+      <p class="site-title">locotor's Notes</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">张晋祥的博客小站</p>
@@ -87,11 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
@@ -135,21 +132,18 @@
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">18</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -167,7 +161,7 @@
       </span>
   </div>
   <div class="cc-license site-overview-item animated" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
   </div>
 
 
@@ -208,11 +202,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="张晋祥">
-      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="locotor's Notes">
+      <meta itemprop="description" content="玻璃晴朗，橘子辉煌。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用 @AuthenticationPrincipal 注解快捷获取当前用户 | locotor's Notes">
+      <meta itemprop="description" content="在控制器的各个接口中，往往需要用到当前用户信息。Spring Security 提供了简便的注解来获取，这里记录一下它的用法。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -256,20 +255,20 @@
     <div class="post-body" itemprop="articleBody">
         <h2 id="通过-SecurityContextHolder-获取"><a href="#通过-SecurityContextHolder-获取" class="headerlink" title="通过 SecurityContextHolder 获取"></a>通过 SecurityContextHolder 获取</h2><p>在每次请求中 Spring Security 会自动创建一个验证上下文，通过它可以获取当前用户信息，这个上下文可以通过 <code>SecurityContextHolder.getContext()</code> 静态方法来获取。</p>
 <p>所以，在任意网络请求中，可以通过这个方式获取当前用户：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Authentication auth = (User)SecurityContextHolder.getContext().getAuthentication().</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(auth != <span class="keyword">null</span>)&#123;</span><br><span class="line">    User currentUser  = auth.getPrincipal();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Authentication</span> <span class="variable">auth</span> <span class="operator">=</span> (User)SecurityContextHolder.getContext().getAuthentication().</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(auth != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="type">User</span> <span class="variable">currentUser</span>  <span class="operator">=</span> auth.getPrincipal();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个 <code>User</code> 类通常是 <code>UserDetails</code> 的具体实现。</p>
 <p>如果当前验证上下文不存在，<code>getContext</code> 方法会返回一个空白的上下文对象。因此需要验证一下当前请求的验证情况。</p>
 <h2 id="通过-AuthenticationPrincipal-简化"><a href="#通过-AuthenticationPrincipal-简化" class="headerlink" title="通过 @AuthenticationPrincipal 简化"></a>通过 @AuthenticationPrincipal 简化</h2><p>对于这个常见的需求，Spring Security 提供了一个方便的注解 <code>@AuthenticationPrincipal</code>，通过它可以快速获取当前请求用户，如果该用户尚未验证，则返回 null。<br>使用示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;getTeam&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;ApiResponse&gt; <span class="title">getTeam</span><span class="params">(<span class="meta">@AuthenticationPrincipal</span> User currentUser, String id)</span> </span>&#123;</span><br><span class="line">    ... <span class="comment">// 略过业务代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;getTeam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;ApiResponse&gt; <span class="title function_">getTeam</span><span class="params">(<span class="meta">@AuthenticationPrincipal</span> User currentUser, String id)</span> &#123;</span><br><span class="line">    ... <span class="comment">// 略过业务代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>还可以自定义这个注解：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123; ElementType.PARAMETER &#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@AuthenticationPrincipal</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CurrentUser &#123; &#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;getTeam&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;ApiResponse&gt; <span class="title">getTeam</span><span class="params">(<span class="meta">@CurrentUser</span> User currentUser, String id)</span> </span>&#123;</span><br><span class="line">    ... <span class="comment">// 略过业务代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;getTeam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;ApiResponse&gt; <span class="title function_">getTeam</span><span class="params">(<span class="meta">@CurrentUser</span> User currentUser, String id)</span> &#123;</span><br><span class="line">    ... <span class="comment">// 略过业务代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个注解还可以通过传入 “spring 表达式” 来改变值。例如给这个控制器函数注入当前用户的用户名：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;getTeam&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;ApiResponse&gt; <span class="title">getTeam</span><span class="params">(<span class="meta">@AuthenticationPrincipal(expression = &quot;username&quot;)</span> String username, String id)</span> </span>&#123;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;getTeam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;ApiResponse&gt; <span class="title function_">getTeam</span><span class="params">(<span class="meta">@AuthenticationPrincipal(expression = &quot;username&quot;)</span> String username, String id)</span> &#123;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p>看了 Spring Security 的注解，也了解一下自定义注解。要创建自定义的注解，需要用到 jdk 提供的元注解 (注解的注解)。它们有：</p>
 <ul>
@@ -346,7 +345,7 @@
 
 
 
-<script src="/js/comments.js"></script>
+
 </div>
   </main>
 
@@ -356,7 +355,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-seedling"></i>
   </span>
@@ -372,11 +371,10 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-
 
 
 
